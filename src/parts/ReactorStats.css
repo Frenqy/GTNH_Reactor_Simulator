@@ -1,0 +1,18 @@
+.reactor-stats-tabs,
+.reactor-stats-tabs .ant-tabs,
+.reactor-stats-tabs .ant-tabs-content-holder,
+.reactor-stats-tabs .ant-tabs-content,
+.reactor-stats-tabs .ant-tabs-tabpane {
+    height: 100%;
+}
+
+.children-full-height {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(168, 73, 73, 0.479);
+    border-width: 5px;
+    border-color: black;
+    border-style: solid;
+    box-sizing: border-box; /* 关键属性 */
+}
