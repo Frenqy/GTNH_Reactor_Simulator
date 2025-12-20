@@ -1,0 +1,12 @@
+.GridButton {
+    cursor: pointer;
+    background-color: #a58b8b;
+}
+
+.GridButton:hover {
+    background-color: #c1a4a4;
+    box-sizing: border-box;
+    border-style: solid;
+    border-color: aqua;
+    border-width: 2px;
+}

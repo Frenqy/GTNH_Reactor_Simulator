@@ -1,0 +1,11 @@
+.GridHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.GridLine {
+    display: flex;
+    gap: 5px;
+}
