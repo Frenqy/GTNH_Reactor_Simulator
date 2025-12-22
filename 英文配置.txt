@@ -1,0 +1,751 @@
+Fuel Rod (Uranium)
+	id:1
+	baseName:fuelRodUranium
+	name:Fuel Rod (Uranium)
+	sourceMod:null
+	info:
+	energyMult:100
+	heatMult:2.0
+	rodCount:1
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Dual Fuel Rod (Uranium)
+	id:2
+	baseName:dualFuelRodUranium
+	name:Dual Fuel Rod (Uranium)
+	sourceMod:null
+	info:
+	energyMult:200
+	heatMult:4.0
+	rodCount:2
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Quad Fuel Rod (Uranium)
+	id:3
+	baseName:quadFuelRodUranium
+	name:Quad Fuel Rod (Uranium)
+	sourceMod:null
+	info:
+	energyMult:400
+	heatMult:8.0
+	rodCount:4
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Fuel Rod (MOX)
+	id:4
+	baseName:fuelRodMox
+	name:Fuel Rod (MOX)
+	sourceMod:null
+	info:
+	energyMult:100
+	heatMult:2.0
+	rodCount:1
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+Dual Fuel Rod (MOX)
+	id:5
+	baseName:dualFuelRodMox
+	name:Dual Fuel Rod (MOX)
+	sourceMod:null
+	info:
+	energyMult:200
+	heatMult:4.0
+	rodCount:2
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+Quad Fuel Rod (MOX)
+	id:6
+	baseName:quadFuelRodMox
+	name:Quad Fuel Rod (MOX)
+	sourceMod:null
+	info:
+	energyMult:400
+	heatMult:8.0
+	rodCount:4
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+Neutron Reflector
+	id:7
+	baseName:neutronReflector
+	name:Neutron Reflector
+	sourceMod:null
+	info:
+	mcVersion:1.12.2
+
+Thick Neutron Reflector
+	id:8
+	baseName:thickNeutronReflector
+	name:Thick Neutron Reflector
+	sourceMod:null
+	info:
+	mcVersion:1.12.2
+
+Heat Vent
+	id:9
+	baseName:heatVent
+	name:Heat Vent
+	sourceMod:null
+	info:
+	selfVent:6
+	hullDraw:0
+	sideVent:0
+
+Advanced Heat Vent
+	id:10
+	baseName:advancedHeatVent
+	name:Advanced Heat Vent
+	sourceMod:null
+	info:
+	selfVent:12
+	hullDraw:0
+	sideVent:0
+
+Reactor Heat Vent
+	id:11
+	baseName:reactorHeatVent
+	name:Reactor Heat Vent
+	sourceMod:null
+	info:
+	selfVent:5
+	hullDraw:5
+	sideVent:0
+
+Component Heat Vent
+	id:12
+	baseName:componentHeatVent
+	name:Component Heat Vent
+	sourceMod:null
+	info:
+	selfVent:0
+	hullDraw:0
+	sideVent:4
+
+Overclocked Heat Vent
+	id:13
+	baseName:overclockedHeatVent
+	name:Overclocked Heat Vent
+	sourceMod:null
+	info:
+	selfVent:20
+	hullDraw:36
+	sideVent:0
+
+10k Coolant Cell
+	id:14
+	baseName:coolantCell10k
+	name:10k Coolant Cell
+	sourceMod:null
+	info:
+
+30k Coolant Cell
+	id:15
+	baseName:coolantCell30k
+	name:30k Coolant Cell
+	sourceMod:null
+	info:
+
+60k Coolant Cell
+	id:16
+	baseName:coolantCell60k
+	name:60k Coolant Cell
+	sourceMod:null
+	info:
+
+Heat Exchanger
+	id:17
+	baseName:heatExchanger
+	name:Heat Exchanger
+	sourceMod:null
+	info:
+	switchSide:12
+	switchReactor:4
+
+Advanced Heat Exchanger
+	id:18
+	baseName:advancedHeatExchanger
+	name:Advanced Heat Exchanger
+	sourceMod:null
+	info:
+	switchSide:24
+	switchReactor:8
+
+Reactor Heat Exchanger
+	id:19
+	baseName:coreHeatExchanger
+	name:Reactor Heat Exchanger
+	sourceMod:null
+	info:
+	switchSide:0
+	switchReactor:72
+
+Component Heat Exchanger
+	id:20
+	baseName:componentHeatExchanger
+	name:Component Heat Exchanger
+	sourceMod:null
+	info:
+	switchSide:36
+	switchReactor:0
+
+Reactor Plating
+	id:21
+	baseName:reactorPlating
+	name:Reactor Plating
+	sourceMod:null
+	info:
+	heatAdjustment:1000
+
+Heat-Capacity Reactor Plating
+	id:22
+	baseName:heatCapacityReactorPlating
+	name:Heat-Capacity Reactor Plating
+	sourceMod:null
+	info:
+	heatAdjustment:1700
+
+Containment Reactor Plating
+	id:23
+	baseName:containmentReactorPlating
+	name:Containment Reactor Plating
+	sourceMod:null
+	info:
+	heatAdjustment:500
+
+RSH-Condensator
+	id:24
+	baseName:rshCondensator
+	name:RSH-Condensator
+	sourceMod:null
+	info:
+
+LZH-Condensator
+	id:25
+	baseName:lzhCondensator
+	name:LZH-Condensator
+	sourceMod:null
+	info:
+
+Fuel Rod (Thorium)
+	id:26
+	baseName:fuelRodThorium
+	name:Fuel Rod (Thorium)
+	sourceMod:GT5.08
+	info:
+	energyMult:20
+	heatMult:0.5
+	rodCount:1
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Dual Fuel Rod (Thorium)
+	id:27
+	baseName:dualFuelRodThorium
+	name:Dual Fuel Rod (Thorium)
+	sourceMod:GT5.08
+	info:
+	energyMult:40
+	heatMult:1.0
+	rodCount:2
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Quad Fuel Rod (Thorium)
+	id:28
+	baseName:quadFuelRodThorium
+	name:Quad Fuel Rod (Thorium)
+	sourceMod:GT5.08
+	info:
+	energyMult:80
+	heatMult:2.0
+	rodCount:4
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+60k He Coolant Cell
+	id:29
+	baseName:coolantCellHelium60k
+	name:60k He Coolant Cell
+	sourceMod:GT5.08
+	info:
+
+180k He Coolant Cell
+	id:30
+	baseName:coolantCellHelium180k
+	name:180k He Coolant Cell
+	sourceMod:GT5.08
+	info:
+
+360k He Coolant Cell
+	id:31
+	baseName:coolantCellHelium360k
+	name:360k He Coolant Cell
+	sourceMod:GT5.08
+	info:
+
+60k NaK Coolant Cell
+	id:32
+	baseName:coolantCellNak60k
+	name:60k NaK Coolant Cell
+	sourceMod:GT5.08
+	info:
+
+180k NaK Coolant Cell
+	id:33
+	baseName:coolantCellNak180k
+	name:180k NaK Coolant Cell
+	sourceMod:GT5.08
+	info:
+
+360k NaK Coolant Cell
+	id:34
+	baseName:coolantCellNak360k
+	name:360k NaK Coolant Cell
+	sourceMod:GT5.08
+	info:
+
+Iridium Neutron Reflector
+	id:35
+	baseName:iridiumNeutronReflector
+	name:Iridium Neutron Reflector
+	sourceMod:null
+	info:
+	mcVersion:1.12.2
+
+Fuel Rod (Naquadah)
+	id:36
+	baseName:fuelRodNaquadah
+	name:Fuel Rod (Naquadah)
+	sourceMod:GT5.09
+	info:
+	energyMult:100
+	heatMult:2.0
+	rodCount:1
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+Dual Fuel Rod (Naquadah)
+	id:37
+	baseName:dualFuelRodNaquadah
+	name:Dual Fuel Rod (Naquadah)
+	sourceMod:GT5.09
+	info:
+	energyMult:200
+	heatMult:4.0
+	rodCount:2
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+Quad Fuel Rod (Naquadah)
+	id:38
+	baseName:quadFuelRodNaquadah
+	name:Quad Fuel Rod (Naquadah)
+	sourceMod:GT5.09
+	info:
+	energyMult:400
+	heatMult:8.0
+	rodCount:4
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+Fuel Rod (Coaxium)
+	id:39
+	baseName:fuelRodCoaxium
+	name:Fuel Rod (Coaxium)
+	sourceMod:Coaxium
+	info:
+	energyMult:100
+	heatMult:0.0
+	rodCount:1
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Dual Fuel Rod (Coaxium)
+	id:40
+	baseName:dualFuelRodCoaxium
+	name:Dual Fuel Rod (Coaxium)
+	sourceMod:Coaxium
+	info:
+	energyMult:200
+	heatMult:0.0
+	rodCount:2
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Quad Fuel Rod (Coaxium)
+	id:41
+	baseName:quadFuelRodCoaxium
+	name:Quad Fuel Rod (Coaxium)
+	sourceMod:Coaxium
+	info:
+	energyMult:400
+	heatMult:0.0
+	rodCount:4
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Fuel Rod (Cesium)
+	id:42
+	baseName:fuelRodCesium
+	name:Fuel Rod (Cesium)
+	sourceMod:Coaxium
+	info:
+	energyMult:200
+	heatMult:1.0
+	rodCount:1
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Dual Fuel Rod (Cesium)
+	id:43
+	baseName:dualFuelRodCesium
+	name:Dual Fuel Rod (Cesium)
+	sourceMod:Coaxium
+	info:
+	energyMult:400
+	heatMult:6.0
+	rodCount:2
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Quad Fuel Rod (Cesium)
+	id:44
+	baseName:quadFuelRodCesium
+	name:Quad Fuel Rod (Cesium)
+	sourceMod:Coaxium
+	info:
+	energyMult:800
+	heatMult:24.0
+	rodCount:4
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Fuel Rod (Naquadah)
+	id:45
+	baseName:fuelRodNaquadahGTNH
+	name:Fuel Rod (Naquadah)
+	sourceMod:GTNH
+	info:
+	energyMult:100
+	heatMult:2.0
+	rodCount:1
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Dual Fuel Rod (Naquadah)
+	id:46
+	baseName:dualFuelRodNaquadahGTNH
+	name:Dual Fuel Rod (Naquadah)
+	sourceMod:GTNH
+	info:
+	energyMult:200
+	heatMult:4.0
+	rodCount:2
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Quad Fuel Rod (Naquadah)
+	id:47
+	baseName:quadFuelRodNaquadahGTNH
+	name:Quad Fuel Rod (Naquadah)
+	sourceMod:GTNH
+	info:
+	energyMult:400
+	heatMult:8.0
+	rodCount:4
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Fuel Rod (Naquadria)
+	id:48
+	baseName:fuelRodNaquadria
+	name:Fuel Rod (Naquadria)
+	sourceMod:GTNH
+	info:
+	energyMult:100
+	heatMult:2.0
+	rodCount:1
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+Dual Fuel Rod (Naquadria)
+	id:49
+	baseName:dualFuelRodNaquadria
+	name:Dual Fuel Rod (Naquadria)
+	sourceMod:GTNH
+	info:
+	energyMult:200
+	heatMult:4.0
+	rodCount:2
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+Quad Fuel Rod (Naquadria)
+	id:50
+	baseName:quadFuelRodNaquadria
+	name:Quad Fuel Rod (Naquadria)
+	sourceMod:GTNH
+	info:
+	energyMult:400
+	heatMult:8.0
+	rodCount:4
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+Fuel Rod (Tiberium)
+	id:51
+	baseName:fuelRodTiberium
+	name:Fuel Rod (Tiberium)
+	sourceMod:GTNH
+	info:
+	energyMult:100
+	heatMult:1.0
+	rodCount:1
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Dual Fuel Rod (Tiberium)
+	id:52
+	baseName:dualFuelRodTiberium
+	name:Dual Fuel Rod (Tiberium)
+	sourceMod:GTNH
+	info:
+	energyMult:200
+	heatMult:2.0
+	rodCount:2
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Quad Fuel Rod (Tiberium)
+	id:53
+	baseName:quadFuelRodTiberium
+	name:Quad Fuel Rod (Tiberium)
+	sourceMod:GTNH
+	info:
+	energyMult:400
+	heatMult:4.0
+	rodCount:4
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+Fuel Rod (The Core)
+	id:54
+	baseName:fuelRodTheCore
+	name:Fuel Rod (The Core)
+	sourceMod:GTNH
+	info:
+	energyMult:12800
+	heatMult:64.0
+	rodCount:32
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+180k Space Coolant Cell
+	id:55
+	baseName:coolantCellSpace180k
+	name:180k Space Coolant Cell
+	sourceMod:GTNH
+	info:
+
+360k Space Coolant Cell
+	id:56
+	baseName:coolantCellSpace360k
+	name:360k Space Coolant Cell
+	sourceMod:GTNH
+	info:
+
+540k Space Coolant Cell
+	id:57
+	baseName:coolantCellSpace540k
+	name:540k Space Coolant Cell
+	sourceMod:GTNH
+	info:
+
+1080k Space Coolant Cell
+	id:58
+	baseName:coolantCellSpace1080k
+	name:1080k Space Coolant Cell
+	sourceMod:GTNH
+	info:
+
+1G Neutronium Heat Capacitor
+	id:59
+	baseName:coolantCellNeutronium1G
+	name:1G Neutronium Heat Capacitor
+	sourceMod:GT5.09
+	info:
+
+Fuel Rod (High-Density Uranium)
+	id:60
+	baseName:fuelRodCompressedUranium
+	name:Fuel Rod (High-Density Uranium)
+	sourceMod:GTNH
+	info:
+	rodCount:1
+	energyMult:400.0
+	heatBonus:0
+	GTNHbehavior:false
+
+Dual Fuel Rod (High-Density Uranium)
+	id:61
+	baseName:dualFuelRodCompressedUranium
+	name:Dual Fuel Rod (High-Density Uranium)
+	sourceMod:GTNH
+	info:
+	rodCount:2
+	energyMult:800.0
+	heatBonus:0
+	GTNHbehavior:false
+
+Quad Fuel Rod (High-Density Uranium)
+	id:62
+	baseName:quadFuelRodCompressedUranium
+	name:Quad Fuel Rod (High-Density Uranium)
+	sourceMod:GTNH
+	info:
+	rodCount:4
+	energyMult:1600.0
+	heatBonus:0
+	GTNHbehavior:false
+
+Fuel Rod (High-Density Plutonium)
+	id:63
+	baseName:fuelRodCompressedPlutonium
+	name:Fuel Rod (High-Density Plutonium)
+	sourceMod:GTNH
+	info:
+	rodCount:1
+	energyMult:200.0
+	heatBonus:6
+	GTNHbehavior:false
+
+Dual Fuel Rod (High-Density Plutonium)
+	id:64
+	baseName:dualFuelRodCompressedPlutonium
+	name:Dual Fuel Rod (High-Density Plutonium)
+	sourceMod:GTNH
+	info:
+	rodCount:2
+	energyMult:400.0
+	heatBonus:6
+	GTNHbehavior:false
+
+Quad Fuel Rod (High-Density Plutonium)
+	id:65
+	baseName:quadFuelRodCompressedPlutonium
+	name:Quad Fuel Rod (High-Density Plutonium)
+	sourceMod:GTNH
+	info:
+	rodCount:4
+	energyMult:800.0
+	heatBonus:6
+	GTNHbehavior:false
+
+Fuel Rod (Excited Uranium)
+	id:66
+	baseName:fuelRodLiquidUranium
+	name:Fuel Rod (Excited Uranium)
+	sourceMod:GTNH
+	info:
+	rodCount:1
+	energyMult:4800.0
+	heatBonus:0
+	GTNHbehavior:false
+
+Dual Fuel Rod (Excited Uranium)
+	id:67
+	baseName:dualFuelRodLiquidUranium
+	name:Dual Fuel Rod (Excited Uranium)
+	sourceMod:GTNH
+	info:
+	rodCount:2
+	energyMult:9600.0
+	heatBonus:0
+	GTNHbehavior:false
+
+Quad Fuel Rod (Excited Uranium)
+	id:68
+	baseName:quadFuelRodLiquidUranium
+	name:Quad Fuel Rod (Excited Uranium)
+	sourceMod:GTNH
+	info:
+	rodCount:4
+	energyMult:19200.0
+	heatBonus:0
+	GTNHbehavior:false
+
+Fuel Rod (Excited Plutonium)
+	id:69
+	baseName:fuelRodLiquidPlutonium
+	name:Fuel Rod (Excited Plutonium)
+	sourceMod:GTNH
+	info:
+	rodCount:1
+	energyMult:6400.0
+	heatBonus:2
+	GTNHbehavior:false
+
+Dual Fuel Rod (Excited Plutonium)
+	id:70
+	baseName:dualFuelRodLiquidPlutonium
+	name:Dual Fuel Rod (Excited Plutonium)
+	sourceMod:GTNH
+	info:
+	rodCount:2
+	energyMult:12800.0
+	heatBonus:2
+	GTNHbehavior:false
+
+Quad Fuel Rod (Excited Plutonium)
+	id:71
+	baseName:quadFuelRodLiquidPlutonium
+	name:Quad Fuel Rod (Excited Plutonium)
+	sourceMod:GTNH
+	info:
+	rodCount:4
+	energyMult:25600.0
+	heatBonus:2
+	GTNHbehavior:false
+
+Glowstone Fuel Rod
+	id:72
+	baseName:fuelRodGlowstone
+	name:Glowstone Fuel Rod
+	sourceMod:GTNH
+	info:
+	mHeatBonusStep:3000
+	mHeatBonusMultiplier:1
+

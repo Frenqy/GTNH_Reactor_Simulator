@@ -1,0 +1,427 @@
+fuelRodNaquadahGTNH
+3 Enriched Naquadah
+4 Iron
+1 Platinum
+4 Tungsten
+
+quadFuelRodCompressedUranium
+36 Carbon
+432 Graphite
+36 Tungsten
+144 Uranium 238
+8 Zircaloy-2
+16 Zircaloy-4
+
+dualFuelRodCoaxium
+6 Coaxium-Enriched Nuclear Fuel
+72 Diamond
+8 Iridium
+1 Iron
+
+quadFuelRodCoaxium
+12 Coaxium-Enriched Nuclear Fuel
+2 Copper
+144 Diamond
+16 Iridium
+3 Iron
+
+coolantCellSpace360k
+1 Callisto Ice Dust
+2,000 Distilled Water
+5.5 Iron
+2 Lapis Lazuli
+1 Ledox Dust
+2 Reinforced Glass
+5.5 Tungsten
+
+fuelRodLiquidUranium
+250 Uranium Based Liquid Fuel (Extend State)
+0.5 Zircaloy-2
+4 Zircaloy-4
+
+dualFuelRodNaquadria
+9 Iron
+6 Naquadria
+2 Platinum
+9 Tungsten
+
+coolantCellNak180k
+3 Distilled Water
+3 Lapis Lazuli
+6 Potassium
+6 Sodium
+31 Tin
+
+dualFuelRodLiquidPlutonium
+500 Plutonium Based Liquid Fuel (Extend State)
+3 Zircaloy-2
+8 Zircaloy-4
+
+fuelRodGlowstone
+250 =Helium
+9 Glowstone Dust
+
+fuelRodTheCore
+96 Enriched Naquadah
+128 Iron
+128 Tiberium
+96 Tungsten
+
+thickNeutronReflector
+16 Coal
+9 Copper
+16 Tin
+
+advancedHeatVent
+10.67 Copper
+1 Diamond
+19.25 Iron
+2 Tin
+
+fuelRodCompressedUranium
+9 Carbon
+108 Graphite
+9 Tungsten
+36 Uranium 238
+0.5 Zircaloy-2
+4 Zircaloy-4
+
+dualFuelRodMox
+3 Iron
+2 MOX Fuel
+
+dualFuelRodUranium
+3 Iron
+2 Uranium Fuel
+
+heatCapacityReactorPlating
+1 Advanced Alloy
+8 Copper
+1 Lead
+
+dualFuelRodCompressedPlutonium
+72 Carbon
+36 HSS-S
+90 Plutonium 239
+18 Uranium 238
+3 Zircaloy-2
+8 Zircaloy-4
+
+fuelRodMox
+1 Iron
+1 MOX Fuel
+
+quadFuelRodNaquadria
+19 Iron
+12 Naquadria
+4 Platinum
+19 Tungsten
+
+dualFuelRodLiquidUranium
+500 Uranium Based Liquid Fuel (Extend State)
+3 Zircaloy-2
+8 Zircaloy-4
+
+heatVent
+5.33 Copper
+8.5 Iron
+1 Tin
+
+quadFuelRodLiquidPlutonium
+500 Plutonium Based Liquid Fuel (Extend State)
+3 Zircaloy-2
+8 Zircaloy-4
+
+coolantCellHelium180k
+3 =Helium
+3 Empty Cell
+18 Tin
+
+containmentReactorPlating
+3 Advanced Alloy
+1 Lead
+
+quadFuelRodNaquadahGTNH
+12 Enriched Naquadah
+19 Iron
+4 Platinum
+19 Tungsten
+
+lzhCondensator
+53 Copper
+28.5 Iron
+9 Lapis Lazuli
+24 Redstone
+18 Rubber
+12 Tin
+
+overclockedHeatVent
+13.33 Copper
+4 Gold
+8.5 Iron
+1 Tin
+
+quadFuelRodMox
+2 Copper
+7 Iron
+4 MOX Fuel
+
+coolantCell10k
+1 Distilled Water
+1 Lapis Lazuli
+4.33 Tin
+
+coolantCell30k
+3 Distilled Water
+3 Lapis Lazuli
+19 Tin
+
+fuelRodLiquidPlutonium
+250 Plutonium Based Liquid Fuel (Extend State)
+0.5 Zircaloy-2
+4 Zircaloy-4
+
+reactorHeatVent
+13.33 Copper
+8.5 Iron
+1 Tin
+
+dualFuelRodThorium
+3 Iron
+6 Thorium
+
+quadFuelRodLiquidUranium
+1,000 Uranium Based Liquid Fuel (Extend State)
+8 Zircaloy-2
+16 Zircaloy-4
+
+coolantCellNak60k
+1 Distilled Water
+1 Lapis Lazuli
+2 Potassium
+2 Sodium
+8.33 Tin
+
+coolantCellSpace180k
+0.5 Callisto Ice Dust
+1,000 Distilled Water
+2 Iron
+1 Lapis Lazuli
+0.5 Ledox Dust
+1 Reinforced Glass
+2 Tungsten
+
+coolantCellNak360k
+9 Copper
+6 Distilled Water
+6 Lapis Lazuli
+12 Potassium
+12 Sodium
+68 Tin
+
+fuelRodTiberium
+4 Iron
+1 Platinum
+3 Tiberium
+4 Tungsten
+
+coolantCellSpace540k
+1.5 Callisto Ice Dust
+3,000 Distilled Water
+9 Iron
+3 Lapis Lazuli
+1.5 Ledox Dust
+3 Reinforced Glass
+9 Tungsten
+
+dualFuelRodCesium
+6 Cesium-Enriched Nuclear Fuel
+3 Iron
+
+coreHeatExchanger
+15 Copper
+1 Iron
+2 Redstone
+6 Rubber
+3 Tin
+
+quadFuelRodTiberium
+19 Iron
+4 Platinum
+12 Tiberium
+19 Tungsten
+
+fuelRodCesium
+3 Cesium-Enriched Nuclear Fuel
+1 Iron
+
+coolantCellSpace1080k
+4.5 Callisto Ice Dust
+9,000 Distilled Water
+9 Fluxed Electrum
+30 Iron
+9 Lapis Lazuli
+4.5 Ledox Dust
+9 Reinforced Glass
+30 Tungsten
+
+heatExchanger
+7 Copper
+1 Iron
+2 Redstone
+6 Rubber
+3 Tin
+
+fuelRodThorium
+1 Iron
+3 Thorium
+
+quadFuelRodThorium
+2 Copper
+7 Iron
+12 Thorium
+
+iridiumNeutronReflector
+4 Advanced Alloy
+96 Coal
+72 Copper
+1 Diamond
+4 Iridium
+96 Tin
+
+advancedFuelRod
+0.5 Zircaloy-2
+4 Zircaloy-4
+
+componentHeatExchanger
+7 Copper
+4 Gold
+1 Iron
+2 Redstone
+6 Rubber
+3 Tin
+
+quadFuelRodCompressedPlutonium
+144 Carbon
+72 HSS-S
+180 Plutonium 239
+36 Uranium 238
+8 Zircaloy-2
+16 Zircaloy-4
+
+advancedHeatExchanger
+19 Copper
+4 Iron
+4 Lapis Lazuli
+8 Redstone
+24 Rubber
+6 Tin
+
+fuelRodCompressedPlutonium
+36 Carbon
+18 HSS-S
+45 Plutonium 239
+9 Uranium 238
+0.5 Zircaloy-2
+4 Zircaloy-4
+
+coolantCellHelium360k
+6 =Helium
+9 Copper
+6 Empty Cell
+42 Tin
+
+quadFuelRodCesium
+12 Cesium-Enriched Nuclear Fuel
+2 Copper
+7 Iron
+
+coolantCell60k
+6 Distilled Water
+1 Iron
+6 Lapis Lazuli
+44 Tin
+
+dualFuelRodNaquadah
+6 Enriched Naquadah
+3 Iron
+
+quadFuelRodUranium
+2 Copper
+7 Iron
+4 Uranium Fuel
+
+reactorPlating
+1 Advanced Alloy
+1 Lead
+
+dualFuelRodCompressedUranium
+18 Carbon
+216 Graphite
+18 Tungsten
+72 Uranium 238
+3 Zircaloy-2
+8 Zircaloy-4
+
+neutronReflector
+4 Coal
+1 Copper
+4 Tin
+
+rshCondensator
+12.33 Copper
+9.5 Iron
+9 Redstone
+6 Rubber
+4 Tin
+
+componentHeatVent
+5.33 Copper
+10 Iron
+5 Tin
+
+coolantCellHelium60k
+1 =Helium
+1 Empty Cell
+4 Tin
+
+coolantCellNeutronium1G
+4 Iridium
+72 Neutronium
+
+fuelRodUranium
+1 Iron
+1 Uranium Fuel
+
+fuelRodNaquadah
+3 Enriched Naquadah
+1 Iron
+
+fuelRodCoaxium
+3 Coaxium-Enriched Nuclear Fuel
+36 Diamond
+4 Iridium
+
+fuelRodNaquadria
+4 Iron
+3 Naquadria
+1 Platinum
+4 Tungsten
+
+dualFuelRodNaquadahGTNH
+6 Enriched Naquadah
+9 Iron
+2 Platinum
+9 Tungsten
+
+dualFuelRodTiberium
+9 Iron
+2 Platinum
+6 Tiberium
+9 Tungsten
+
+quadFuelRodNaquadah
+2 Copper
+12 Enriched Naquadah
+7 Iron
+

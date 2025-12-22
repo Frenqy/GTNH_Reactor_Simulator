@@ -1,0 +1,427 @@
+fuelRodNaquadahGTNH
+3 富集硅岩
+4 钨
+4 铁
+1 铂
+
+quadFuelRodCompressedUranium
+432 石墨
+36 碳
+36 钨
+144 铀-238
+8 锆锡合金-2
+16 锆锡合金-4
+
+dualFuelRodCoaxium
+6 富集 Coaxium 核燃料
+72 钻石
+1 铁
+8 铱
+
+quadFuelRodCoaxium
+12 富集 Coaxium 核燃料
+144 钻石
+3 铁
+2 铜
+16 铱
+
+coolantCellSpace360k
+1 木卫四冰尘
+1 深铅粉
+2,000 蒸馏水
+5.5 钨
+5.5 铁
+2 防爆玻璃
+2 青金石
+
+fuelRodLiquidUranium
+250 铀基流体燃料(激发态)
+0.5 锆锡合金-2
+4 锆锡合金-4
+
+dualFuelRodNaquadria
+6 超能硅岩
+9 钨
+9 铁
+2 铂
+
+coolantCellNak180k
+3 蒸馏水
+6 钠
+6 钾
+31 锡
+3 青金石
+
+dualFuelRodLiquidPlutonium
+500 钚基流体燃料(激发态)
+3 锆锡合金-2
+8 锆锡合金-4
+
+fuelRodGlowstone
+250 =氦
+9 萤石粉
+
+fuelRodTheCore
+96 富集硅岩
+128 泰伯利亚
+96 钨
+128 铁
+
+thickNeutronReflector
+16 煤
+9 铜
+16 锡
+
+advancedHeatVent
+1 钻石
+19.25 铁
+10.67 铜
+2 锡
+
+fuelRodCompressedUranium
+108 石墨
+9 碳
+9 钨
+36 铀-238
+0.5 锆锡合金-2
+4 锆锡合金-4
+
+dualFuelRodMox
+2 MOX 燃料
+3 铁
+
+dualFuelRodUranium
+2 铀燃料
+3 铁
+
+heatCapacityReactorPlating
+1 铅
+8 铜
+1 高级合金
+
+dualFuelRodCompressedPlutonium
+72 碳
+90 钚-2339
+18 铀-238
+3 锆锡合金-2
+8 锆锡合金-4
+36 高速钢-S
+
+fuelRodMox
+1 MOX 燃料
+1 铁
+
+quadFuelRodNaquadria
+12 超能硅岩
+19 钨
+19 铁
+4 铂
+
+dualFuelRodLiquidUranium
+500 铀基流体燃料(激发态)
+3 锆锡合金-2
+8 锆锡合金-4
+
+heatVent
+8.5 铁
+5.33 铜
+1 锡
+
+quadFuelRodLiquidPlutonium
+500 钚基流体燃料(激发态)
+3 锆锡合金-2
+8 锆锡合金-4
+
+coolantCellHelium180k
+3 =氦
+3 空单元
+18 锡
+
+containmentReactorPlating
+1 铅
+3 高级合金
+
+quadFuelRodNaquadahGTNH
+12 富集硅岩
+19 钨
+19 铁
+4 铂
+
+lzhCondensator
+18 橡胶
+24 红石
+28.5 铁
+53 铜
+12 锡
+9 青金石
+
+overclockedHeatVent
+4 金
+8.5 铁
+13.33 铜
+1 锡
+
+quadFuelRodMox
+4 MOX 燃料
+7 铁
+2 铜
+
+coolantCell10k
+1 蒸馏水
+4.33 锡
+1 青金石
+
+coolantCell30k
+3 蒸馏水
+19 锡
+3 青金石
+
+fuelRodLiquidPlutonium
+250 钚基流体燃料(激发态)
+0.5 锆锡合金-2
+4 锆锡合金-4
+
+reactorHeatVent
+8.5 铁
+13.33 铜
+1 锡
+
+dualFuelRodThorium
+6 钍
+3 铁
+
+quadFuelRodLiquidUranium
+1,000 铀基流体燃料(激发态)
+8 锆锡合金-2
+16 锆锡合金-4
+
+coolantCellNak60k
+1 蒸馏水
+2 钠
+2 钾
+8.33 锡
+1 青金石
+
+coolantCellSpace180k
+0.5 木卫四冰尘
+0.5 深铅粉
+1,000 蒸馏水
+2 钨
+2 铁
+1 防爆玻璃
+1 青金石
+
+coolantCellNak360k
+6 蒸馏水
+12 钠
+12 钾
+9 铜
+68 锡
+6 青金石
+
+fuelRodTiberium
+3 泰伯利亚
+4 钨
+4 铁
+1 铂
+
+coolantCellSpace540k
+1.5 木卫四冰尘
+1.5 深铅粉
+3,000 蒸馏水
+9 钨
+9 铁
+3 防爆玻璃
+3 青金石
+
+dualFuelRodCesium
+6 富集铯核燃料
+3 铁
+
+coreHeatExchanger
+6 橡胶
+2 红石
+1 铁
+15 铜
+3 锡
+
+quadFuelRodTiberium
+12 泰伯利亚
+19 钨
+19 铁
+4 铂
+
+fuelRodCesium
+3 富集铯核燃料
+1 铁
+
+coolantCellSpace1080k
+4.5 木卫四冰尘
+4.5 深铅粉
+9,000 蒸馏水
+9 通流琥珀金
+30 钨
+30 铁
+9 防爆玻璃
+9 青金石
+
+heatExchanger
+6 橡胶
+2 红石
+1 铁
+7 铜
+3 锡
+
+fuelRodThorium
+3 钍
+1 铁
+
+quadFuelRodThorium
+12 钍
+7 铁
+2 铜
+
+iridiumNeutronReflector
+96 煤
+1 钻石
+72 铜
+4 铱
+96 锡
+4 高级合金
+
+advancedFuelRod
+0.5 锆锡合金-2
+4 锆锡合金-4
+
+componentHeatExchanger
+6 橡胶
+2 红石
+4 金
+1 铁
+7 铜
+3 锡
+
+quadFuelRodCompressedPlutonium
+144 碳
+180 钚-2339
+36 铀-238
+8 锆锡合金-2
+16 锆锡合金-4
+72 高速钢-S
+
+advancedHeatExchanger
+24 橡胶
+8 红石
+4 铁
+19 铜
+6 锡
+4 青金石
+
+fuelRodCompressedPlutonium
+36 碳
+45 钚-2339
+9 铀-238
+0.5 锆锡合金-2
+4 锆锡合金-4
+18 高速钢-S
+
+coolantCellHelium360k
+6 =氦
+6 空单元
+9 铜
+42 锡
+
+quadFuelRodCesium
+12 富集铯核燃料
+7 铁
+2 铜
+
+coolantCell60k
+6 蒸馏水
+1 铁
+44 锡
+6 青金石
+
+dualFuelRodNaquadah
+6 富集硅岩
+3 铁
+
+quadFuelRodUranium
+4 铀燃料
+7 铁
+2 铜
+
+reactorPlating
+1 铅
+1 高级合金
+
+dualFuelRodCompressedUranium
+216 石墨
+18 碳
+18 钨
+72 铀-238
+3 锆锡合金-2
+8 锆锡合金-4
+
+neutronReflector
+4 煤
+1 铜
+4 锡
+
+rshCondensator
+6 橡胶
+9 红石
+9.5 铁
+12.33 铜
+4 锡
+
+componentHeatVent
+10 铁
+5.33 铜
+5 锡
+
+coolantCellHelium60k
+1 =氦
+1 空单元
+4 锡
+
+coolantCellNeutronium1G
+72 中子
+4 铱
+
+fuelRodUranium
+1 铀燃料
+1 铁
+
+fuelRodNaquadah
+3 富集硅岩
+1 铁
+
+fuelRodCoaxium
+3 富集 Coaxium 核燃料
+36 钻石
+4 铱
+
+fuelRodNaquadria
+3 超能硅岩
+4 钨
+4 铁
+1 铂
+
+dualFuelRodNaquadahGTNH
+6 富集硅岩
+9 钨
+9 铁
+2 铂
+
+dualFuelRodTiberium
+6 泰伯利亚
+9 钨
+9 铁
+2 铂
+
+quadFuelRodNaquadah
+12 富集硅岩
+7 铁
+2 铜
+

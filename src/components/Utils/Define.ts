@@ -1,8 +1,10 @@
 import { BigintStorage } from "./BigintStorage";
+import { Condensator } from "./ReactorItems/Condensator";
 
-class ReactorItem {
+export class ReactorItem {
     static MAX_VALUE = 999999;
     id: number;
+    baseName: string;
     name: string;
     image: string;
     maxDamage: number;
@@ -33,31 +35,25 @@ class ReactorItem {
     currentCondensatorCooling = 0;
     bestCondensatorCooling = 0;
     explosionPowerMultiplier = 1;
+    info: string = "";
 
-    constructor(id: number, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string, other?: ReactorItem) {
-        if (other !== undefined) {
-            this.id = other.id;
-            this.name = other.name;
-            this.image = other.image;
-            this.maxDamage = other.maxDamage;
-            this.maxHeat = other.maxHeat;
-            this.initialHeat = other.initialHeat;
-            this.automationThreshold = other.automationThreshold;
-            this.reactorPause = other.reactorPause;
-            this.sourceMod = other.sourceMod;
-        } else {
-            this.id = id;
-            this.name = name;
-            this.image = image;
-            this.maxDamage = maxDamage;
-            this.maxHeat = maxHeat;
-            if (maxHeat > 1) {
-                this.automationThreshold = Math.round(maxHeat * 0.9);
-            } else if (maxDamage > 1) {
-                this.automationThreshold = Math.round(maxDamage * 1.1);
-            }
-            this.sourceMod = sourceMod;
+    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string) {
+        this.id = id;
+        this.baseName = baseName;
+        this.name = name;
+        this.image = image;
+        this.maxDamage = maxDamage;
+        this.maxHeat = maxHeat;
+        if (maxHeat > 1) {
+            this.automationThreshold = Math.round(maxHeat * 0.9);
+        } else if (maxDamage > 1) {
+            this.automationThreshold = Math.round(maxDamage * 1.1);
         }
+        this.sourceMod = sourceMod;
+    }
+
+    getCopy() {
+        return new ReactorItem(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod);
     }
 
     setInitialHeat(value: number) {
@@ -224,7 +220,7 @@ class ReactorItem {
     }
 }
 
-class Reactor {
+export class Reactor {
     static DEFAULT_ON_PULSE = 5e6;
     static DEFAULT_SUSPEND_TEMP = 120e3;
     static DEFAULT_RESUME_TEMP = 120e3;
@@ -545,25 +541,26 @@ class Reactor {
     }
 }
 
-class ComponentFactory {
+export class ComponentFactory {
     static ITEMS: ReactorItem[] = [];
     static ITEM_MAP: Map<string, ReactorItem> = new Map<string, ReactorItem>();
+
     static getDefaultComponent(id: number): ReactorItem | null {
         if (id >= 0 && id < ComponentFactory.ITEMS.length) {
-            return new ReactorItem(0, "0", "0", 0, 0, "0", ComponentFactory.ITEMS[id]);
+            return ComponentFactory.ITEMS[id].getCopy();
         }
         return null;
     }
 
     static createComponent(id?: number, name?: string): ReactorItem | null {
         if (id !== undefined && id >= 0 && id < ComponentFactory.ITEMS.length) {
-            return new ReactorItem(0, "0", "0", 0, 0, "0", ComponentFactory.ITEMS[id]);
+            return ComponentFactory.ITEMS[id].getCopy();
         } else if (name !== undefined && name != null) {
             const temp = ComponentFactory.ITEM_MAP.get(name);
             if (temp == undefined) {
                 return null;
             } else {
-                return new ReactorItem(0, "0", "0", 0, 0, "0", temp);
+                return temp.getCopy();
             }
         }
         return null;

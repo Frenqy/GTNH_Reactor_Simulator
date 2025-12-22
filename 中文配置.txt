@@ -1,0 +1,751 @@
+燃料棒 (铀)
+	id:1
+	baseName:fuelRodUranium
+	name:燃料棒 (铀)
+	sourceMod:null
+	info:
+	energyMult:100
+	heatMult:2.0
+	rodCount:1
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+双联燃料棒 (铀)
+	id:2
+	baseName:dualFuelRodUranium
+	name:双联燃料棒 (铀)
+	sourceMod:null
+	info:
+	energyMult:200
+	heatMult:4.0
+	rodCount:2
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+四联燃料棒 (铀)
+	id:3
+	baseName:quadFuelRodUranium
+	name:四联燃料棒 (铀)
+	sourceMod:null
+	info:
+	energyMult:400
+	heatMult:8.0
+	rodCount:4
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+燃料棒 (MOX)
+	id:4
+	baseName:fuelRodMox
+	name:燃料棒 (MOX)
+	sourceMod:null
+	info:
+	energyMult:100
+	heatMult:2.0
+	rodCount:1
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+双联燃料棒 (MOX)
+	id:5
+	baseName:dualFuelRodMox
+	name:双联燃料棒 (MOX)
+	sourceMod:null
+	info:
+	energyMult:200
+	heatMult:4.0
+	rodCount:2
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+四联燃料棒 (MOX)
+	id:6
+	baseName:quadFuelRodMox
+	name:四联燃料棒 (MOX)
+	sourceMod:null
+	info:
+	energyMult:400
+	heatMult:8.0
+	rodCount:4
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+中子反射板
+	id:7
+	baseName:neutronReflector
+	name:中子反射板
+	sourceMod:null
+	info:
+	mcVersion:1.12.2
+
+加厚中子反射板
+	id:8
+	baseName:thickNeutronReflector
+	name:加厚中子反射板
+	sourceMod:null
+	info:
+	mcVersion:1.12.2
+
+散热片
+	id:9
+	baseName:heatVent
+	name:散热片
+	sourceMod:null
+	info:
+	selfVent:6
+	hullDraw:0
+	sideVent:0
+
+高级散热片
+	id:10
+	baseName:advancedHeatVent
+	name:高级散热片
+	sourceMod:null
+	info:
+	selfVent:12
+	hullDraw:0
+	sideVent:0
+
+反应堆散热片
+	id:11
+	baseName:reactorHeatVent
+	name:反应堆散热片
+	sourceMod:null
+	info:
+	selfVent:5
+	hullDraw:5
+	sideVent:0
+
+元件散热片
+	id:12
+	baseName:componentHeatVent
+	name:元件散热片
+	sourceMod:null
+	info:
+	selfVent:0
+	hullDraw:0
+	sideVent:4
+
+超频散热片
+	id:13
+	baseName:overclockedHeatVent
+	name:超频散热片
+	sourceMod:null
+	info:
+	selfVent:20
+	hullDraw:36
+	sideVent:0
+
+10k 冷却单元
+	id:14
+	baseName:coolantCell10k
+	name:10k 冷却单元
+	sourceMod:null
+	info:
+
+30k 冷却单元
+	id:15
+	baseName:coolantCell30k
+	name:30k 冷却单元
+	sourceMod:null
+	info:
+
+60k 冷却单元
+	id:16
+	baseName:coolantCell60k
+	name:60k 冷却单元
+	sourceMod:null
+	info:
+
+热交换器
+	id:17
+	baseName:heatExchanger
+	name:热交换器
+	sourceMod:null
+	info:
+	switchSide:12
+	switchReactor:4
+
+高级热交换器
+	id:18
+	baseName:advancedHeatExchanger
+	name:高级热交换器
+	sourceMod:null
+	info:
+	switchSide:24
+	switchReactor:8
+
+反应堆热交换器
+	id:19
+	baseName:coreHeatExchanger
+	name:反应堆热交换器
+	sourceMod:null
+	info:
+	switchSide:0
+	switchReactor:72
+
+元件热交换器
+	id:20
+	baseName:componentHeatExchanger
+	name:元件热交换器
+	sourceMod:null
+	info:
+	switchSide:36
+	switchReactor:0
+
+反应堆隔板
+	id:21
+	baseName:reactorPlating
+	name:反应堆隔板
+	sourceMod:null
+	info:
+	heatAdjustment:1000
+
+高热容反应堆隔板
+	id:22
+	baseName:heatCapacityReactorPlating
+	name:高热容反应堆隔板
+	sourceMod:null
+	info:
+	heatAdjustment:1700
+
+密封反应堆隔热板
+	id:23
+	baseName:containmentReactorPlating
+	name:密封反应堆隔热板
+	sourceMod:null
+	info:
+	heatAdjustment:500
+
+红石冷凝模块
+	id:24
+	baseName:rshCondensator
+	name:红石冷凝模块
+	sourceMod:null
+	info:
+
+青金石冷凝模块
+	id:25
+	baseName:lzhCondensator
+	name:青金石冷凝模块
+	sourceMod:null
+	info:
+
+燃料棒 (钍)
+	id:26
+	baseName:fuelRodThorium
+	name:燃料棒 (钍)
+	sourceMod:GT5.08
+	info:
+	energyMult:20
+	heatMult:0.5
+	rodCount:1
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+双联燃料棒 (钍)
+	id:27
+	baseName:dualFuelRodThorium
+	name:双联燃料棒 (钍)
+	sourceMod:GT5.08
+	info:
+	energyMult:40
+	heatMult:1.0
+	rodCount:2
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+四联燃料棒 (钍)
+	id:28
+	baseName:quadFuelRodThorium
+	name:四联燃料棒 (钍)
+	sourceMod:GT5.08
+	info:
+	energyMult:80
+	heatMult:2.0
+	rodCount:4
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+60k 氦冷却单元
+	id:29
+	baseName:coolantCellHelium60k
+	name:60k 氦冷却单元
+	sourceMod:GT5.08
+	info:
+
+180k 氦冷却单元
+	id:30
+	baseName:coolantCellHelium180k
+	name:180k 氦冷却单元
+	sourceMod:GT5.08
+	info:
+
+360k 氦冷却单元
+	id:31
+	baseName:coolantCellHelium360k
+	name:360k 氦冷却单元
+	sourceMod:GT5.08
+	info:
+
+60k 钠钾冷却单元
+	id:32
+	baseName:coolantCellNak60k
+	name:60k 钠钾冷却单元
+	sourceMod:GT5.08
+	info:
+
+180k 钠钾冷却单元
+	id:33
+	baseName:coolantCellNak180k
+	name:180k 钠钾冷却单元
+	sourceMod:GT5.08
+	info:
+
+360k 钠钾冷却单元
+	id:34
+	baseName:coolantCellNak360k
+	name:360k 钠钾冷却单元
+	sourceMod:GT5.08
+	info:
+
+铱中子反射板
+	id:35
+	baseName:iridiumNeutronReflector
+	name:铱中子反射板
+	sourceMod:null
+	info:
+	mcVersion:1.12.2
+
+燃料棒 (硅岩)
+	id:36
+	baseName:fuelRodNaquadah
+	name:燃料棒 (硅岩)
+	sourceMod:GT5.09
+	info:
+	energyMult:100
+	heatMult:2.0
+	rodCount:1
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+双联燃料棒 (硅岩)
+	id:37
+	baseName:dualFuelRodNaquadah
+	name:双联燃料棒 (硅岩)
+	sourceMod:GT5.09
+	info:
+	energyMult:200
+	heatMult:4.0
+	rodCount:2
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+四联燃料棒 (硅岩)
+	id:38
+	baseName:quadFuelRodNaquadah
+	name:四联燃料棒 (硅岩)
+	sourceMod:GT5.09
+	info:
+	energyMult:400
+	heatMult:8.0
+	rodCount:4
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+燃料棒 (Coaxium)
+	id:39
+	baseName:fuelRodCoaxium
+	name:燃料棒 (Coaxium)
+	sourceMod:Coaxium
+	info:
+	energyMult:100
+	heatMult:0.0
+	rodCount:1
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+双联燃料棒 (Coaxium)
+	id:40
+	baseName:dualFuelRodCoaxium
+	name:双联燃料棒 (Coaxium)
+	sourceMod:Coaxium
+	info:
+	energyMult:200
+	heatMult:0.0
+	rodCount:2
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+四联燃料棒 (Coaxium)
+	id:41
+	baseName:quadFuelRodCoaxium
+	name:四联燃料棒 (Coaxium)
+	sourceMod:Coaxium
+	info:
+	energyMult:400
+	heatMult:0.0
+	rodCount:4
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+燃料棒 (铯)
+	id:42
+	baseName:fuelRodCesium
+	name:燃料棒 (铯)
+	sourceMod:Coaxium
+	info:
+	energyMult:200
+	heatMult:1.0
+	rodCount:1
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+双联燃料棒 (铯)
+	id:43
+	baseName:dualFuelRodCesium
+	name:双联燃料棒 (铯)
+	sourceMod:Coaxium
+	info:
+	energyMult:400
+	heatMult:6.0
+	rodCount:2
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+四联燃料棒 (铯)
+	id:44
+	baseName:quadFuelRodCesium
+	name:四联燃料棒 (铯)
+	sourceMod:Coaxium
+	info:
+	energyMult:800
+	heatMult:24.0
+	rodCount:4
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+燃料棒(硅岩)
+	id:45
+	baseName:fuelRodNaquadahGTNH
+	name:燃料棒(硅岩)
+	sourceMod:GTNH
+	info:
+	energyMult:100
+	heatMult:2.0
+	rodCount:1
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+二联燃料棒(硅岩)
+	id:46
+	baseName:dualFuelRodNaquadahGTNH
+	name:二联燃料棒(硅岩)
+	sourceMod:GTNH
+	info:
+	energyMult:200
+	heatMult:4.0
+	rodCount:2
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+四联燃料棒(硅岩)
+	id:47
+	baseName:quadFuelRodNaquadahGTNH
+	name:四联燃料棒(硅岩)
+	sourceMod:GTNH
+	info:
+	energyMult:400
+	heatMult:8.0
+	rodCount:4
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+燃料棒(富集硅岩)
+	id:48
+	baseName:fuelRodNaquadria
+	name:燃料棒(富集硅岩)
+	sourceMod:GTNH
+	info:
+	energyMult:100
+	heatMult:2.0
+	rodCount:1
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+二联燃料棒(富集硅岩)
+	id:49
+	baseName:dualFuelRodNaquadria
+	name:二联燃料棒(富集硅岩)
+	sourceMod:GTNH
+	info:
+	energyMult:200
+	heatMult:4.0
+	rodCount:2
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+四联燃料棒(富集硅岩)
+	id:50
+	baseName:quadFuelRodNaquadria
+	name:四联燃料棒(富集硅岩)
+	sourceMod:GTNH
+	info:
+	energyMult:400
+	heatMult:8.0
+	rodCount:4
+	moxStyle:true
+	GT509behavior:false
+	GTNHbehavior:false
+
+燃料棒(泰伯利亚)
+	id:51
+	baseName:fuelRodTiberium
+	name:燃料棒(泰伯利亚)
+	sourceMod:GTNH
+	info:
+	energyMult:100
+	heatMult:1.0
+	rodCount:1
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+二联燃料棒(泰伯利亚)
+	id:52
+	baseName:dualFuelRodTiberium
+	name:二联燃料棒(泰伯利亚)
+	sourceMod:GTNH
+	info:
+	energyMult:200
+	heatMult:2.0
+	rodCount:2
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+四联燃料棒(泰伯利亚)
+	id:53
+	baseName:quadFuelRodTiberium
+	name:四联燃料棒(泰伯利亚)
+	sourceMod:GTNH
+	info:
+	energyMult:400
+	heatMult:4.0
+	rodCount:4
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+"核心"单元
+	id:54
+	baseName:fuelRodTheCore
+	name:"核心"单元
+	sourceMod:GTNH
+	info:
+	energyMult:12800
+	heatMult:64.0
+	rodCount:32
+	moxStyle:false
+	GT509behavior:false
+	GTNHbehavior:false
+
+180k空间冷却单元
+	id:55
+	baseName:coolantCellSpace180k
+	name:180k空间冷却单元
+	sourceMod:GTNH
+	info:
+
+360k空间冷却单元
+	id:56
+	baseName:coolantCellSpace360k
+	name:360k空间冷却单元
+	sourceMod:GTNH
+	info:
+
+540k空间冷却单元
+	id:57
+	baseName:coolantCellSpace540k
+	name:540k空间冷却单元
+	sourceMod:GTNH
+	info:
+
+1080k空间冷却单元
+	id:58
+	baseName:coolantCellSpace1080k
+	name:1080k空间冷却单元
+	sourceMod:GTNH
+	info:
+
+1G中子锭热容
+	id:59
+	baseName:coolantCellNeutronium1G
+	name:1G中子锭热容
+	sourceMod:GT5.09
+	info:
+
+燃料棒(浓缩铀)
+	id:60
+	baseName:fuelRodCompressedUranium
+	name:燃料棒(浓缩铀)
+	sourceMod:GTNH
+	info:
+	rodCount:1
+	energyMult:400.0
+	heatBonus:0
+	GTNHbehavior:false
+
+二联燃料棒(浓缩铀)
+	id:61
+	baseName:dualFuelRodCompressedUranium
+	name:二联燃料棒(浓缩铀)
+	sourceMod:GTNH
+	info:
+	rodCount:2
+	energyMult:800.0
+	heatBonus:0
+	GTNHbehavior:false
+
+四联燃料棒(浓缩铀)
+	id:62
+	baseName:quadFuelRodCompressedUranium
+	name:四联燃料棒(浓缩铀)
+	sourceMod:GTNH
+	info:
+	rodCount:4
+	energyMult:1600.0
+	heatBonus:0
+	GTNHbehavior:false
+
+燃料棒(浓缩钚)
+	id:63
+	baseName:fuelRodCompressedPlutonium
+	name:燃料棒(浓缩钚)
+	sourceMod:GTNH
+	info:
+	rodCount:1
+	energyMult:200.0
+	heatBonus:6
+	GTNHbehavior:false
+
+二联燃料棒(浓缩钚)
+	id:64
+	baseName:dualFuelRodCompressedPlutonium
+	name:二联燃料棒(浓缩钚)
+	sourceMod:GTNH
+	info:
+	rodCount:2
+	energyMult:400.0
+	heatBonus:6
+	GTNHbehavior:false
+
+四联燃料棒(浓缩钚)
+	id:65
+	baseName:quadFuelRodCompressedPlutonium
+	name:四联燃料棒(浓缩钚)
+	sourceMod:GTNH
+	info:
+	rodCount:4
+	energyMult:800.0
+	heatBonus:6
+	GTNHbehavior:false
+
+燃料棒(激发铀)
+	id:66
+	baseName:fuelRodLiquidUranium
+	name:燃料棒(激发铀)
+	sourceMod:GTNH
+	info:
+	rodCount:1
+	energyMult:4800.0
+	heatBonus:0
+	GTNHbehavior:false
+
+二联燃料棒(激发铀)
+	id:67
+	baseName:dualFuelRodLiquidUranium
+	name:二联燃料棒(激发铀)
+	sourceMod:GTNH
+	info:
+	rodCount:2
+	energyMult:9600.0
+	heatBonus:0
+	GTNHbehavior:false
+
+四联燃料棒(激发铀)
+	id:68
+	baseName:quadFuelRodLiquidUranium
+	name:四联燃料棒(激发铀)
+	sourceMod:GTNH
+	info:
+	rodCount:4
+	energyMult:19200.0
+	heatBonus:0
+	GTNHbehavior:false
+
+燃料棒(激发钚)
+	id:69
+	baseName:fuelRodLiquidPlutonium
+	name:燃料棒(激发钚)
+	sourceMod:GTNH
+	info:
+	rodCount:1
+	energyMult:6400.0
+	heatBonus:2
+	GTNHbehavior:false
+
+二联燃料棒(激发钚)
+	id:70
+	baseName:dualFuelRodLiquidPlutonium
+	name:二联燃料棒(激发钚)
+	sourceMod:GTNH
+	info:
+	rodCount:2
+	energyMult:12800.0
+	heatBonus:2
+	GTNHbehavior:false
+
+四联燃料棒(激发钚)
+	id:71
+	baseName:quadFuelRodLiquidPlutonium
+	name:四联燃料棒(激发钚)
+	sourceMod:GTNH
+	info:
+	rodCount:4
+	energyMult:25600.0
+	heatBonus:2
+	GTNHbehavior:false
+
+萤石燃料棒
+	id:72
+	baseName:fuelRodGlowstone
+	name:萤石燃料棒
+	sourceMod:GTNH
+	info:
+	mHeatBonusStep:3000
+	mHeatBonusMultiplier:1
+
