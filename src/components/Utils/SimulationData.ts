@@ -1,4 +1,4 @@
-import { MaterialsList } from "./Define";
+import { MaterialsList } from "./ReactorItem";
 
 export class SimulationData {
     timeToBelow50: number = Number.MAX_SAFE_INTEGER;

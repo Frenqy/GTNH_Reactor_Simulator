@@ -1,7 +1,7 @@
-import { ReactorItem } from "../Define";
+import { ReactorItem } from "../ReactorItem";
 
 export class CoolantCell extends ReactorItem {
-    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string) {
+    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string | null) {
         super(id, baseName, name, image, maxDamage, maxHeat, sourceMod);
     }
 

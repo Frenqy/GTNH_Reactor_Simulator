@@ -1,10 +1,10 @@
-import { ReactorItem } from "../Define";
+import { ReactorItem } from "../ReactorItem";
 
 export class Exchanger extends ReactorItem {
     switchSide: number;
     switchReactor: number;
 
-    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string, switchSide: number, switchReactor: number) {
+    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string | null, switchSide: number, switchReactor: number) {
         super(id, baseName, name, image, maxDamage, maxHeat, sourceMod);
         this.switchSide = switchSide;
         this.switchReactor = switchReactor;

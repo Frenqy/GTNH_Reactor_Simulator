@@ -4,7 +4,7 @@ import "./ReactorStats.css";
 
 const items: TabsProps["items"] = [];
 
-const tabsName: string[] = ["模拟", "元件", "元件自动化", "元件清单", "材料", "csv", "高级", "比较方式"];
+const tabsName: string[] = ["模拟", "元件清单", "材料", "高级", "比较方式"];
 tabsName.forEach((name, idx) => {
     items.push({
         label: name,

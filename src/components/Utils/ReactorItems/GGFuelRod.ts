@@ -17,7 +17,7 @@ export class GGFuelRod extends FuelRod {
         image: string,
         maxDamage: number,
         maxHeat: number,
-        sourceMod: string,
+        sourceMod: string | null,
         energyMult: number,
         heatMult: number,
         rodCount: number,

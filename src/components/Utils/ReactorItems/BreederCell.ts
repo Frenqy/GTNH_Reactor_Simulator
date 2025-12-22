@@ -1,11 +1,11 @@
-import { ReactorItem } from "../Define";
+import { ReactorItem } from "../ReactorItem";
 import { FuelRod } from "./FuelRod";
 
 export class BreederCell extends ReactorItem {
     mHeatBonusStep: number;
     mHeatBonusMultiplier: number;
 
-    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string, heatBonusStep: number, heatBonusMultiplier: number) {
+    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string | null, heatBonusStep: number, heatBonusMultiplier: number) {
         super(id, baseName, name, image, maxDamage, maxHeat, sourceMod);
         this.mHeatBonusStep = heatBonusStep;
         this.mHeatBonusMultiplier = heatBonusMultiplier;

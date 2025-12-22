@@ -1,9 +1,10 @@
-import { Reactor, ReactorItem } from "../Define";
+import type { Reactor } from "../Reactor";
+import { ReactorItem } from "../ReactorItem";
 
 export class Plating extends ReactorItem {
     heatAdjustment: number;
 
-    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string, heatAdjustment: number, explosionPowerMultiplier: number) {
+    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string | null, heatAdjustment: number, explosionPowerMultiplier: number) {
         super(id, baseName, name, image, maxDamage, maxHeat, sourceMod);
         this.heatAdjustment = heatAdjustment;
         this.explosionPowerMultiplier = explosionPowerMultiplier;

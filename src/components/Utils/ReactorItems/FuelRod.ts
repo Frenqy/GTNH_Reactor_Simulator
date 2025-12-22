@@ -1,4 +1,4 @@
-import { ReactorItem } from "../Define";
+import { ReactorItem } from "../ReactorItem";
 
 export class FuelRod extends ReactorItem {
     energyMult: number;
@@ -24,7 +24,7 @@ export class FuelRod extends ReactorItem {
         image: string,
         maxDamage: number,
         maxHeat: number,
-        sourceMod: string,
+        sourceMod: string | null,
         energyMult: number,
         heatMult: number,
         rodCount: number,

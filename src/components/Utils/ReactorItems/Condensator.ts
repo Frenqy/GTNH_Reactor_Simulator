@@ -1,7 +1,7 @@
-import { ReactorItem } from "../Define";
+import { ReactorItem } from "../ReactorItem";
 
 export class Condensator extends ReactorItem {
-    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string) {
+    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string | null) {
         super(id, baseName, name, image, maxDamage, maxHeat, sourceMod);
     }
 
@@ -28,5 +28,9 @@ export class Condensator extends ReactorItem {
 
     injectCoolant() {
         this.currentHeat = 0;
+    }
+
+    isCoolable(): boolean {
+        return this.maxHeat > 1 && !(this instanceof Condensator);
     }
 }
