@@ -1,3 +1,5 @@
+import { MaterialsList } from "./Define";
+
 export class SimulationData {
     timeToBelow50: number = Number.MAX_SAFE_INTEGER;
     timeToBurn: number = Number.MAX_SAFE_INTEGER;
@@ -55,5 +57,5 @@ export class SimulationData {
     ventCooling: number = 0;
     ventCoolingCapacity: number = 0;
 
-    replacedItems: [] = [];
+    replacedItems: MaterialsList = new MaterialsList();
 }
