@@ -18,23 +18,23 @@ export class FuelRod extends ReactorItem {
     }
 
     constructor(
-        id: number,
+        id: number | string,
         baseName: string,
         name: string,
         image: string,
-        maxDamage: number,
-        maxHeat: number,
+        maxDamage: number | string,
+        maxHeat: number | string,
         sourceMod: string | null,
-        energyMult: number,
-        heatMult: number,
-        rodCount: number,
-        moxStyle: boolean
+        energyMult: number | string,
+        heatMult: number | string,
+        rodCount: number | string,
+        moxStyle: boolean | string
     ) {
         super(id, baseName, name, image, maxDamage, maxHeat, sourceMod);
-        this.energyMult = energyMult;
-        this.heatMult = heatMult;
-        this.rodCount = rodCount;
-        this.moxStyle = moxStyle;
+        this.energyMult = Number(energyMult);
+        this.heatMult = Number(heatMult);
+        this.rodCount = Number(rodCount);
+        this.moxStyle = moxStyle === true || moxStyle === "true";
     }
 
     getCopy(): FuelRod {

@@ -1,7 +1,7 @@
 import { ReactorItem } from "../ReactorItem";
 
 export class Condensator extends ReactorItem {
-    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string | null) {
+    constructor(id: number | string, baseName: string, name: string, image: string, maxDamage: number | string, maxHeat: number | string, sourceMod: string | null) {
         super(id, baseName, name, image, maxDamage, maxHeat, sourceMod);
     }
 

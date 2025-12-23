@@ -1,0 +1,11 @@
+div.componentSelector {
+    height: 40%;
+    background-color: rgb(145, 130, 130);
+    align-items: center;
+    justify-content: center;
+}
+
+div.ReactorSideInside {
+    height: 100%;
+    width: 100%;
+}

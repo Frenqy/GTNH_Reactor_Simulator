@@ -1,4 +1,6 @@
-import { MaterialsList, ReactorItem, type Reactor } from "./ReactorItem";
+import { MaterialsList } from "./MaterialsList";
+import type { Reactor } from "./Reactor";
+import type { ReactorItem } from "./ReactorItem";
 import { BreederCell } from "./ReactorItems/BreederCell";
 import { SimulationData } from "./SimulationData";
 

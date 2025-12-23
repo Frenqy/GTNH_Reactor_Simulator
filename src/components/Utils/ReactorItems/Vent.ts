@@ -5,11 +5,22 @@ export class Vent extends ReactorItem {
     hullDraw: number;
     sideVent: number;
 
-    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string | null, selfVent: number, hullDraw: number, sideVent: number) {
+    constructor(
+        id: number | string,
+        baseName: string,
+        name: string,
+        image: string,
+        maxDamage: number | string,
+        maxHeat: number | string,
+        sourceMod: string | null,
+        selfVent: number | string,
+        hullDraw: number | string,
+        sideVent: number | string
+    ) {
         super(id, baseName, name, image, maxDamage, maxHeat, sourceMod);
-        this.selfVent = selfVent;
-        this.hullDraw = hullDraw;
-        this.sideVent = sideVent;
+        this.selfVent = Number(selfVent);
+        this.hullDraw = Number(hullDraw);
+        this.sideVent = Number(sideVent);
     }
 
     getCopy(): Vent {

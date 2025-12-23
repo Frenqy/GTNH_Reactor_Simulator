@@ -4,10 +4,20 @@ import { ReactorItem } from "../ReactorItem";
 export class Plating extends ReactorItem {
     heatAdjustment: number;
 
-    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string | null, heatAdjustment: number, explosionPowerMultiplier: number) {
+    constructor(
+        id: number | string,
+        baseName: string,
+        name: string,
+        image: string,
+        maxDamage: number | string,
+        maxHeat: number | string,
+        sourceMod: string | null,
+        heatAdjustment: number | string,
+        explosionPowerMultiplier: number | string
+    ) {
         super(id, baseName, name, image, maxDamage, maxHeat, sourceMod);
-        this.heatAdjustment = heatAdjustment;
-        this.explosionPowerMultiplier = explosionPowerMultiplier;
+        this.heatAdjustment = Number(heatAdjustment);
+        this.explosionPowerMultiplier = Number(explosionPowerMultiplier);
     }
 
     getCopy(): Plating {

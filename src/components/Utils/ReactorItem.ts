@@ -36,17 +36,17 @@ export class ReactorItem {
     explosionPowerMultiplier = 1;
     info: string = "";
 
-    constructor(id: number, baseName: string, name: string, image: string, maxDamage: number, maxHeat: number, sourceMod: string | null) {
-        this.id = id;
+    constructor(id: number | string, baseName: string, name: string, image: string, maxDamage: number | string, maxHeat: number | string, sourceMod: string | null) {
+        this.id = Number(id);
         this.baseName = baseName;
         this.name = name;
         this.image = image;
-        this.maxDamage = maxDamage;
-        this.maxHeat = maxHeat;
-        if (maxHeat > 1) {
-            this.automationThreshold = Math.round(maxHeat * 0.9);
-        } else if (maxDamage > 1) {
-            this.automationThreshold = Math.round(maxDamage * 1.1);
+        this.maxDamage = Number(maxDamage);
+        this.maxHeat = Number(maxHeat);
+        if (this.maxHeat > 1) {
+            this.automationThreshold = Math.round(this.maxHeat * 0.9);
+        } else if (this.maxDamage > 1) {
+            this.automationThreshold = Math.round(this.maxDamage * 1.1);
         }
         this.sourceMod = sourceMod;
     }
