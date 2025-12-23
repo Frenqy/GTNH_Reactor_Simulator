@@ -1,11 +1,29 @@
 div.componentSelector {
-    height: 40%;
-    background-color: rgb(145, 130, 130);
+    height: 50%;
+    /* background-color: rgb(145, 130, 130); */
+    flex-wrap: wrap;
+    overflow-y: auto;
     align-items: center;
     justify-content: center;
+    display: flex;
 }
 
-div.ReactorSideInside {
-    height: 100%;
-    width: 100%;
+.selectedItemInfo {
+    height: 10%;
+    background-color: rgb(7, 165, 99);
+}
+
+.infoLine {
+    height: 50%;
+    display: flex;
+    align-items: center;
+    margin-left: 1%;
+    flex-direction: row;
+}
+
+.paramGroup {
+    width: 30%;
+    gap: 1%;
+    display: flex;
+    justify-content: center;
 }

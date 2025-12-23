@@ -1,33 +1,38 @@
-import { type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import GridButton from "../components/GridButton";
 import { ItemLoader } from "../components/Utils/ItemLoader";
+import { LanguageLoader } from "../components/Utils/LanguageLoader";
 import type { ReactorItem } from "../components/Utils/ReactorItem";
 import "./ReactorSide.css";
 
 type input = {
     setSelectedItem: React.Dispatch<React.SetStateAction<ReactorItem | null>>;
+    isLoaded: boolean;
+    selectedItem: ReactorItem | null;
 };
-function ReactorSide({ setSelectedItem }: input) {
-    // divSize.width, divSize.height;
-    // const buttonSize = Math.round(Math.min((nodeSize.height * 0.2) / 10, nodeSize.width / 10));
-    // console.log(buttonSize);
-    const reactorButtons = [];
-    for (const itemType of ItemLoader.ITEM_TYPE_NAME_LIST) {
-        for (const item of ItemLoader.ITEM_LIST_MAP[itemType]) {
-            reactorButtons.push(
-                GridButton({
-                    key: item.id,
-                    size: 20,
-                    reactorItem: item,
-                    onClick: (event: MouseEvent<HTMLDivElement>) => handleButtonClick(event, item),
-                })
-            );
-        }
-    }
+function ReactorSide({ setSelectedItem, isLoaded, selectedItem }: input) {
+    const selfRef = useRef<HTMLDivElement>(null);
+    const [divSize, setDivSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
 
-    function handleButtonClick(event: MouseEvent<HTMLDivElement>, item: ReactorItem | null) {
-        // event.preventDefault();
-        // left click => 1; right click => 2
+    useEffect(() => {
+        const node = selfRef.current;
+        if (!node) return;
+        const updateSize = () => {
+            setDivSize({
+                width: node.clientWidth,
+                height: node.clientHeight,
+            });
+        };
+        updateSize();
+
+        const resizeObserver = new ResizeObserver(updateSize);
+        resizeObserver.observe(node);
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, []);
+
+    function handleButtonClick(_event: MouseEvent<HTMLDivElement>, item: ReactorItem | null) {
         setSelectedItem(() => {
             if (item) {
                 return item.getCopy();
@@ -37,11 +42,47 @@ function ReactorSide({ setSelectedItem }: input) {
         });
     }
 
+    // 动态生成按钮
+    const reactorButtons = [];
+    if (isLoaded && divSize.width > 0) {
+        const buttonSize = Math.round(divSize.width / Math.round(divSize.width / 64));
+        for (const itemType of ItemLoader.ITEM_TYPE_NAME_LIST) {
+            for (const item of ItemLoader.ITEM_LIST_MAP[itemType]) {
+                reactorButtons.push(
+                    GridButton({
+                        key: `select${item.id}`,
+                        size: buttonSize,
+                        reactorItem: item,
+                        onClick: (event: MouseEvent<HTMLDivElement>) => handleButtonClick(event, item),
+                    })
+                );
+            }
+        }
+    }
+
     return (
-        <div className="ReactorSideInside">
-            <div className="componentSelector">{reactorButtons}</div>
-            <div className="temp"></div>
-        </div>
+        <>
+            <div ref={selfRef} className="componentSelector">
+                {reactorButtons}
+            </div>
+            <div className="selectedItemInfo">
+                <div className="infoLine">{selectedItem ? LanguageLoader.getI18N("UI.ComponentPlacingSpecific", selectedItem.name) : LanguageLoader.getI18N("UI.ComponentPlacingDefault")}</div>
+                <div className="infoLine" style={{ justifyContent: "center" }}>
+                    <div className="paramGroup">
+                        {LanguageLoader.getI18N("Config.InitialComponentHeat")}
+                        <input type="number" id="initHeat"></input>
+                    </div>
+                    <div className="paramGroup">
+                        {LanguageLoader.getI18N("Config.PlacingReplacementThreshold")}
+                        <input type="number" id="replacementThreshold"></input>
+                    </div>
+                    <div className="paramGroup">
+                        {LanguageLoader.getI18N("Config.PlacingReactorPause")}
+                        <input type="number" id="reactorPause"></input>
+                    </div>
+                </div>
+            </div>
+        </>
     );
 }
 

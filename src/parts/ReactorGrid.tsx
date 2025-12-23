@@ -52,12 +52,12 @@ function ReactorGrid({ reactor, onReactorChange, selectedItem }: input) {
 
     function handleButtonClick(event: MouseEvent<HTMLDivElement>, row: number, column: number) {
         event.preventDefault();
-        // left click => 1; right click => 2
+        // left click => 0; right click => 2
         onReactorChange((prev: Reactor) => {
             const newReactor = cloneDeep(prev);
-            if (event.button == 2 || (event.button == 1 && selectedItem == null)) {
+            if (event.button == 2 || (event.button == 0 && selectedItem == null)) {
                 newReactor.setComponentAt(row, column, null);
-            } else if (event.button == 1 && selectedItem != null) {
+            } else if (event.button == 0 && selectedItem != null) {
                 newReactor.setComponentAt(row, column, selectedItem.getCopy());
             }
             return newReactor;

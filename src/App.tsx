@@ -17,6 +17,7 @@ function initLang() {
 function App() {
     const [reactor, setReactor] = useState(() => new Reactor());
     const [selectedItem, setSelectedItem] = useState<ReactorItem | null>(null);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         const loadData = async () => {
@@ -28,12 +29,17 @@ function App() {
             const allData: AllData = await allRes.json();
             ImageLoader.initImages(allData.image);
             ItemLoader.initItems(allData.items);
+            setIsLoaded(true);
         };
         loadData();
 
         initLang();
     }, []);
 
+    if (!isLoaded) {
+        // 数据没加载完时只显示 loading
+        return <div>加载中...</div>;
+    }
     return (
         <>
             <div className="MainBody">
@@ -42,7 +48,7 @@ function App() {
                         <ReactorGrid reactor={reactor} onReactorChange={setReactor} selectedItem={selectedItem} />
                     </div>
                     <div className="ReactorSide">
-                        <ReactorSide setSelectedItem={setSelectedItem} />
+                        <ReactorSide setSelectedItem={setSelectedItem} isLoaded={isLoaded} selectedItem={selectedItem} />
                     </div>
                 </div>
                 <div className="ReactorStats">

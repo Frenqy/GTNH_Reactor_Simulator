@@ -8,7 +8,12 @@ export class LanguageLoader {
         this.LangsData = d;
     }
 
-    static getI18N(key: string): string {
+    static format(str: string, ...args: string[]) {
+        let i = 0;
+        return str.replace(/%s/g, () => args[i++]);
+    }
+
+    static getI18N(key: string, ...args: string[]): string {
         let temp: unknown = this.LangsData[GlobalData.language == lang.zh ? lang.zh : lang.en];
         for (const k of key.split(".")) {
             if (typeof temp === "object" && temp !== null) {
@@ -17,6 +22,10 @@ export class LanguageLoader {
                 return "";
             }
         }
-        return typeof temp === "string" ? temp : "";
+        if (args.length > 0) {
+            return this.format(typeof temp === "string" ? temp : "", ...args);
+        } else {
+            return typeof temp === "string" ? temp : "";
+        }
     }
 }

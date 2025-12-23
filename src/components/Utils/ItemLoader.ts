@@ -18,7 +18,6 @@ type ReactorItemConstructor = new (...data: string[]) => ReactorItem;
 export class ItemLoader {
     private static ITEM_MAP: Map<string, ReactorItem> = new Map<string, ReactorItem>();
 
-    // 这里直接用类名，不要用 .constructor
     private static CLZ_MAP: Record<string, ReactorItemConstructor> = {
         BreederCell: BreederCell,
         Condensator: Condensator,
@@ -46,6 +45,10 @@ export class ItemLoader {
     static ITEM_TYPE_NAME_LIST: string[] = ["FuelRod", "GGFuelRod", "BreederCell", "CoolantCell", "Condensator", "Exchanger", "Vent", "Plating", "Reflector"];
 
     static initItems(data: ItemData[]) {
+        for (const key in this.ITEM_LIST_MAP) {
+            this.ITEM_LIST_MAP[key] = [];
+        }
+        this.ITEM_MAP.clear();
         data.forEach((item: ItemData) => {
             const Clz = this.CLZ_MAP[item.type];
             if (Clz) {
@@ -58,8 +61,6 @@ export class ItemLoader {
                 console.warn(`未知的item类型: ${item.type}`);
             }
         });
-        // console.clear();
-        // console.log(this.ITEM_CACHE);
     }
 
     static getItemByName(name: string): ReactorItem | null {

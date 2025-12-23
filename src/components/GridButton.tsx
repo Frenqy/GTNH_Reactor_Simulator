@@ -15,7 +15,7 @@ type input = {
 function GridButton({ size, thisRow, thisCol, reactorItem, onClick, enable = true, key }: input) {
     return (
         <div key={key ? key : `row${thisRow}col${thisCol}`} style={{ width: size, height: size }} className={`GridButton ${enable ? "active" : "inactive"}`} onContextMenu={onClick} onClick={onClick}>
-            <img src={reactorItem?.image} style={{ width: "100%", height: "100%" }}></img>
+            {reactorItem ? <img src={reactorItem?.image} title={reactorItem?.name}></img> : ""}
         </div>
     );
 }
