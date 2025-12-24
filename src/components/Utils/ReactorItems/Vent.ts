@@ -24,7 +24,18 @@ export class Vent extends ReactorItem {
     }
 
     getCopy(): Vent {
-        return new Vent(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod, this.selfVent, this.hullDraw, this.sideVent);
+        return new Vent(
+            this.id,
+            this.baseName,
+            this.name,
+            this.image,
+            this.maxDamage,
+            this.maxHeat,
+            this.sourceMod,
+            this.selfVent,
+            this.hullDraw,
+            this.sideVent
+        );
     }
 
     dissipate() {

@@ -1,4 +1,4 @@
-.GridButton.active {
+.GridButton {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,6 +11,7 @@
     border-width: 4px;
     box-sizing: border-box;
     background-color: #8b8b8b;
+    white-space: pre-wrap;
 }
 
 .GridButton.active:hover {

@@ -21,7 +21,17 @@ export class Plating extends ReactorItem {
     }
 
     getCopy(): Plating {
-        return new Plating(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod, this.heatAdjustment, this.explosionPowerMultiplier);
+        return new Plating(
+            this.id,
+            this.baseName,
+            this.name,
+            this.image,
+            this.maxDamage,
+            this.maxHeat,
+            this.sourceMod,
+            this.heatAdjustment,
+            this.explosionPowerMultiplier
+        );
     }
 
     addToReactor(parent: Reactor, row: number, col: number) {

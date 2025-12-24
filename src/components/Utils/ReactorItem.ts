@@ -36,7 +36,15 @@ export class ReactorItem {
     explosionPowerMultiplier = 1;
     info: string = "";
 
-    constructor(id: number | string, baseName: string, name: string, image: string, maxDamage: number | string, maxHeat: number | string, sourceMod: string | null) {
+    constructor(
+        id: number | string,
+        baseName: string,
+        name: string,
+        image: string,
+        maxDamage: number | string,
+        maxHeat: number | string,
+        sourceMod: string | null
+    ) {
         this.id = Number(id);
         this.baseName = baseName;
         this.name = name;

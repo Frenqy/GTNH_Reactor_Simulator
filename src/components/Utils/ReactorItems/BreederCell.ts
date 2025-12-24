@@ -22,7 +22,17 @@ export class BreederCell extends ReactorItem {
     }
 
     getCopy(): ReactorItem {
-        return new BreederCell(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod, this.mHeatBonusStep, this.mHeatBonusMultiplier);
+        return new BreederCell(
+            this.id,
+            this.baseName,
+            this.name,
+            this.image,
+            this.maxDamage,
+            this.maxHeat,
+            this.sourceMod,
+            this.mHeatBonusStep,
+            this.mHeatBonusMultiplier
+        );
     }
 
     generateHeat(): number {

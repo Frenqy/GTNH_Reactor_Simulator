@@ -32,7 +32,17 @@ export class ItemLoader {
 
     static ITEM_LIST_MAP: Record<string, ReactorItem[]> = {};
 
-    static ITEM_TYPE_NAME_LIST: string[] = ["FuelRod", "GGFuelRod", "BreederCell", "CoolantCell", "Condensator", "Exchanger", "Vent", "Plating", "Reflector"];
+    static ITEM_TYPE_NAME_LIST: string[] = [
+        "FuelRod",
+        "GGFuelRod",
+        "BreederCell",
+        "CoolantCell",
+        "Condensator",
+        "Exchanger",
+        "Vent",
+        "Plating",
+        "Reflector",
+    ];
 
     static initItems(data: ItemData[]) {
         for (const key of this.ITEM_TYPE_NAME_LIST) {
@@ -41,10 +51,11 @@ export class ItemLoader {
         this.ITEM_MAP = new Map<string, ReactorItem>();
 
         data.forEach((item: ItemData) => {
+            // get localized name
+            item.data[2] = LanguageLoader.getI18N(item.data[2]);
+            item.data[3] = ImageLoader.getImage(item.data[3]);
             const Clz = this.CLZ_MAP[item.type];
             if (Clz) {
-                item.data[2] = LanguageLoader.getI18N(item.data[2]);
-                item.data[3] = ImageLoader.getImage(item.data[3]);
                 const instance = new Clz(...item.data) as ReactorItem;
                 this.ITEM_MAP.set(instance.name, instance);
                 this.ITEM_LIST_MAP[item.type].push(instance);

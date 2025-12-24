@@ -39,24 +39,25 @@ function App() {
     if (!isLoaded) {
         // 数据没加载完时只显示 loading
         return <div>加载中...</div>;
+    } else {
+        return (
+            <>
+                <div className="MainBody">
+                    <div className="ReactorTop">
+                        <div className="ReactorGrid">
+                            <ReactorGrid reactor={reactor} onReactorChange={setReactor} selectedItem={selectedItem} />
+                        </div>
+                        <div className="ReactorSide">
+                            <ReactorSide setSelectedItem={setSelectedItem} isLoaded={isLoaded} selectedItem={selectedItem} />
+                        </div>
+                    </div>
+                    <div className="ReactorStats">
+                        <ReactorStats />
+                    </div>
+                </div>
+            </>
+        );
     }
-    return (
-        <>
-            <div className="MainBody">
-                <div className="ReactorTop">
-                    <div className="ReactorGrid">
-                        <ReactorGrid reactor={reactor} onReactorChange={setReactor} selectedItem={selectedItem} />
-                    </div>
-                    <div className="ReactorSide">
-                        <ReactorSide setSelectedItem={setSelectedItem} isLoaded={isLoaded} selectedItem={selectedItem} />
-                    </div>
-                </div>
-                <div className="ReactorStats">
-                    <ReactorStats />
-                </div>
-            </div>
-        </>
-    );
 }
 
 export default App;

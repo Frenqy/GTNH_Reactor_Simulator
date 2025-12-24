@@ -21,7 +21,17 @@ export class Exchanger extends ReactorItem {
     }
 
     getCopy() {
-        return new Exchanger(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod, this.switchSide, this.switchReactor);
+        return new Exchanger(
+            this.id,
+            this.baseName,
+            this.name,
+            this.image,
+            this.maxDamage,
+            this.maxHeat,
+            this.sourceMod,
+            this.switchSide,
+            this.switchReactor
+        );
     }
 
     getHullCoolingCapacity() {

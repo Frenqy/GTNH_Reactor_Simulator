@@ -38,7 +38,19 @@ export class FuelRod extends ReactorItem {
     }
 
     getCopy(): FuelRod {
-        return new FuelRod(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod, this.energyMult, this.heatMult, this.rodCount, this.moxStyle);
+        return new FuelRod(
+            this.id,
+            this.baseName,
+            this.name,
+            this.image,
+            this.maxDamage,
+            this.maxHeat,
+            this.sourceMod,
+            this.energyMult,
+            this.heatMult,
+            this.rodCount,
+            this.moxStyle
+        );
     }
 
     isNeutronReflector() {
@@ -111,7 +123,12 @@ export class FuelRod extends ReactorItem {
     generateHeat() {
         const pulses = this.countNeutronNeighbors() + 1 + this.getRodCount() / 2;
         let heat = Math.round(this.heatMult * pulses * (pulses + 1));
-        if (this.parentReactor != null && this.moxStyle && this.parentReactor.isFluid() && this.parentReactor.getCurrentHeat() / this.parentReactor.getMaxHeat() > 0.5) {
+        if (
+            this.parentReactor != null &&
+            this.moxStyle &&
+            this.parentReactor.isFluid() &&
+            this.parentReactor.getCurrentHeat() / this.parentReactor.getMaxHeat() > 0.5
+        ) {
             heat *= 2;
         }
         this.currentHeatGenerated = heat;

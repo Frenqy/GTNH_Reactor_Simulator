@@ -31,7 +31,20 @@ export class GGFuelRod extends FuelRod {
     }
 
     getCopy(): FuelRod {
-        return new GGFuelRod(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod, this.energyMult, this.heatMult, this.rodCount, this.moxStyle, this.heatBonus);
+        return new GGFuelRod(
+            this.id,
+            this.baseName,
+            this.name,
+            this.image,
+            this.maxDamage,
+            this.maxHeat,
+            this.sourceMod,
+            this.energyMult,
+            this.heatMult,
+            this.rodCount,
+            this.moxStyle,
+            this.heatBonus
+        );
     }
 
     countNeutronNeighbors = super.countNeutronNeighbors;

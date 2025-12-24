@@ -484,8 +484,8 @@
             "Time": {
                 "Both": "%+,d seconds (%d/%d)\n",
                 "BothColored": "<font color='%s'>%+,d</font> seconds (%d/%d)\n",
-                "LeftOnly": "%d/\\u221e\n",
-                "RightOnly": "\\u221e/%d\n"
+                "LeftOnly": "%d/∞\n",
+                "RightOnly": "∞/%d\n"
             },
             "VentCooling": "Vent cooling: %s (%s/%s)\n",
             "VentCoolingPossible": "Possible vent cooling: %s (%s/%s)\n"

@@ -3,7 +3,15 @@ import { ReactorItem } from "../ReactorItem";
 export class Reflector extends ReactorItem {
     static mcVersion: string = "1.12.2";
 
-    constructor(id: number | string, baseName: string, name: string, image: string, maxDamage: number | string, maxHeat: number | string, sourceMod: string | null) {
+    constructor(
+        id: number | string,
+        baseName: string,
+        name: string,
+        image: string,
+        maxDamage: number | string,
+        maxHeat: number | string,
+        sourceMod: string | null
+    ) {
         super(id, baseName, name, image, maxDamage, maxHeat, sourceMod);
     }
 
