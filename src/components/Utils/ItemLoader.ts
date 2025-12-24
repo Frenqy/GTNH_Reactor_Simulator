@@ -35,11 +35,11 @@ export class ItemLoader {
     static ITEM_TYPE_NAME_LIST: string[] = ["FuelRod", "GGFuelRod", "BreederCell", "CoolantCell", "Condensator", "Exchanger", "Vent", "Plating", "Reflector"];
 
     static initItems(data: ItemData[]) {
-        for (const key in this.ITEM_LIST_MAP) {
-            this.ITEM_LIST_MAP[key] = [];
+        for (const key of this.ITEM_TYPE_NAME_LIST) {
+            this.ITEM_LIST_MAP[key] = new Array<ReactorItem>();
         }
         this.ITEM_MAP = new Map<string, ReactorItem>();
-        
+
         data.forEach((item: ItemData) => {
             const Clz = this.CLZ_MAP[item.type];
             if (Clz) {

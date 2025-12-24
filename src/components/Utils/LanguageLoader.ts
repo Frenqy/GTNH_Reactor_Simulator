@@ -3,7 +3,7 @@ import { GlobalData } from "./GlobalData";
 
 export class LanguageLoader {
     static LangsData: LangsJson;
-    private static regex = /%((.(?<number>\d)*|,*)+f|(.(?<number>\d)*|,*)d|s)/g;
+    private static regex = /%((\.(?<num>\d)*|,*)+f|(\.(?<num>\d)*|,*)d|s)/g;
 
     static initLanguageLoader(d: LangsJson) {
         this.LangsData = d;
@@ -22,7 +22,7 @@ export class LanguageLoader {
             counter += 1;
         }
         counter = 0;
-        return baseString.replace(this.regex, () => args[counter++]);
+        return baseString.replace(this.regex, () => args[counter++]).replaceAll("%%", "");
     }
 
     static getI18N(key: string, ...args: string[]): string {
@@ -35,9 +35,9 @@ export class LanguageLoader {
             }
         }
         if (args.length > 0) {
-            return this.format(typeof temp === "string" ? temp : "", ...args);
+            return typeof temp === "string" ? this.format(temp, ...args) : "";
         } else {
-            return typeof temp === "string" ? temp : "";
+            return typeof temp === "string" ? temp.replaceAll("%%", "") : "";
         }
     }
 }
