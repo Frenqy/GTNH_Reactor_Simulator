@@ -3,14 +3,26 @@ import { GlobalData } from "./GlobalData";
 
 export class LanguageLoader {
     static LangsData: LangsJson;
+    private static regex = /%((.(?<number>\d)*|,*)+f|(.(?<number>\d)*|,*)d|s)/g;
 
     static initLanguageLoader(d: LangsJson) {
         this.LangsData = d;
     }
 
-    static format(str: string, ...args: string[]) {
-        let i = 0;
-        return str.replace(/%s/g, () => args[i++]);
+    static format(baseString: string, ...args: string[]) {
+        let m;
+        let counter = 0;
+        while ((m = this.regex.exec(baseString)) !== null) {
+            if (m[0].includes(".") && m.groups) {
+                args[counter] = Number(args[counter]).toFixed(Number(m.groups["num"]));
+            }
+            if (m[0].includes(",")) {
+                args[counter] = Number(args[counter]).toLocaleString();
+            }
+            counter += 1;
+        }
+        counter = 0;
+        return baseString.replace(this.regex, () => args[counter++]);
     }
 
     static getI18N(key: string, ...args: string[]): string {

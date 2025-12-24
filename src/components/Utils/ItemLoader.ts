@@ -16,7 +16,7 @@ import { Vent } from "./ReactorItems/Vent";
 type ReactorItemConstructor = new (...data: string[]) => ReactorItem;
 
 export class ItemLoader {
-    private static ITEM_MAP: Map<string, ReactorItem> = new Map<string, ReactorItem>();
+    private static ITEM_MAP: Map<string, ReactorItem>;
 
     private static CLZ_MAP: Record<string, ReactorItemConstructor> = {
         BreederCell: BreederCell,
@@ -30,17 +30,7 @@ export class ItemLoader {
         Vent: Vent,
     };
 
-    static ITEM_LIST_MAP: Record<string, ReactorItem[]> = {
-        BreederCell: [],
-        Condensator: [],
-        CoolantCell: [],
-        Exchanger: [],
-        FuelRod: [],
-        GGFuelRod: [],
-        Plating: [],
-        Reflector: [],
-        Vent: [],
-    };
+    static ITEM_LIST_MAP: Record<string, ReactorItem[]> = {};
 
     static ITEM_TYPE_NAME_LIST: string[] = ["FuelRod", "GGFuelRod", "BreederCell", "CoolantCell", "Condensator", "Exchanger", "Vent", "Plating", "Reflector"];
 
@@ -48,7 +38,8 @@ export class ItemLoader {
         for (const key in this.ITEM_LIST_MAP) {
             this.ITEM_LIST_MAP[key] = [];
         }
-        this.ITEM_MAP.clear();
+        this.ITEM_MAP = new Map<string, ReactorItem>();
+        
         data.forEach((item: ItemData) => {
             const Clz = this.CLZ_MAP[item.type];
             if (Clz) {
@@ -58,7 +49,7 @@ export class ItemLoader {
                 this.ITEM_MAP.set(instance.name, instance);
                 this.ITEM_LIST_MAP[item.type].push(instance);
             } else {
-                console.warn(`未知的item类型: ${item.type}`);
+                console.warn(`未知的item类型: ${item.type}, ${item.data}`);
             }
         });
     }
