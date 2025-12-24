@@ -10,7 +10,26 @@ div.componentSelector {
 
 .selectedItemInfo {
     height: 10%;
-    background-color: rgb(7, 165, 99);
+    border-style: solid;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-color: black;
+    border-bottom-color: black;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+}
+
+.controlPanel {
+    height: 40%;
+    /* background-color: rgb(145, 130, 130); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
 }
 
 .infoLine {
@@ -31,4 +50,11 @@ div.componentSelector {
 
 div.paramGroup input {
     max-width: 50%;
+    text-align: left;
+}
+
+.controlLine {
+    height: 14%;
+    width: 90%;
+    /* background-color: aqua; */
 }

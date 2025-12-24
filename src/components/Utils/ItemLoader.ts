@@ -52,6 +52,7 @@ export class ItemLoader {
 
         data.forEach((item: ItemData) => {
             // get localized name
+            item.data[1] = item.data[2].split(".")[1];
             item.data[2] = LanguageLoader.getI18N(item.data[2]);
             item.data[3] = ImageLoader.getImage(item.data[3]);
             const Clz = this.CLZ_MAP[item.type];

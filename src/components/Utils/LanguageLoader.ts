@@ -5,7 +5,12 @@ export class LanguageLoader {
     static LangsData: LangsJson;
     private static regex = /%((\.(?<num>\d)*|,*)+f|(\.(?<num>\d)*|,*)d|s)/g;
 
-    private static replacePairs = [["%%", ""]];
+    private static replacePairs = [
+        ["%%", ""],
+        ["&lt;", "<"],
+        ["&gt;", ">"],
+        ["&amp;", "&"],
+    ];
 
     static initLanguageLoader(d: LangsJson) {
         this.LangsData = d;

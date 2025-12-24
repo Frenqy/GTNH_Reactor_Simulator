@@ -48,7 +48,12 @@ function App() {
                             <ReactorGrid reactor={reactor} onReactorChange={setReactor} selectedItem={selectedItem} />
                         </div>
                         <div className="ReactorSide">
-                            <ReactorSide setSelectedItem={setSelectedItem} isLoaded={isLoaded} selectedItem={selectedItem} />
+                            <ReactorSide
+                                setSelectedItem={setSelectedItem}
+                                selectedItem={selectedItem}
+                                reactor={reactor}
+                                setReactor={setReactor}
+                            />
                         </div>
                     </div>
                     <div className="ReactorStats">

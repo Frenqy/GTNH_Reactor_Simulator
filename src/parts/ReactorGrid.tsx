@@ -52,7 +52,6 @@ function ReactorGrid({ reactor, onReactorChange, selectedItem }: input) {
 
     function handleButtonClick(event: MouseEvent<HTMLDivElement>, row: number, column: number) {
         event.preventDefault();
-        // left click => 0; right click => 2
         onReactorChange((prev: Reactor) => {
             const newReactor = cloneDeep(prev);
             if (event.button == 2 || (event.button == 0 && selectedItem == null)) {
