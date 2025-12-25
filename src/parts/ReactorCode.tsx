@@ -1,4 +1,5 @@
-import { Button, Col, Input, Row } from "antd";
+import { Button, Col, ConfigProvider, Input, Row } from "antd";
+import { showInsetEffect } from "../components/Utils/Defines";
 import { LanguageLoader } from "../components/Utils/LanguageLoader";
 import { Reactor } from "../components/Utils/Reactor";
 
@@ -31,16 +32,18 @@ function ReactorCode({ reactor, onReactorChange }: input) {
                 <Col flex="auto">
                     <Input disabled value={reactor.getCode()} />
                 </Col>
-                <Col flex="10%">
-                    <Button style={{ width: "100%" }} onClick={handleCopyCode}>
-                        {getI18N("UI.CopyCodeButton")}
-                    </Button>
-                </Col>
-                <Col flex="10%">
-                    <Button style={{ width: "100%" }} onClick={handlePasteCode}>
-                        {getI18N("UI.PasteCodeButton")}
-                    </Button>
-                </Col>
+                <ConfigProvider wave={{ showEffect: showInsetEffect }}>
+                    <Col flex="10%">
+                        <Button style={{ width: "100%" }} onClick={handleCopyCode}>
+                            {getI18N("UI.CopyCodeButton")}
+                        </Button>
+                    </Col>
+                    <Col flex="10%">
+                        <Button style={{ width: "100%" }} onClick={handlePasteCode}>
+                            {getI18N("UI.PasteCodeButton")}
+                        </Button>
+                    </Col>
+                </ConfigProvider>
             </Row>
         </>
     );
