@@ -1,5 +1,7 @@
+import { message } from "antd";
 import { BigintStorage } from "./BigintStorage";
 import { ComponentFactory } from "./ComponentFactory";
+import { ItemLoader } from "./ItemLoader";
 import type { ReactorItem } from "./ReactorItem";
 
 export class Reactor {
@@ -127,73 +129,73 @@ export class Reactor {
     }
 
     readCodeString(code: string) {
-        const storage = BigintStorage.inputBase64(code);
-        // // read the code revision from the code itself instead of making it part of the prefix.
-        const codeRevision = storage.extract(255);
-        let maxComponentHeat;
-        if (codeRevision == 4) maxComponentHeat = 1e9;
-        else if (codeRevision == 3) maxComponentHeat = 1080e3;
-        else maxComponentHeat = 360e3;
-        // Check if the code revision is supported yet.
-        if (codeRevision > 4) {
-            throw new Error("Unsupported code revision in reactor code.");
-        }
-        // for code revision 1 or newer, read whether the reactor is pulsed and/or automated next.
-        if (codeRevision >= 1) {
-            this.pulsed = storage.extract(1) > 0;
-            this.automated = storage.extract(1) > 0;
-        }
-        // read the grid next
-        for (let row = 0; row < this.grid.length; row++) {
-            for (let col = 0; col < this.grid[row].length; col++) {
-                let componentId = 0;
-                // Changes may be coming to the number of components available, so make sure to check the code revision
-                // number.
-                if (codeRevision <= 1) {
-                    componentId = storage.extract(38);
-                } else if (codeRevision == 2) {
-                    componentId = storage.extract(44);
-                } else if (codeRevision == 3) {
-                    componentId = storage.extract(58);
-                } else {
-                    componentId = storage.extract(72);
-                }
-                if (componentId != 0) {
-                    const component: ReactorItem | null = ComponentFactory.createComponent(componentId);
-                    const hasSpecialAutomationConfig = storage.extract(1);
-                    if (hasSpecialAutomationConfig > 0) {
-                        if (component != null) {
-                            component.setInitialHeat(storage.extract(maxComponentHeat));
-                        }
-                        if (codeRevision == 0 || (codeRevision >= 1 && this.automated)) {
-                            if (component != null) {
-                                component.setAutomationThreshold(storage.extract(maxComponentHeat));
-                            }
-                            if (component != null) {
-                                component.setReactorPause(storage.extract(10e3));
-                            }
-                        }
+        code = code.replace("erp=", "");
+        try {
+            const storage = BigintStorage.inputBase64(code);
+
+            const codeRevision = storage.extract(255);
+            let maxComponentHeat;
+            if (codeRevision == 4) maxComponentHeat = 1e9;
+            else if (codeRevision == 3) maxComponentHeat = 1080e3;
+            else maxComponentHeat = 360e3;
+            if (codeRevision > 4) {
+                throw new Error("Unsupported code revision in reactor code.");
+            }
+            if (codeRevision >= 1) {
+                this.pulsed = storage.extract(1) > 0;
+                this.automated = storage.extract(1) > 0;
+            }
+            for (let row = 0; row < this.grid.length; row++) {
+                for (let col = 0; col < this.grid[row].length; col++) {
+                    let componentId = 0;
+                    if (codeRevision <= 1) {
+                        componentId = storage.extract(38);
+                    } else if (codeRevision == 2) {
+                        componentId = storage.extract(44);
+                    } else if (codeRevision == 3) {
+                        componentId = storage.extract(58);
+                    } else {
+                        componentId = storage.extract(72);
                     }
-                    this.setComponentAt(row, col, component);
-                } else {
-                    this.setComponentAt(row, col, null);
+                    if (componentId != 0) {
+                        const component: ReactorItem | null = ItemLoader.getItemByNameOrId(componentId.toString());
+                        const hasSpecialAutomationConfig = storage.extract(1);
+                        if (hasSpecialAutomationConfig > 0) {
+                            if (component != null) {
+                                component.setInitialHeat(storage.extract(maxComponentHeat));
+                            }
+                            if (codeRevision == 0 || (codeRevision >= 1 && this.automated)) {
+                                if (component != null) {
+                                    component.setAutomationThreshold(storage.extract(maxComponentHeat));
+                                }
+                                if (component != null) {
+                                    component.setReactorPause(storage.extract(10e3));
+                                }
+                            }
+                        }
+                        this.setComponentAt(row, col, component);
+                    } else {
+                        this.setComponentAt(row, col, null);
+                    }
                 }
             }
+            this.currentHeat = storage.extract(120e3);
+            if (codeRevision == 0 || (codeRevision >= 1 && this.pulsed)) {
+                this.onPulse = storage.extract(5e6);
+                this.offPulse = storage.extract(5e6);
+                this.suspendTemp = storage.extract(120e3);
+                this.resumeTemp = storage.extract(120e3);
+            }
+            this.fluid = storage.extract(1) > 0;
+            this.usingReactorCoolantInjectors = storage.extract(1) > 0;
+            if (codeRevision == 0) {
+                this.pulsed = storage.extract(1) > 0;
+                this.automated = storage.extract(1) > 0;
+            }
+            this.maxSimulationTicks = storage.extract(5e6);
+        } catch (error) {
+            message.error("读取反应堆代码时出错: " + (error as Error).message);
         }
-        this.currentHeat = storage.extract(120e3);
-        if (codeRevision == 0 || (codeRevision >= 1 && this.pulsed)) {
-            this.onPulse = storage.extract(5e6);
-            this.offPulse = storage.extract(5e6);
-            this.suspendTemp = storage.extract(120e3);
-            this.resumeTemp = storage.extract(120e3);
-        }
-        this.fluid = storage.extract(1) > 0;
-        this.usingReactorCoolantInjectors = storage.extract(1) > 0;
-        if (codeRevision == 0) {
-            this.pulsed = storage.extract(1) > 0;
-            this.automated = storage.extract(1) > 0;
-        }
-        this.maxSimulationTicks = storage.extract(5e6);
     }
 
     buildCodeString() {
@@ -208,18 +210,15 @@ export class Reactor {
             storage.store(this.onPulse, 5e6);
         }
         storage.store(this.currentHeat, 120e3);
-        // grid is read (almost) first, so written (almost) last, and in reverse order
         for (let row = this.grid.length - 1; row >= 0; row--) {
             for (let col = this.grid[row].length - 1; col >= 0; col--) {
                 const component: ReactorItem | null = this.grid[row][col];
                 if (component != null) {
                     const id = component.id;
-                    // only store automation details for a component if non-default, and add a flag bit to indicate
-                    // their presence.  null components don't even need the flag bit.
                     if (
                         component.initialHeat > 0 ||
-                        component.automationThreshold != ComponentFactory.getDefaultComponent(id)!.automationThreshold ||
-                        component.reactorPause != ComponentFactory.getDefaultComponent(id)!.reactorPause
+                        component.automationThreshold != ComponentFactory.getDefaultComponent(id)?.automationThreshold ||
+                        component.reactorPause != ComponentFactory.getDefaultComponent(id)?.reactorPause
                     ) {
                         if (this.automated) {
                             storage.store(component.reactorPause, 10e3);
@@ -238,7 +237,6 @@ export class Reactor {
         }
         storage.store(this.automated ? 1 : 0, 1);
         storage.store(this.pulsed ? 1 : 0, 1);
-        // store the code revision, allowing values up to 255 (8 bits) before adjusting how it is stored in the code.
         storage.store(4, 255);
         return storage.outputBase64();
     }

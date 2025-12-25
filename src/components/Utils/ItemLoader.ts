@@ -59,6 +59,7 @@ export class ItemLoader {
             if (Clz) {
                 const instance = new Clz(...item.data) as ReactorItem;
                 this.ITEM_MAP.set(instance.name, instance);
+                this.ITEM_MAP.set(instance.id.toString(), instance);
                 this.ITEM_LIST_MAP[item.type].push(instance);
             } else {
                 console.warn(`未知的item类型: ${item.type}, ${item.data}`);
@@ -66,8 +67,8 @@ export class ItemLoader {
         });
     }
 
-    static getItemByName(name: string): ReactorItem | null {
-        const item = this.ITEM_MAP.get(name);
+    static getItemByNameOrId(nameOrId: string): ReactorItem | null {
+        const item = this.ITEM_MAP.get(nameOrId);
         return item ? item.getCopy() : null;
     }
 }

@@ -15,6 +15,8 @@ type input = {
 };
 
 function GridButton({ size, thisRow, thisCol, reactorItem = null, onClick, enable = true, key, tooltips }: input) {
+    tooltips = tooltips || tooltips?.length === 0 ? tooltips : reactorItem?.name;
+
     let maxWidth = reactorItem ? reactorItem.name.length : 0;
     tooltips?.split("\n").forEach((line) => {
         maxWidth = Math.max(maxWidth, line.length);
@@ -23,12 +25,12 @@ function GridButton({ size, thisRow, thisCol, reactorItem = null, onClick, enabl
 
     return (
         <Tooltip
-            title={tooltips || tooltips?.length === 0 ? tooltips : reactorItem?.name}
+            title={tooltips}
             styles={{
                 container: {
                     whiteSpace: "pre-line",
                     width: `${Math.max(maxWidth, size)}px`,
-                    fontSize: Math.max(maxWidth, size) == maxWidth ? "xx-small" : "",
+                    fontSize: maxWidth > size ? "xx-small" : "",
                 },
             }}
             key={key ? key : `row${thisRow}col${thisCol}`}
@@ -40,6 +42,7 @@ function GridButton({ size, thisRow, thisCol, reactorItem = null, onClick, enabl
                 onClick={onClick}
             >
                 {reactorItem ? <img src={reactorItem?.image}></img> : null}
+                {!enable && <div className="GridButtonMask" />}
             </div>
         </Tooltip>
     );

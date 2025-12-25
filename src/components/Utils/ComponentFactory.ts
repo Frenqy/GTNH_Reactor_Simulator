@@ -12,6 +12,7 @@ export class ComponentFactory {
     }
 
     static createComponent(id?: number, name?: string): ReactorItem | null {
+        console.log(ComponentFactory.ITEMS );
         if (id !== undefined && id >= 0 && id < ComponentFactory.ITEMS.length) {
             return ComponentFactory.ITEMS[id].getCopy();
         } else if (name !== undefined && name != null) {

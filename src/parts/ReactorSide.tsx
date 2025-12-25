@@ -1,7 +1,8 @@
-import { Button, Checkbox, Flex, InputNumber, Radio } from "antd";
+import { Button, Checkbox, ConfigProvider, Flex, InputNumber, Radio } from "antd";
 import { cloneDeep } from "lodash";
 import { useEffect, useRef, useState, type MouseEvent, type ReactElement } from "react";
 import GridButton from "../components/GridButton";
+import { showInsetEffect } from "../components/Utils/Defines";
 import { ItemLoader } from "../components/Utils/ItemLoader";
 import { LanguageLoader } from "../components/Utils/LanguageLoader";
 import { Reactor } from "../components/Utils/Reactor";
@@ -20,6 +21,20 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor }: inp
     const [replacementThresholdValue, setReplacementThresholdValue] = useState(9000);
     const [reactorPauseValue, setReactorPauseValue] = useState(0);
     const [divSize, setDivSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
+
+    const isPulsedOrAutomaOptions = [
+        { label: LanguageLoader.getI18N("UI.PulsedReactor"), value: "PulsedReactor" },
+        { label: LanguageLoader.getI18N("UI.AutomatedReactor"), value: "AutomatedReactor" },
+    ];
+
+    const isFluidOptions = [
+        { value: 1, label: `${LanguageLoader.getI18N("Config.EUReactor")}` },
+        { value: 2, label: `${LanguageLoader.getI18N("Config.FluidReactor")}` },
+    ];
+
+    function getI18N(key: string, ...args: string[]) {
+        return LanguageLoader.getI18N(key, ...args);
+    }
 
     function handleButtonClick(_event: MouseEvent<HTMLDivElement>, item: ReactorItem | null) {
         setSelectedItem(() => {
@@ -102,9 +117,7 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor }: inp
                         size: buttonSize,
                         reactorItem: item,
                         onClick: (event: MouseEvent<HTMLDivElement>) => handleButtonClick(event, item),
-                        tooltips: `${LanguageLoader.getI18N("ComponentName." + item.baseName)}\n${LanguageLoader.getI18N(
-                            "ComponentData." + item.baseName
-                        )}`,
+                        tooltips: `${getI18N("ComponentName." + item.baseName)}\n${getI18N("ComponentData." + item.baseName)}`,
                     })
                 );
             });
@@ -114,17 +127,17 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor }: inp
     return (
         <>
             <div ref={selfRef} className="componentSelector">
-                {reactorButtons}
+                <Flex wrap gap="small">
+                    {reactorButtons}
+                </Flex>
             </div>
             <div className="selectedItemInfo">
                 <div className="infoLine">
-                    {selectedItem
-                        ? LanguageLoader.getI18N("UI.ComponentPlacingSpecific", selectedItem.name)
-                        : LanguageLoader.getI18N("UI.ComponentPlacingDefault")}
+                    {selectedItem ? getI18N("UI.ComponentPlacingSpecific", selectedItem.name) : getI18N("UI.ComponentPlacingDefault")}
                 </div>
                 <div className="infoLine center">
                     <div className="paramGroup">
-                        {LanguageLoader.getI18N("Config.InitialComponentHeat")}
+                        {getI18N("Config.InitialComponentHeat")}
                         <InputNumber
                             value={initHeatValue}
                             onChange={(v) => setInitHeatValue(Number(v))}
@@ -136,7 +149,7 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor }: inp
                         />
                     </div>
                     <div className="paramGroup">
-                        {LanguageLoader.getI18N("Config.PlacingReplacementThreshold")}
+                        {getI18N("Config.PlacingReplacementThreshold")}
                         <InputNumber
                             value={replacementThresholdValue}
                             onChange={(v) => setReplacementThresholdValue(Number(v))}
@@ -148,7 +161,7 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor }: inp
                         />
                     </div>
                     <div className="paramGroup">
-                        {LanguageLoader.getI18N("Config.PlacingReactorPause")}
+                        {getI18N("Config.PlacingReactorPause")}
                         <InputNumber
                             value={reactorPauseValue}
                             onChange={(v) => setReactorPauseValue(Number(v))}
@@ -165,29 +178,28 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor }: inp
                 <div className="controlLine center">
                     <Radio.Group
                         value={reactor.isFluid() ? 2 : 1}
-                        options={[
-                            { value: 1, label: `${LanguageLoader.getI18N("Config.EUReactor")}` },
-                            { value: 2, label: `${LanguageLoader.getI18N("Config.FluidReactor")}` },
-                        ]}
+                        options={isFluidOptions}
                         onChange={(e) => handleReactorUpdate("isFluid", e.target.value)}
                     />
                 </div>
                 <div className="controlLine center">
                     <Flex gap={"small"}>
-                        <Button variant="solid" color="primary">
-                            {LanguageLoader.getI18N("UI.ClearGridButton")}
-                        </Button>
-                        <Button variant="solid" color="danger">
-                            {LanguageLoader.getI18N("UI.SimulateButton")}
-                        </Button>
-                        <Button variant="solid" color="default">
-                            {LanguageLoader.getI18N("UI.CancelButton")}
-                        </Button>
+                        <ConfigProvider wave={{ showEffect: showInsetEffect }}>
+                            <Button variant="solid" color="primary">
+                                {getI18N("UI.ClearGridButton")}
+                            </Button>
+                            <Button variant="solid" color="danger">
+                                {getI18N("UI.SimulateButton")}
+                            </Button>
+                            <Button variant="solid" color="default">
+                                {getI18N("UI.CancelButton")}
+                            </Button>
+                        </ConfigProvider>
                     </Flex>
                 </div>
                 <div className="controlLine center">
                     <Flex gap={"small"}>
-                        {LanguageLoader.getI18N("UI.InitialReactorHeat")}
+                        {getI18N("UI.InitialReactorHeat")}
                         <InputNumber
                             value={reactor.getCurrentHeat()}
                             onChange={(e) => handleReactorUpdate("reactorInitHeat", e)}
@@ -197,16 +209,13 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor }: inp
                             step={1}
                             style={{ maxWidth: "45%" }}
                         />
-                        {LanguageLoader.getI18N("UI.MaxHeatDefault")}
+                        {getI18N("UI.MaxHeatDefault")}
                     </Flex>
                 </div>
                 <div className="controlLine center">
                     <Flex gap={"small"}>
                         <Checkbox.Group
-                            options={[
-                                { label: LanguageLoader.getI18N("UI.PulsedReactor"), value: "PulsedReactor" },
-                                { label: LanguageLoader.getI18N("UI.AutomatedReactor"), value: "AutomatedReactor" },
-                            ]}
+                            options={isPulsedOrAutomaOptions}
                             defaultValue={[reactor.isPulsed() ? "PulsedReactor" : "", reactor.isAutomated() ? "AutomatedReactor" : ""]}
                             onChange={(e) => {
                                 handleReactorUpdate("modifyReactor", e);
@@ -216,7 +225,7 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor }: inp
                 </div>
                 <div className="controlLine center">
                     <Flex gap={"small"}>
-                        {LanguageLoader.getI18N("UI.MaxSimulationTicks")}
+                        {getI18N("UI.MaxSimulationTicks")}
                         <InputNumber
                             value={reactor.getMaxSimulationTicks()}
                             onChange={(e) => handleReactorUpdate("maxSimulationTicks", e)}
@@ -226,17 +235,16 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor }: inp
                             step={1}
                             style={{ maxWidth: "45%" }}
                         />
-                        {LanguageLoader.getI18N("Config.Seconds")}
+                        {getI18N("Config.Seconds")}
                     </Flex>
                 </div>
                 <div className="controlLine center">
                     <Checkbox.Group
-                        options={[{ label: LanguageLoader.getI18N("Config.ReactorCoolantInjectors"), value: "Injector" }]}
+                        options={[{ label: getI18N("Config.ReactorCoolantInjectors"), value: "Injector" }]}
                         defaultValue={[reactor.isUsingReactorCoolantInjectors() ? "Injector" : ""]}
                         onChange={(e) => {
                             handleReactorUpdate("coolantInjectors", e);
                         }}
-                        disabled
                     />
                 </div>
             </div>

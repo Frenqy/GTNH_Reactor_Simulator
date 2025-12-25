@@ -6,6 +6,7 @@ import { ItemLoader } from "./components/Utils/ItemLoader";
 import { LanguageLoader } from "./components/Utils/LanguageLoader";
 import { Reactor } from "./components/Utils/Reactor";
 import type { ReactorItem } from "./components/Utils/ReactorItem";
+import ReactorCode from "./parts/ReactorCode";
 import ReactorGrid from "./parts/ReactorGrid";
 import ReactorSide from "./parts/ReactorSide";
 import ReactorStats from "./parts/ReactorStats";
@@ -43,21 +44,19 @@ function App() {
         return (
             <>
                 <div className="MainBody">
-                    <div className="ReactorTop">
+                    <div className="ReactorGridCodeStats">
                         <div className="ReactorGrid">
                             <ReactorGrid reactor={reactor} onReactorChange={setReactor} selectedItem={selectedItem} />
                         </div>
-                        <div className="ReactorSide">
-                            <ReactorSide
-                                setSelectedItem={setSelectedItem}
-                                selectedItem={selectedItem}
-                                reactor={reactor}
-                                setReactor={setReactor}
-                            />
+                        <div className="ReactorCode">
+                            <ReactorCode reactor={reactor} onReactorChange={setReactor} />
+                        </div>
+                        <div className="ReactorStats">
+                            <ReactorStats />
                         </div>
                     </div>
-                    <div className="ReactorStats">
-                        <ReactorStats />
+                    <div className="ReactorSide">
+                        <ReactorSide setSelectedItem={setSelectedItem} selectedItem={selectedItem} reactor={reactor} setReactor={setReactor} />
                     </div>
                 </div>
             </>
