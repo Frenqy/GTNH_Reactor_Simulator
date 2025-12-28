@@ -19,6 +19,7 @@ function App() {
     const [reactor, setReactor] = useState(() => new Reactor());
     const [selectedItem, setSelectedItem] = useState<ReactorItem | null>(null);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [version, setVersion] = useState<{ mcVersion: string; gtVersion: string }>({ mcVersion: "1.7.10", gtVersion: "-" });
 
     useEffect(() => {
         const loadData = async () => {
@@ -35,7 +36,7 @@ function App() {
         loadData();
 
         initLang();
-    }, []);
+    }, [version]);
 
     if (!isLoaded) {
         // 数据没加载完时只显示 loading
@@ -52,11 +53,18 @@ function App() {
                             <ReactorCode reactor={reactor} onReactorChange={setReactor} />
                         </div>
                         <div className="ReactorStats">
-                            <ReactorStats />
+                            <ReactorStats reactor={reactor} onReactorChange={setReactor} />
                         </div>
                     </div>
                     <div className="ReactorSide">
-                        <ReactorSide setSelectedItem={setSelectedItem} selectedItem={selectedItem} reactor={reactor} setReactor={setReactor} />
+                        <ReactorSide
+                            setSelectedItem={setSelectedItem}
+                            selectedItem={selectedItem}
+                            reactor={reactor}
+                            setReactor={setReactor}
+                            version={version}
+                            setVersion={setVersion}
+                        />
                     </div>
                 </div>
             </>

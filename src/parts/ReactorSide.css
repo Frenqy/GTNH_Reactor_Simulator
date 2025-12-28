@@ -48,13 +48,7 @@ div.componentSelector {
     font-size: 0.9rem;
 }
 
-div.paramGroup input {
-    max-width: 50%;
-    text-align: left;
-}
-
 .controlLine {
     height: 14%;
     width: 90%;
-    /* background-color: aqua; */
 }

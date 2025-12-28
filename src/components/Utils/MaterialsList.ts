@@ -12,10 +12,10 @@ export class MaterialsList {
         return new Map<string, MaterialsList>();
     }
 
-    add(materials: (MaterialsList | number | string)[]) {
+    add(materials: (MaterialsList | number | string | null)[]) {
         let itemCount = 1;
         for (const material of materials) {
-            if (material instanceof String) {
+            if (typeof material === "string") {
                 const materialName: string = material as string;
                 if (this.materials.has(materialName)) {
                     this.materials.set(materialName, this.materials.get(materialName)! + itemCount);
@@ -23,7 +23,7 @@ export class MaterialsList {
                     this.materials.set(materialName, itemCount);
                 }
                 itemCount = 1;
-            } else if (material instanceof Number) {
+            } else if (typeof material === "number") {
                 itemCount = (material as number) * 2;
             } else if (material instanceof MaterialsList) {
                 for (const entrySet of material.materials.entries()) {
@@ -36,5 +36,13 @@ export class MaterialsList {
                 itemCount = 1;
             }
         }
+    }
+
+    toString(): string {
+        let result = "";
+        for (const [material, count] of this.materials.entries()) {
+            result += `${material}: ${count}\n`;
+        }
+        return result;
     }
 }

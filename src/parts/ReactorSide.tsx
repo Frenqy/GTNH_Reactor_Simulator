@@ -1,4 +1,4 @@
-import { Button, Checkbox, ConfigProvider, Flex, InputNumber, Radio } from "antd";
+import { Button, Checkbox, ConfigProvider, Flex, InputNumber, Radio, Select } from "antd";
 import { cloneDeep } from "lodash";
 import { useEffect, useRef, useState, type MouseEvent, type ReactElement } from "react";
 import GridButton from "../components/GridButton";
@@ -14,13 +14,19 @@ type input = {
     selectedItem: ReactorItem | null;
     reactor: Reactor;
     setReactor: React.Dispatch<React.SetStateAction<Reactor>>;
+    version: { mcVersion: string; gtVersion: string };
+    setVersion: React.Dispatch<React.SetStateAction<{ mcVersion: string; gtVersion: string }>>;
 };
-function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor }: input) {
+function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, version, setVersion }: input) {
     const selfRef = useRef<HTMLDivElement>(null);
     const [initHeatValue, setInitHeatValue] = useState(0);
     const [replacementThresholdValue, setReplacementThresholdValue] = useState(9000);
     const [reactorPauseValue, setReactorPauseValue] = useState(0);
     const [divSize, setDivSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
+
+    const styleForEachLine: React.CSSProperties = { width: "90%", height: "100%" };
+    const mcVersion: string[] = ["1.7.10", "1.8.9", "1.9.4", "1.10.2", "1.11.2", "1.12.2"];
+    const gtVersion: string[] = ["-", "5.08", "5.09", "GTNH"];
 
     const isPulsedOrAutomaOptions = [
         { label: LanguageLoader.getI18N("UI.PulsedReactor"), value: "PulsedReactor" },
@@ -75,8 +81,27 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor }: inp
                     newReactor.setUsingReactorCoolantInjectors((data as string[]).includes("Injector"));
                     break;
                 }
+                case "clearReactor": {
+                    newReactor.clearGrid();
+                    break;
+                }
             }
             return newReactor;
+        });
+    }
+
+    function handleVersionChange(which: string, e: string) {
+        setVersion((prev) => {
+            const newVersion = cloneDeep(prev);
+            if (which === "mcVersion") {
+                newVersion.mcVersion = e;
+                if (e !== "1.7.10") {
+                    newVersion.gtVersion = "-";
+                }
+            } else if (which === "gtVersion") {
+                newVersion.gtVersion = e;
+            }
+            return newVersion;
         });
     }
 
@@ -110,14 +135,16 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor }: inp
             })
         );
         ItemLoader.ITEM_TYPE_NAME_LIST.forEach((itemType) => {
-            ItemLoader.ITEM_LIST_MAP[itemType].forEach((item) => {
+            ItemLoader.ITEM_LIST_MAP[itemType]?.forEach((item) => {
+                const isEnable = ItemLoader.isItemDisable(version.mcVersion, version.gtVersion, item.baseName.toString());
                 reactorButtons.push(
                     GridButton({
                         key: `select${item.id}`,
                         size: buttonSize,
                         reactorItem: item,
                         onClick: (event: MouseEvent<HTMLDivElement>) => handleButtonClick(event, item),
-                        tooltips: `${getI18N("ComponentName." + item.baseName)}\n${getI18N("ComponentData." + item.baseName)}`,
+                        tooltips: `${getI18N("ComponentName." + item.name.split(".")[1])}\n${getI18N("ComponentData." + item.name.split(".")[1])}`,
+                        enable: isEnable,
                     })
                 );
             });
@@ -127,127 +154,149 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor }: inp
     return (
         <>
             <div ref={selfRef} className="componentSelector">
-                <Flex wrap gap="small">
+                <Flex wrap gap="small" justify="center">
                     {reactorButtons}
                 </Flex>
             </div>
-            <div className="selectedItemInfo">
-                <div className="infoLine">
-                    {selectedItem ? getI18N("UI.ComponentPlacingSpecific", selectedItem.name) : getI18N("UI.ComponentPlacingDefault")}
-                </div>
-                <div className="infoLine center">
-                    <div className="paramGroup">
+            <Flex className="selectedItemInfo" vertical>
+                <Flex style={{ marginLeft: "1%" }}>
+                    {getI18N(
+                        "UI.TemperatureEffectsSpecific",
+                        Math.round(reactor.getMaxHeat() * 0.4).toString(),
+                        Math.round(reactor.getMaxHeat() * 0.5).toString(),
+                        Math.round(reactor.getMaxHeat() * 0.7).toString(),
+                        Math.round(reactor.getMaxHeat() * 0.85).toString(),
+                        Math.round(reactor.getMaxHeat() * 1.0).toString()
+                    )}
+                </Flex>
+                <Flex style={{ height: "50%", marginLeft: "1%" }} align="center">
+                    {selectedItem
+                        ? getI18N("UI.ComponentPlacingSpecific", getI18N("ComponentName." + selectedItem.name.split(".")[1]))
+                        : getI18N("UI.ComponentPlacingDefault")}
+                </Flex>
+                <Flex style={{ height: "50%" }} align="center" justify="center">
+                    <Flex className="paramGroup">
                         {getI18N("Config.InitialComponentHeat")}
                         <InputNumber
                             value={initHeatValue}
                             onChange={(v) => setInitHeatValue(Number(v))}
                             min={0}
                             max={Reactor.MAX_COMPONENT_HEAT}
-                            size={"small"}
+                            size="small"
                             step={1}
                             style={{ maxWidth: "45%" }}
                         />
-                    </div>
-                    <div className="paramGroup">
+                    </Flex>
+                    <Flex className="paramGroup">
                         {getI18N("Config.PlacingReplacementThreshold")}
                         <InputNumber
                             value={replacementThresholdValue}
                             onChange={(v) => setReplacementThresholdValue(Number(v))}
                             min={0}
                             max={Reactor.MAX_COMPONENT_HEAT}
-                            size={"small"}
+                            size="small"
                             step={1}
                             style={{ maxWidth: "45%" }}
                         />
-                    </div>
-                    <div className="paramGroup">
+                    </Flex>
+                    <Flex className="paramGroup">
                         {getI18N("Config.PlacingReactorPause")}
                         <InputNumber
                             value={reactorPauseValue}
                             onChange={(v) => setReactorPauseValue(Number(v))}
                             min={0}
                             max={10_000}
-                            size={"small"}
+                            size="small"
                             step={1}
                             style={{ maxWidth: "45%" }}
                         />
-                    </div>
-                </div>
-            </div>
-            <div className="controlPanel center">
-                <div className="controlLine center">
+                    </Flex>
+                </Flex>
+            </Flex>
+            <Flex vertical style={{ height: "40%" }} align="center" justify="center">
+                <Flex style={styleForEachLine} align="center" justify="center">
                     <Radio.Group
                         value={reactor.isFluid() ? 2 : 1}
                         options={isFluidOptions}
                         onChange={(e) => handleReactorUpdate("isFluid", e.target.value)}
                     />
-                </div>
-                <div className="controlLine center">
-                    <Flex gap={"small"}>
-                        <ConfigProvider wave={{ showEffect: showInsetEffect }}>
-                            <Button variant="solid" color="primary">
-                                {getI18N("UI.ClearGridButton")}
-                            </Button>
-                            <Button variant="solid" color="danger">
-                                {getI18N("UI.SimulateButton")}
-                            </Button>
-                            <Button variant="solid" color="default">
-                                {getI18N("UI.CancelButton")}
-                            </Button>
-                        </ConfigProvider>
-                    </Flex>
-                </div>
-                <div className="controlLine center">
-                    <Flex gap={"small"}>
-                        {getI18N("UI.InitialReactorHeat")}
-                        <InputNumber
-                            value={reactor.getCurrentHeat()}
-                            onChange={(e) => handleReactorUpdate("reactorInitHeat", e)}
-                            min={0}
-                            max={10_000}
-                            size={"small"}
-                            step={1}
-                            style={{ maxWidth: "45%" }}
-                        />
-                        {getI18N("UI.MaxHeatDefault")}
-                    </Flex>
-                </div>
-                <div className="controlLine center">
-                    <Flex gap={"small"}>
-                        <Checkbox.Group
-                            options={isPulsedOrAutomaOptions}
-                            defaultValue={[reactor.isPulsed() ? "PulsedReactor" : "", reactor.isAutomated() ? "AutomatedReactor" : ""]}
-                            onChange={(e) => {
-                                handleReactorUpdate("modifyReactor", e);
-                            }}
-                        />
-                    </Flex>
-                </div>
-                <div className="controlLine center">
-                    <Flex gap={"small"}>
-                        {getI18N("UI.MaxSimulationTicks")}
-                        <InputNumber
-                            value={reactor.getMaxSimulationTicks()}
-                            onChange={(e) => handleReactorUpdate("maxSimulationTicks", e)}
-                            min={0}
-                            max={5e6}
-                            size={"small"}
-                            step={1}
-                            style={{ maxWidth: "45%" }}
-                        />
-                        {getI18N("Config.Seconds")}
-                    </Flex>
-                </div>
-                <div className="controlLine center">
+                </Flex>
+                <Flex style={styleForEachLine} align="center" justify="center" gap={"small"}>
+                    <ConfigProvider wave={{ showEffect: showInsetEffect }}>
+                        <Button variant="solid" color="primary" onClick={() => handleReactorUpdate("clearReactor", null)}>
+                            {getI18N("UI.ClearGridButton")}
+                        </Button>
+                        <Button variant="solid" color="danger">
+                            {getI18N("UI.SimulateButton")}
+                        </Button>
+                        <Button variant="solid" color="default">
+                            {getI18N("UI.CancelButton")}
+                        </Button>
+                    </ConfigProvider>
+                </Flex>
+                <Flex style={styleForEachLine} align="center" justify="center" gap={"small"}>
+                    {getI18N("UI.InitialReactorHeat")}
+                    <InputNumber
+                        value={reactor.getCurrentHeat()}
+                        onChange={(e) => handleReactorUpdate("reactorInitHeat", e)}
+                        min={0}
+                        max={10_000}
+                        size={"small"}
+                        step={1}
+                        style={{ maxWidth: "45%" }}
+                    />
+                    {getI18N("UI.MaxHeatDefault")}
+                </Flex>
+                <Flex style={styleForEachLine} align="center" justify="center" gap={"small"}>
+                    <Checkbox.Group
+                        options={isPulsedOrAutomaOptions}
+                        value={[reactor.isPulsed() ? "PulsedReactor" : "", reactor.isAutomated() ? "AutomatedReactor" : ""]}
+                        onChange={(e) => {
+                            handleReactorUpdate("modifyReactor", e);
+                        }}
+                    />
+                </Flex>
+                <Flex style={styleForEachLine} align="center" justify="center" gap={"small"}>
+                    {getI18N("UI.MaxSimulationTicks")}
+                    <InputNumber
+                        value={reactor.getMaxSimulationTicks()}
+                        onChange={(e) => handleReactorUpdate("maxSimulationTicks", e)}
+                        min={0}
+                        max={5e6}
+                        size={"small"}
+                        step={1}
+                        style={{ maxWidth: "45%" }}
+                    />
+                    {getI18N("Config.Seconds")}
+                </Flex>
+                <Flex style={styleForEachLine} align="center" justify="center">
                     <Checkbox.Group
                         options={[{ label: getI18N("Config.ReactorCoolantInjectors"), value: "Injector" }]}
-                        defaultValue={[reactor.isUsingReactorCoolantInjectors() ? "Injector" : ""]}
+                        value={[reactor.isUsingReactorCoolantInjectors() ? "Injector" : ""]}
                         onChange={(e) => {
                             handleReactorUpdate("coolantInjectors", e);
                         }}
+                        disabled={version.mcVersion === "1.7.10"}
                     />
-                </div>
-            </div>
+                </Flex>
+                <Flex style={styleForEachLine} align="center" justify="center" gap={"small"}>
+                    {getI18N("UI.MinecraftVersion")}
+                    <Select
+                        options={mcVersion.map((version) => ({ label: version, value: version }))}
+                        value={version.mcVersion}
+                        onChange={(e) => handleVersionChange("mcVersion", e)}
+                        style={{ minWidth: "15%" }}
+                    />
+                    {getI18N("UI.GregTechVersion")}
+                    <Select
+                        options={gtVersion.map((version) => ({ label: version, value: version }))}
+                        value={version.gtVersion}
+                        onChange={(e) => handleVersionChange("gtVersion", e)}
+                        style={{ minWidth: "15%" }}
+                        disabled={version.mcVersion !== "1.7.10"}
+                    />
+                </Flex>
+            </Flex>
         </>
     );
 }

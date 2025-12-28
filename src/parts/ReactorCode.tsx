@@ -1,4 +1,4 @@
-import { Button, Col, ConfigProvider, Input, Row } from "antd";
+import { Button, Col, ConfigProvider, Flex, Input } from "antd";
 import { showInsetEffect } from "../components/Utils/Defines";
 import { LanguageLoader } from "../components/Utils/LanguageLoader";
 import { Reactor } from "../components/Utils/Reactor";
@@ -18,8 +18,6 @@ function ReactorCode({ reactor, onReactorChange }: input) {
             onReactorChange(() => {
                 const newReactor = new Reactor();
                 newReactor.readCodeString(text);
-                console.log(newReactor);
-
                 return newReactor;
             });
         });
@@ -27,7 +25,7 @@ function ReactorCode({ reactor, onReactorChange }: input) {
 
     return (
         <>
-            <Row wrap={false} style={{ width: "100%" }} align="middle" gutter={1}>
+            <Flex align="center" justify="center" style={{ width: "100%", height: "100%" }}>
                 <Col flex="5%">{getI18N("UI.CodeLabel")}</Col>
                 <Col flex="auto">
                     <Input disabled value={reactor.getCode()} />
@@ -44,7 +42,7 @@ function ReactorCode({ reactor, onReactorChange }: input) {
                         </Button>
                     </Col>
                 </ConfigProvider>
-            </Row>
+            </Flex>
         </>
     );
 }

@@ -44,9 +44,8 @@ export class ItemLoader {
         "Reflector",
     ];
 
-    //iridiumNeutronReflectorButton.setEnabled(!"1.7.10".equals(mcVersion));
-    static DISABLE_MAP = {
-        "GT5.08": [
+    static DISABLE_MAP: { [key: string]: string[] } = {
+        "5.08": [
             "coolantCellNeutronium1G",
             "fuelRodNaquadah",
             "dualFuelRodNaquadah",
@@ -84,8 +83,9 @@ export class ItemLoader {
             "dualFuelRodLiquidPlutonium",
             "quadFuelRodLiquidPlutonium",
             "fuelRodGlowstone",
+            "coolantCellNeutronium1G",
         ],
-        "GT5.09": [
+        "5.09": [
             "fuelRodCesium",
             "dualFuelRodCesium",
             "quadFuelRodCesium",
@@ -120,8 +120,18 @@ export class ItemLoader {
             "quadFuelRodLiquidPlutonium",
             "fuelRodGlowstone",
         ],
-        GTNH: ["fuelRodCesium", "dualFuelRodCesium", "quadFuelRodCesium", "fuelRodCoaxium", "dualFuelRodCoaxium", "quadFuelRodCoaxium"],
-        default: [
+        GTNH: [
+            "fuelRodCesium",
+            "dualFuelRodCesium",
+            "quadFuelRodCesium",
+            "fuelRodCoaxium",
+            "dualFuelRodCoaxium",
+            "quadFuelRodCoaxium",
+            "fuelRodNaquadah",
+            "dualFuelRodNaquadah",
+            "quadFuelRodNaquadah",
+        ],
+        "-": [
             "fuelRodThorium",
             "dualFuelRodThorium",
             "quadFuelRodThorium",
@@ -135,6 +145,9 @@ export class ItemLoader {
             "fuelRodNaquadah",
             "dualFuelRodNaquadah",
             "quadFuelRodNaquadah",
+            "fuelRodNaquadahGTNH",
+            "dualFuelRodNaquadahGTNH",
+            "quadFuelRodNaquadahGTNH",
             "coolantCellSpace180k",
             "coolantCellSpace360k",
             "coolantCellSpace540k",
@@ -158,6 +171,7 @@ export class ItemLoader {
             "fuelRodLiquidPlutonium",
             "dualFuelRodLiquidPlutonium",
             "quadFuelRodLiquidPlutonium",
+            "fuelRodGlowstone",
         ],
         "1.7.10": ["iridiumNeutronReflector"],
     };
@@ -169,14 +183,13 @@ export class ItemLoader {
         this.ITEM_MAP = new Map<string, ReactorItem>();
 
         data.forEach((item: ItemData) => {
-            // get localized name
-            item.data[1] = item.data[2].split(".")[1];
-            item.data[2] = LanguageLoader.getI18N(item.data[2]);
+            const name = LanguageLoader.getI18N(item.data[2]);
             item.data[3] = ImageLoader.getImage(item.data[3]);
             const Clz = this.CLZ_MAP[item.type];
+
             if (Clz) {
                 const instance = new Clz(...item.data) as ReactorItem;
-                this.ITEM_MAP.set(instance.name, instance);
+                this.ITEM_MAP.set(name, instance);
                 this.ITEM_MAP.set(instance.id.toString(), instance);
                 this.ITEM_LIST_MAP[item.type].push(instance);
             } else {
@@ -188,5 +201,13 @@ export class ItemLoader {
     static getItemByNameOrId(nameOrId: string): ReactorItem | null {
         const item = this.ITEM_MAP.get(nameOrId);
         return item ? item.getCopy() : null;
+    }
+
+    static isItemDisable(mcVersion: string, gtVersion: string, name: string) {
+        if (gtVersion === "-") {
+            return !this.DISABLE_MAP[mcVersion]?.includes(name) && !this.DISABLE_MAP[gtVersion]?.includes(name);
+        } else {
+            return !this.DISABLE_MAP[gtVersion]?.includes(name);
+        }
     }
 }

@@ -2,6 +2,8 @@ import { message } from "antd";
 import { BigintStorage } from "./BigintStorage";
 import { ComponentFactory } from "./ComponentFactory";
 import { ItemLoader } from "./ItemLoader";
+import { LanguageLoader } from "./LanguageLoader";
+import { MaterialsList } from "./MaterialsList";
 import type { ReactorItem } from "./ReactorItem";
 
 export class Reactor {
@@ -100,17 +102,18 @@ export class Reactor {
     //     }
     //     return result;
     // }
-    // public MaterialsList getComponentList() {
-    //     MaterialsList result = new MaterialsList();
-    //     for (int col = 0; col < grid[0].length; col++) {
-    //         for (int row = 0; row < grid.length; row++) {
-    //             if (getComponentAt(row, col) != null) {
-    //                 result.add(getComponentAt(row, col).name);
-    //             }
-    //         }
-    //     }
-    //     return result;
-    // }
+    getComponentList(): MaterialsList {
+        const result: MaterialsList = new MaterialsList();
+        let item: ReactorItem | null;
+        for (let col = 0; col < this.grid[0].length; col++) {
+            for (let row = 0; row < this.grid.length; row++) {
+                if ((item = this.getComponentAt(row, col)) !== null) {
+                    result.add([LanguageLoader.getI18N("ComponentName." + item.name.split(".")[1])]);
+                }
+            }
+        }
+        return result;
+    }
 
     getVentedHeat() {
         return this.ventedHeat;

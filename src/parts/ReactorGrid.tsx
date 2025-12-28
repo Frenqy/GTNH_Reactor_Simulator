@@ -1,6 +1,7 @@
 import { cloneDeep } from "lodash";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import GridButton from "../components/GridButton";
+import { LanguageLoader } from "../components/Utils/LanguageLoader";
 import type { Reactor } from "../components/Utils/Reactor";
 import type { ReactorItem } from "../components/Utils/ReactorItem";
 import "./ReactorGrid.css";
@@ -33,13 +34,15 @@ function ReactorGrid({ reactor, onReactorChange, selectedItem }: input) {
     for (let row = 0; row < 6; row++) {
         const eachLine = [];
         for (let col = 0; col < 9; col++) {
+            const item = reactor.getComponentAt(row, col);
             eachLine.push(
                 GridButton({
                     size: reactorItemSize,
                     thisRow: row,
                     thisCol: col,
-                    reactorItem: reactor.getComponentAt(row, col),
+                    reactorItem: item,
                     onClick: (event: MouseEvent<HTMLDivElement>) => handleButtonClick(event, row, col),
+                    tooltips: item ? LanguageLoader.getI18N("ComponentName." + item.name.split(".")[1]) : "",
                 })
             );
         }
@@ -54,7 +57,7 @@ function ReactorGrid({ reactor, onReactorChange, selectedItem }: input) {
         event.preventDefault();
         onReactorChange((prev: Reactor) => {
             const newReactor = cloneDeep(prev);
-            if (event.button == 2 || (event.button == 0 && selectedItem == null)) {
+            if (event.button == 2) {
                 newReactor.setComponentAt(row, column, null);
             } else if (event.button == 0 && selectedItem != null) {
                 newReactor.setComponentAt(row, column, selectedItem.getCopy());
