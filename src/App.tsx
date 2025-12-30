@@ -48,7 +48,7 @@ function App() {
 
         initLang();
         // changeLang();
-    }, [version]);
+    }, []);
 
     if (!isLoaded) {
         // 数据没加载完时只显示 loading
