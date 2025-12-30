@@ -16,7 +16,7 @@ export class LanguageLoader {
         this.LangsData = d;
     }
 
-    static format(baseString: string, ...args: string[]) {
+    static format(baseString: string, ...args: (string | number)[]) {
         let temp;
         let counter = 0;
         while ((temp = this.regex.exec(baseString)) !== null) {
@@ -29,7 +29,7 @@ export class LanguageLoader {
             counter += 1;
         }
         counter = 0;
-        return baseString.replace(this.regex, () => args[counter++]);
+        return baseString.replace(this.regex, () => args[counter++].toString());
     }
 
     static capitalizeWithReplace(str: string) {
@@ -43,7 +43,7 @@ export class LanguageLoader {
         return str;
     }
 
-    static getI18N(key: string, ...args: string[]): string {
+    static getI18N(key: string, ...args: (string | number)[]): string {
         let temp: unknown = this.LangsData[GlobalData.language == lang.zh ? lang.zh : lang.en];
         for (const k of key.split(".")) {
             if (typeof temp === "object" && temp !== null) {

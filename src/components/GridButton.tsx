@@ -12,9 +12,10 @@ type input = {
     enable?: boolean;
     key?: string | number;
     tooltips: string | null;
+    simulateItem?: ReactorItem | null;
 };
 
-function GridButton({ size, thisRow, thisCol, reactorItem = null, onClick, enable = true, key, tooltips }: input) {
+function GridButton({ size, thisRow, thisCol, reactorItem = null, onClick, enable = true, key, tooltips, simulateItem = null }: input) {
     let maxWidth = 0;
     tooltips?.split("\n").forEach((line) => {
         maxWidth = Math.max(maxWidth, line.length);
@@ -23,6 +24,16 @@ function GridButton({ size, thisRow, thisCol, reactorItem = null, onClick, enabl
 
     const borderWidth = size / 18;
     const borderHoverWidth = (size * 1.5) / 18;
+
+    let color: string = "#C0C0C0";
+
+    if (simulateItem) {
+        if (simulateItem.currentHeat > 0) {
+            color = "#FFA500";
+        } else if (simulateItem.isBroken()) {
+            color = "#FF0000";
+        }
+    }
 
     return (
         <Tooltip
@@ -37,8 +48,8 @@ function GridButton({ size, thisRow, thisCol, reactorItem = null, onClick, enabl
             key={key ? key : `row${thisRow}col${thisCol}`}
         >
             <div
-                style={{ width: size, height: size, borderWidth: `${borderWidth}px` }}
-                className={`GridButton`}
+                style={{ width: size, height: size, borderWidth: `${borderWidth}px`, backgroundColor: color }}
+                className="GridButton"
                 onContextMenu={enable ? onClick : undefined}
                 onClick={enable ? onClick : undefined}
                 onMouseEnter={(e) => {

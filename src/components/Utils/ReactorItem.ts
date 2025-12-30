@@ -1,3 +1,4 @@
+import { LanguageLoader } from "./LanguageLoader";
 import type { Reactor } from "./Reactor";
 
 export class ReactorItem {
@@ -224,5 +225,13 @@ export class ReactorItem {
 
     injectCoolant() {
         // do nothing by default.
+    }
+
+    toString() {
+        let result = LanguageLoader.getI18N(this.name);
+        if (this.initialHeat > 0) {
+            result += LanguageLoader.getI18N("UI.InitialHeatDisplay", this.initialHeat);
+        }
+        return result;
     }
 }

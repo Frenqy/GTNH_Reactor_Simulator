@@ -9,7 +9,7 @@
     border-bottom-color: #ffffff;
     border-style: solid;
     box-sizing: border-box;
-    background-color: #8b8b8b;
+    /* background-color: #8b8b8b; */
     position: relative; /* 新增这一行 */
 }
 

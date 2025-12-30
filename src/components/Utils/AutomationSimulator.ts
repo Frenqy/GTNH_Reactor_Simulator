@@ -1,3 +1,4 @@
+import { LanguageLoader } from "./LanguageLoader";
 import { MaterialsList } from "./MaterialsList";
 import type { Reactor } from "./Reactor";
 import type { ReactorItem } from "./ReactorItem";
@@ -74,13 +75,17 @@ export class AutomationSimulator {
         this.maxSimulationTicks = reactor.getMaxSimulationTicks();
     }
 
-    simulate() {
+    getI18N(key: string, ...args: (string | number)[]) {
+        return LanguageLoader.getI18N(key, ...args);
+    }
+
+    async simulate() {
         const reactor = this.reactor;
         let reactorTicks = 0;
         let cooldownTicks = 0;
         let totalRodCount = 0;
         try {
-            console.log("Simulation.Started");
+            console.log(this.getI18N("Simulation.Started"));
             this.reactor.setCurrentHeat(this.initialHeat);
             this.reactor.clearVentedHeat();
             let minReactorHeat = this.initialHeat;
@@ -165,7 +170,10 @@ export class AutomationSimulator {
                         if (this.active) {
                             this.activeTime++;
                             this.currentActiveTime++;
-                            if (this.reactor.isPulsed() && (this.reactor.getCurrentHeat() >= this.suspendTemp || reactorTicks % this.clockPeriod >= this.onPulseDuration)) {
+                            if (
+                                this.reactor.isPulsed() &&
+                                (this.reactor.getCurrentHeat() >= this.suspendTemp || reactorTicks % this.clockPeriod >= this.onPulseDuration)
+                            ) {
                                 this.active = false;
                                 this.minActiveTime = Math.min(this.currentActiveTime, this.minActiveTime);
                                 this.maxActiveTime = Math.max(this.currentActiveTime, this.maxActiveTime);
@@ -176,7 +184,11 @@ export class AutomationSimulator {
                             this.currentInactiveTime++;
                             if (reactor.isAutomated() && this.pauseTimer > 0) {
                                 this.pauseTimer--;
-                            } else if (reactor.isPulsed() && reactor.getCurrentHeat() <= this.resumeTemp && reactorTicks % this.clockPeriod < this.onPulseDuration) {
+                            } else if (
+                                reactor.isPulsed() &&
+                                reactor.getCurrentHeat() <= this.resumeTemp &&
+                                reactorTicks % this.clockPeriod < this.onPulseDuration
+                            ) {
                                 this.active = true;
                                 this.minInactiveTime = Math.min(this.currentInactiveTime, this.minInactiveTime);
                                 this.maxInactiveTime = Math.max(this.currentInactiveTime, this.maxInactiveTime);
@@ -192,33 +204,37 @@ export class AutomationSimulator {
                 this.calculateHeatingCooling(reactorTicks);
                 this.handleAutomation(reactorTicks);
                 this.handleBrokenComponents(reactorTicks, totalHeatOutput, totalRodCount, totalEUoutput, minReactorHeat, maxReactorHeat);
-            } while (reactor.getCurrentHeat() < reactor.getMaxHeat() && (!this.allFuelRodsDepleted || lastEUoutput > 0 || lastHeatOutput > 0) && reactorTicks < this.maxSimulationTicks);
+            } while (
+                reactor.getCurrentHeat() < reactor.getMaxHeat() &&
+                (!this.allFuelRodsDepleted || lastEUoutput > 0 || lastHeatOutput > 0) &&
+                reactorTicks < this.maxSimulationTicks
+            );
             this.data.minTemp = minReactorHeat;
             this.data.maxTemp = maxReactorHeat;
-            console.log("Simulation.ReactorMinTemp", minReactorHeat);
-            console.log("Simulation.ReactorMaxTemp", maxReactorHeat);
+            console.log(this.getI18N("Simulation.ReactorMinTemp", minReactorHeat));
+            console.log(this.getI18N("Simulation.ReactorMaxTemp", maxReactorHeat));
             if (reactor.getCurrentHeat() < reactor.getMaxHeat()) {
-                console.log("Simulation.TimeWithoutExploding", reactorTicks);
+                console.log(this.getI18N("Simulation.TimeWithoutExploding", reactorTicks));
                 if (reactor.isPulsed()) {
                     let rangeString: string = "";
                     if (this.maxActiveTime > this.minActiveTime) {
-                        rangeString = "Simulation.ActiveTimeRange" + this.minActiveTime + ", " + this.maxActiveTime;
+                        rangeString = this.getI18N("Simulation.ActiveTimeRange", this.minActiveTime, this.maxActiveTime);
                     } else if (this.minActiveTime < this.activeTime) {
-                        rangeString = "Simulation.ActiveTimeSingle" + this.minActiveTime;
+                        rangeString = this.getI18N("Simulation.ActiveTimeSingle", this.minActiveTime);
                     }
-                    console.log("Simulation.ActiveTime", this.activeTime, rangeString);
+                    console.log(this.getI18N("Simulation.ActiveTime", this.activeTime, rangeString));
                     rangeString = "";
                     if (this.maxInactiveTime > this.minInactiveTime) {
-                        rangeString = "Simulation.InactiveTimeRange" + this.minInactiveTime + ", " + this.maxInactiveTime;
+                        rangeString = this.getI18N("Simulation.InactiveTimeRange", this.minInactiveTime, this.maxInactiveTime);
                     } else if (this.minInactiveTime < this.inactiveTime) {
-                        rangeString = "Simulation.InactiveTimeSingle" + this.minInactiveTime;
+                        rangeString = this.getI18N("Simulation.InactiveTimeSingle", this.minInactiveTime);
                     }
-                    console.log("Simulation.InactiveTime", this.inactiveTime, rangeString);
+                    console.log(this.getI18N("Simulation.InactiveTime", this.inactiveTime, rangeString));
                 }
                 const replacedItemsString: string = this.replacedItems.toString();
                 if (!(replacedItemsString.length == 0)) {
                     this.data.replacedItems = new MaterialsList(this.replacedItems);
-                    console.log("Simulation.ComponentsReplaced", replacedItemsString);
+                    console.log(this.getI18N("Simulation.ComponentsReplaced", replacedItemsString));
                 }
 
                 if (reactorTicks > 0) {
@@ -230,18 +246,22 @@ export class AutomationSimulator {
                         this.data.maxHUoutput = 2 * this.maxHeatOutput;
                         if (totalHeatOutput > 0) {
                             console.log(
-                                "Simulation.HeatOutputs",
-                                (40 * totalHeatOutput).toFixed(2),
-                                ((2 * totalHeatOutput) / reactorTicks).toFixed(2),
-                                (2 * this.minHeatOutput).toFixed(2),
-                                (2 * this.maxHeatOutput).toFixed(2)
+                                this.getI18N(
+                                    "Simulation.HeatOutputs",
+                                    (40 * totalHeatOutput).toFixed(2),
+                                    ((2 * totalHeatOutput) / reactorTicks).toFixed(2),
+                                    (2 * this.minHeatOutput).toFixed(2),
+                                    (2 * this.maxHeatOutput).toFixed(2)
+                                )
                             );
                             if (totalRodCount > 0) {
                                 console.log(
-                                    "Simulation.Efficiency",
-                                    totalHeatOutput / reactorTicks / 4 / totalRodCount,
-                                    this.minHeatOutput / 4 / totalRodCount,
-                                    this.maxHeatOutput / 4 / totalRodCount
+                                    this.getI18N(
+                                        "Simulation.Efficiency",
+                                        totalHeatOutput / reactorTicks / 4 / totalRodCount,
+                                        this.minHeatOutput / 4 / totalRodCount,
+                                        this.maxHeatOutput / 4 / totalRodCount
+                                    )
                                 );
                             }
                         }
@@ -252,18 +272,22 @@ export class AutomationSimulator {
                         this.data.maxEUoutput = this.maxEUoutput / 20.0;
                         if (totalEUoutput > 0) {
                             console.log(
-                                "Simulation.EUOutputs",
-                                totalEUoutput.toFixed(2),
-                                (totalEUoutput / (reactorTicks * 20)).toFixed(2),
-                                (this.minEUoutput / 20.0).toFixed(2),
-                                (this.maxEUoutput / 20.0).toFixed(2)
+                                this.getI18N(
+                                    "Simulation.EUOutputs",
+                                    totalEUoutput.toFixed(2),
+                                    (totalEUoutput / (reactorTicks * 20)).toFixed(2),
+                                    (this.minEUoutput / 20.0).toFixed(2),
+                                    (this.maxEUoutput / 20.0).toFixed(2)
+                                )
                             );
                             if (totalRodCount > 0) {
                                 console.log(
-                                    "Simulation.Efficiency",
-                                    totalEUoutput / reactorTicks / 100 / totalRodCount,
-                                    this.minEUoutput / 100 / totalRodCount,
-                                    this.maxEUoutput / 100 / totalRodCount
+                                    this.getI18N(
+                                        "Simulation.Efficiency",
+                                        totalEUoutput / reactorTicks / 100 / totalRodCount,
+                                        this.minEUoutput / 100 / totalRodCount,
+                                        this.maxEUoutput / 100 / totalRodCount
+                                    )
                                 );
                             }
                         }
@@ -271,7 +295,7 @@ export class AutomationSimulator {
                 }
 
                 if (reactor.getCurrentHeat() > 0.0) {
-                    console.log("Simulation.ReactorRemainingHeat", reactor.getCurrentHeat());
+                    console.log(this.getI18N("Simulation.ReactorRemainingHeat", reactor.getCurrentHeat()));
                 }
                 let prevReactorHeat: number = reactor.getCurrentHeat();
                 let prevTotalComponentHeat: number = 0.0;
@@ -282,13 +306,13 @@ export class AutomationSimulator {
                             if (component.currentHeat > 0.0) {
                                 prevTotalComponentHeat += component.currentHeat;
                                 console.log(`R${row}C${col}:0xFFA500`); // NOI18N
-                                component.info += "ComponentInfo.RemainingHeat" + component.currentHeat;
+                                component.info += this.getI18N("ComponentInfo.RemainingHeat", component.currentHeat);
                             }
                         }
                     }
                 }
                 if (prevReactorHeat == 0.0 && prevTotalComponentHeat == 0.0) {
-                    console.log("Simulation.NoCooldown");
+                    console.log(this.getI18N("Simulation.NoCooldown"));
                 } else if (reactor.getCurrentHeat() < reactor.getMaxHeat()) {
                     let currentTotalComponentHeat: number = prevTotalComponentHeat;
                     let reactorCooldownTime: number = 0;
@@ -322,7 +346,7 @@ export class AutomationSimulator {
                                 if (component != null && !component.isBroken()) {
                                     currentTotalComponentHeat += component.currentHeat;
                                     if (component.currentHeat == 0.0 && this.needsCooldown[row][col]) {
-                                        component.info += "ComponentInfo.CooldownTime" + cooldownTicks;
+                                        component.info += this.getI18N("ComponentInfo.CooldownTime", cooldownTicks);
                                         this.needsCooldown[row][col] = false;
                                     }
                                 }
@@ -331,15 +355,15 @@ export class AutomationSimulator {
                     } while (lastHeatOutput > 0 && cooldownTicks < 50000);
                     if (reactor.getCurrentHeat() < reactor.getMaxHeat()) {
                         if (reactor.getCurrentHeat() == 0.0) {
-                            console.log("Simulation.ReactorCooldownTime", reactorCooldownTime);
+                            console.log(this.getI18N("Simulation.ReactorCooldownTime", reactorCooldownTime));
                         } else if (reactorCooldownTime > 0) {
-                            console.log("Simulation.ReactorResidualHeat", reactor.getCurrentHeat(), reactorCooldownTime);
+                            console.log(this.getI18N("Simulation.ReactorResidualHeat", reactor.getCurrentHeat(), reactorCooldownTime));
                         }
-                        console.log("Simulation.TotalCooldownTime", cooldownTicks);
+                        console.log(this.getI18N("Simulation.TotalCooldownTime", cooldownTicks));
                     }
                 }
             } else {
-                console.log("Simulation.ReactorOverheatedTime", reactorTicks);
+                console.log(this.getI18N("Simulation.ReactorOverheatedTime", reactorTicks));
                 let explosionPower = 10.0;
                 let explosionPowerMult = 1.0;
                 for (let row = 0; row < 6; row++) {
@@ -352,7 +376,7 @@ export class AutomationSimulator {
                     }
                 }
                 explosionPower *= explosionPowerMult;
-                console.log("Simulation.ExplosionPower", explosionPower);
+                console.log(this.getI18N("Simulation.ExplosionPower", explosionPower));
             }
             let totalCellCooling = 0.0;
             let totalCondensatorCooling = 0.0;
@@ -362,24 +386,31 @@ export class AutomationSimulator {
                     const component: ReactorItem | null = reactor.getComponentAt(row, col);
                     if (component != null) {
                         if (component.getVentCoolingCapacity() > 0) {
-                            component.info += "ComponentInfo.UsedCooling" + component.bestVentCooling + component.getVentCoolingCapacity();
+                            component.info += this.getI18N(
+                                "ComponentInfo.UsedCooling",
+                                component.bestVentCooling,
+                                component.getVentCoolingCapacity()
+                            );
                         } else if (component.bestCellCooling > 0) {
-                            component.info += "ComponentInfo.ReceivedHeat" + component.bestCellCooling;
+                            component.info += this.getI18N("ComponentInfo.ReceivedHeat", component.bestCellCooling);
                             totalCellCooling += component.bestCellCooling;
                         } else if (component.bestCondensatorCooling > 0) {
-                            component.info += "ComponentInfo.ReceivedHeat" + component.bestCondensatorCooling;
+                            component.info += this.getI18N("ComponentInfo.ReceivedHeat", component.bestCondensatorCooling);
                             totalCondensatorCooling += component.bestCondensatorCooling;
                         } else if (component.maxHeatGenerated > 0) {
                             if (!reactor.isFluid() && component.maxEUGenerated > 0) {
-                                component.info += "ComponentInfo.GeneratedEU" + component.minEUGenerated + component.maxEUGenerated;
+                                component.info += this.getI18N("ComponentInfo.GeneratedEU", component.minEUGenerated, component.maxEUGenerated);
                             }
-                            component.info += "ComponentInfo.GeneratedHeat" + component.minHeatGenerated + component.maxHeatGenerated;
+                            component.info += this.getI18N("ComponentInfo.GeneratedHeat", component.minHeatGenerated, component.maxHeatGenerated);
                         } else if (component instanceof BreederCell) {
-                            component.info +=
-                                "ComponentInfo.BreederProgress" + (component.currentDamage > component.maxDamage ? component.maxDamage : component.currentDamage).toString() + component.maxDamage;
+                            component.info += this.getI18N(
+                                "ComponentInfo.BreederProgress",
+                                (component.currentDamage > component.maxDamage ? component.maxDamage : component.currentDamage).toString(),
+                                component.maxDamage
+                            );
                         }
                         if (component.maxReachedHeat > 0) {
-                            component.info += "ComponentInfo.ReachedHeat" + component.maxReachedHeat + component.maxHeat;
+                            component.info += this.getI18N("ComponentInfo.ReachedHeat", component.maxReachedHeat, component.maxHeat);
                         }
                     }
                 }
@@ -392,19 +423,19 @@ export class AutomationSimulator {
             this.showHeatingCooling(reactorTicks); // Call to show this info in case it hasn't already been shown, such as for an
             // automated reactor.
             if (totalCellCooling > 0) {
-                console.log("Simulation.TotalCellCooling", totalCellCooling);
+                console.log(this.getI18N("Simulation.TotalCellCooling", totalCellCooling));
             }
             if (totalCondensatorCooling > 0) {
-                console.log("Simulation.TotalCondensatorCooling", totalCondensatorCooling);
+                console.log(this.getI18N("Simulation.TotalCondensatorCooling", totalCondensatorCooling));
             }
             if (maxGeneratedHeat > 0) {
-                console.log("Simulation.MaxHeatGenerated", maxGeneratedHeat);
+                console.log(this.getI18N("Simulation.MaxHeatGenerated", maxGeneratedHeat));
             }
             if (this.redstoneUsed > 0) {
-                console.log("Simulation.RedstoneUsed", this.redstoneUsed);
+                console.log(this.getI18N("Simulation.RedstoneUsed", this.redstoneUsed));
             }
             if (this.lapisUsed > 0) {
-                console.log("Simulation.LapisUsed", this.lapisUsed);
+                console.log(this.getI18N("Simulation.LapisUsed", this.lapisUsed));
             }
             // double totalCooling = totalEffectiveVentCooling + totalCellCooling +
             // totalCondensatorCooling;
@@ -418,9 +449,9 @@ export class AutomationSimulator {
             // return null;
         } catch (e) {
             if (cooldownTicks == 0) {
-                console.log("Simulation.ErrorReactor", reactorTicks);
+                console.log(this.getI18N("Simulation.ErrorReactor", reactorTicks));
             } else {
-                console.log("Simulation.ErrorCooldown", cooldownTicks);
+                console.log(this.getI18N("Simulation.ErrorCooldown", cooldownTicks));
             }
             console.log(e);
         }
@@ -428,32 +459,32 @@ export class AutomationSimulator {
 
     checkReactorTemperature(reactorTicks: number) {
         if (this.reactor.getCurrentHeat() < 0.5 * this.reactor.getMaxHeat() && !this.reachedBelow50 && this.reachedEvaporate) {
-            console.log("Simulation.TimeToBelow50", reactorTicks);
+            console.log(this.getI18N("Simulation.TimeToBelow50"), reactorTicks);
             this.reachedBelow50 = true;
             this.data.timeToBelow50 = reactorTicks;
         }
         if (this.reactor.getCurrentHeat() >= 0.4 * this.reactor.getMaxHeat() && !this.reachedBurn) {
-            console.log("Simulation.TimeToBurn", reactorTicks);
+            console.log(this.getI18N("Simulation.TimeToBurn", reactorTicks));
             this.reachedBurn = true;
             this.data.timeToBurn = reactorTicks;
         }
         if (this.reactor.getCurrentHeat() >= 0.5 * this.reactor.getMaxHeat() && !this.reachedEvaporate) {
-            console.log("Simulation.TimeToEvaporate", reactorTicks);
+            console.log(this.getI18N("Simulation.TimeToEvaporate", reactorTicks));
             this.reachedEvaporate = true;
             this.data.timeToEvaporate = reactorTicks;
         }
         if (this.reactor.getCurrentHeat() >= 0.7 * this.reactor.getMaxHeat() && !this.reachedHurt) {
-            console.log("Simulation.TimeToHurt", reactorTicks);
+            console.log(this.getI18N("Simulation.TimeToHurt", reactorTicks));
             this.reachedHurt = true;
             this.data.timeToHurt = reactorTicks;
         }
         if (this.reactor.getCurrentHeat() >= 0.85 * this.reactor.getMaxHeat() && !this.reachedLava) {
-            console.log("Simulation.TimeToLava", reactorTicks);
+            console.log(this.getI18N("Simulation.TimeToLava", reactorTicks));
             this.reachedLava = true;
             this.data.timeToLava = reactorTicks;
         }
         if (this.reactor.getCurrentHeat() >= this.reactor.getMaxHeat() && !this.reachedExplode) {
-            console.log("Simulation.TimeToXplode", reactorTicks);
+            console.log(this.getI18N("Simulation.TimeToXplode", reactorTicks));
             this.reachedExplode = true;
             this.data.timeToXplode = reactorTicks;
         }
@@ -484,7 +515,7 @@ export class AutomationSimulator {
                         if (component.automationThreshold > component.initialHeat && component.currentHeat >= component.automationThreshold) {
                             component.clearCurrentHeat();
                             this.replacedItems.add([component.name]);
-                            component.info += "ComponentInfo.ReplacedTime" + reactorTicks;
+                            component.info += this.getI18N("ComponentInfo.ReplacedTime", reactorTicks);
                             if (component.reactorPause > 0) {
                                 this.active = false;
                                 this.pauseTimer = Math.max(this.pauseTimer, component.reactorPause);
@@ -495,7 +526,7 @@ export class AutomationSimulator {
                         } else if (component.automationThreshold < component.initialHeat && component.currentHeat <= component.automationThreshold) {
                             component.clearCurrentHeat();
                             this.replacedItems.add([component.name]);
-                            component.info += "ComponentInfo.ReplacedTime" + reactorTicks;
+                            component.info += this.getI18N("ComponentInfo.ReplacedTime", reactorTicks);
                             if (component.reactorPause > 0) {
                                 this.active = false;
                                 this.pauseTimer = Math.max(this.pauseTimer, component.reactorPause);
@@ -507,7 +538,7 @@ export class AutomationSimulator {
                     } else if (component.isBroken() || (component.maxDamage > 1 && component.currentDamage >= component.automationThreshold)) {
                         component.clearDamage();
                         this.replacedItems.add([component.name]);
-                        component.info += "ComponentInfo.ReplacedTime" + reactorTicks;
+                        component.info += this.getI18N("ComponentInfo.ReplacedTime", reactorTicks);
                         if (component.reactorPause > 0) {
                             this.active = false;
                             this.pauseTimer = Math.max(this.pauseTimer, component.reactorPause);
@@ -529,7 +560,14 @@ export class AutomationSimulator {
         }
     }
 
-    handleBrokenComponents(reactorTicks: number, totalHeatOutput: number, totalRodCount: number, totalEUoutput: number, minReactorHeat: number, maxReactorHeat: number) {
+    handleBrokenComponents(
+        reactorTicks: number,
+        totalHeatOutput: number,
+        totalRodCount: number,
+        totalEUoutput: number,
+        minReactorHeat: number,
+        maxReactorHeat: number
+    ) {
         for (let row = 0; row < 6; row++) {
             for (let col = 0; col < 9; col++) {
                 const component: ReactorItem | null = this.reactor.getComponentAt(row, col);
@@ -537,32 +575,36 @@ export class AutomationSimulator {
                     this.alreadyBroken[row][col] = true;
                     if (component.getRodCount() == 0) {
                         console.log(`R${row}C${col}:0xFF0000`); // NOI18N
-                        component.info += "ComponentInfo.BrokeTime" + reactorTicks;
+                        component.info += this.getI18N("ComponentInfo.BrokeTime", reactorTicks);
                         if (this.componentsIntact) {
                             this.componentsIntact = false;
                             this.data.firstComponentBrokenTime = reactorTicks;
                             this.data.firstComponentBrokenRow = row;
                             this.data.firstComponentBrokenCol = col;
                             this.data.firstComponentBrokenDescription = component.toString();
-                            console.log("Simulation.FirstComponentBrokenDetails", component.toString(), row, col, reactorTicks);
+                            console.log(this.getI18N("Simulation.FirstComponentBrokenDetails", component.toString(), row, col, reactorTicks));
                             if (this.reactor.isFluid()) {
                                 this.data.prebreakTotalHUoutput = 40 * totalHeatOutput;
                                 this.data.prebreakAvgHUoutput = (2 * totalHeatOutput) / reactorTicks;
                                 this.data.prebreakMinHUoutput = 2 * this.minHeatOutput;
                                 this.data.prebreakMaxHUoutput = 2 * this.maxHeatOutput;
                                 console.log(
-                                    "Simulation.HeatOutputsBeforeBreak",
-                                    (40 * totalHeatOutput).toFixed(2),
-                                    ((2 * totalHeatOutput) / reactorTicks).toFixed(2),
-                                    (2 * this.minHeatOutput).toFixed(2),
-                                    (2 * this.maxHeatOutput).toFixed(2)
+                                    this.getI18N(
+                                        "Simulation.HeatOutputsBeforeBreak",
+                                        (40 * totalHeatOutput).toFixed(2),
+                                        ((2 * totalHeatOutput) / reactorTicks).toFixed(2),
+                                        (2 * this.minHeatOutput).toFixed(2),
+                                        (2 * this.maxHeatOutput).toFixed(2)
+                                    )
                                 );
                                 if (totalRodCount > 0) {
                                     console.log(
-                                        "Simulation.Efficiency",
-                                        totalHeatOutput / reactorTicks / 4 / totalRodCount,
-                                        this.minHeatOutput / 4 / totalRodCount,
-                                        this.maxHeatOutput / 4 / totalRodCount
+                                        this.getI18N(
+                                            "Simulation.Efficiency",
+                                            totalHeatOutput / reactorTicks / 4 / totalRodCount,
+                                            this.minHeatOutput / 4 / totalRodCount,
+                                            this.maxHeatOutput / 4 / totalRodCount
+                                        )
                                     );
                                 }
                             } else {
@@ -571,18 +613,22 @@ export class AutomationSimulator {
                                 this.data.prebreakMinEUoutput = this.minEUoutput / 20.0;
                                 this.data.prebreakMaxEUoutput = this.maxEUoutput / 20.0;
                                 console.log(
-                                    "Simulation.EUOutputsBeforeBreak",
-                                    totalEUoutput.toFixed(2),
-                                    (totalEUoutput / (reactorTicks * 20)).toFixed(2),
-                                    (this.minEUoutput / 20.0).toFixed(2),
-                                    (this.maxEUoutput / 20.0).toFixed(2)
+                                    this.getI18N(
+                                        "Simulation.EUOutputsBeforeBreak",
+                                        totalEUoutput.toFixed(2),
+                                        (totalEUoutput / (reactorTicks * 20)).toFixed(2),
+                                        (this.minEUoutput / 20.0).toFixed(2),
+                                        (this.maxEUoutput / 20.0).toFixed(2)
+                                    )
                                 );
                                 if (totalRodCount > 0) {
                                     console.log(
-                                        "Simulation.Efficiency",
-                                        totalEUoutput / reactorTicks / 100 / totalRodCount,
-                                        this.minEUoutput / 100 / totalRodCount,
-                                        this.maxEUoutput / 100 / totalRodCount
+                                        this.getI18N(
+                                            "Simulation.Efficiency",
+                                            totalEUoutput / reactorTicks / 100 / totalRodCount,
+                                            this.minEUoutput / 100 / totalRodCount,
+                                            this.maxEUoutput / 100 / totalRodCount
+                                        )
                                     );
                                 }
                             }
@@ -593,25 +639,29 @@ export class AutomationSimulator {
                         this.data.firstRodDepletedRow = row;
                         this.data.firstRodDepletedCol = col;
                         this.data.firstRodDepletedDescription = component.toString();
-                        console.log("Simulation.FirstRodDepletedDetails", component.toString(), row, col, reactorTicks);
+                        console.log(this.getI18N("Simulation.FirstRodDepletedDetails", component.toString(), row, col, reactorTicks));
                         if (this.reactor.isFluid()) {
                             this.data.predepleteTotalHUoutput = 40 * totalHeatOutput;
                             this.data.predepleteAvgHUoutput = (2 * totalHeatOutput) / reactorTicks;
                             this.data.predepleteMinHUoutput = 2 * this.minHeatOutput;
                             this.data.predepleteMaxHUoutput = 2 * this.maxHeatOutput;
                             console.log(
-                                "Simulation.HeatOutputsBeforeDepleted",
-                                (40 * totalHeatOutput).toFixed(2),
-                                ((2 * totalHeatOutput) / reactorTicks).toFixed(2),
-                                (2 * this.minHeatOutput).toFixed(2),
-                                (2 * this.maxHeatOutput).toFixed(2)
+                                this.getI18N(
+                                    "Simulation.HeatOutputsBeforeDepleted",
+                                    (40 * totalHeatOutput).toFixed(2),
+                                    ((2 * totalHeatOutput) / reactorTicks).toFixed(2),
+                                    (2 * this.minHeatOutput).toFixed(2),
+                                    (2 * this.maxHeatOutput).toFixed(2)
+                                )
                             );
                             if (totalRodCount > 0) {
                                 console.log(
-                                    "Simulation.Efficiency",
-                                    totalHeatOutput / reactorTicks / 4 / totalRodCount,
-                                    this.minHeatOutput / 4 / totalRodCount,
-                                    this.maxHeatOutput / 4 / totalRodCount
+                                    this.getI18N(
+                                        "Simulation.Efficiency",
+                                        totalHeatOutput / reactorTicks / 4 / totalRodCount,
+                                        this.minHeatOutput / 4 / totalRodCount,
+                                        this.maxHeatOutput / 4 / totalRodCount
+                                    )
                                 );
                             }
                         } else {
@@ -620,25 +670,29 @@ export class AutomationSimulator {
                             this.data.predepleteMinEUoutput = this.minEUoutput / 20.0;
                             this.data.predepleteMaxEUoutput = this.maxEUoutput / 20.0;
                             console.log(
-                                "Simulation.EUOutputsBeforeDepleted",
-                                totalEUoutput.toFixed(2),
-                                (totalEUoutput / (reactorTicks * 20)).toFixed(2),
-                                (this.minEUoutput / 20.0).toFixed(2),
-                                (this.maxEUoutput / 20.0).toFixed(2)
+                                this.getI18N(
+                                    "Simulation.EUOutputsBeforeDepleted",
+                                    totalEUoutput.toFixed(2),
+                                    (totalEUoutput / (reactorTicks * 20)).toFixed(2),
+                                    (this.minEUoutput / 20.0).toFixed(2),
+                                    (this.maxEUoutput / 20.0).toFixed(2)
+                                )
                             );
                             if (totalRodCount > 0) {
                                 console.log(
-                                    "Simulation.Efficiency",
-                                    totalEUoutput / reactorTicks / 100 / totalRodCount,
-                                    this.minEUoutput / 100 / totalRodCount,
-                                    this.maxEUoutput / 100 / totalRodCount
+                                    this.getI18N(
+                                        "Simulation.Efficiency",
+                                        totalEUoutput / reactorTicks / 100 / totalRodCount,
+                                        this.minEUoutput / 100 / totalRodCount,
+                                        this.maxEUoutput / 100 / totalRodCount
+                                    )
                                 );
                             }
                         }
                         this.data.predepleteMinTemp = minReactorHeat;
                         this.data.predepleteMaxTemp = maxReactorHeat;
-                        console.log("Simulation.ReactorMinTempBeforeDepleted", minReactorHeat);
-                        console.log("Simulation.ReactorMaxTempBeforeDepleted", maxReactorHeat);
+                        console.log(this.getI18N("Simulation.ReactorMinTempBeforeDepleted", minReactorHeat));
+                        console.log(this.getI18N("Simulation.ReactorMaxTempBeforeDepleted", maxReactorHeat));
                     }
                     this.showHeatingCooling(reactorTicks);
                 }
@@ -668,16 +722,16 @@ export class AutomationSimulator {
                 this.data.ventCooling = this.totalVentCooling / (reactorTicks - 20);
                 this.data.ventCoolingCapacity = totalVentCoolingCapacity;
                 if (this.totalHullHeating > 0) {
-                    console.log("Simulation.HullHeating", this.totalHullHeating / (reactorTicks - 20));
+                    console.log(this.getI18N("Simulation.HullHeating", this.totalHullHeating / (reactorTicks - 20)));
                 }
                 if (this.totalComponentHeating > 0) {
-                    console.log("Simulation.ComponentHeating", this.totalComponentHeating / (reactorTicks - 20));
+                    console.log(this.getI18N("Simulation.ComponentHeating", this.totalComponentHeating / (reactorTicks - 20)));
                 }
                 if (totalHullCoolingCapacity > 0) {
-                    console.log("Simulation.HullCooling", this.totalHullCooling / (reactorTicks - 20), totalHullCoolingCapacity);
+                    console.log(this.getI18N("Simulation.HullCooling", this.totalHullCooling / (reactorTicks - 20), totalHullCoolingCapacity));
                 }
                 if (totalVentCoolingCapacity > 0) {
-                    console.log("Simulation.VentCooling", this.totalVentCooling / (reactorTicks - 20), totalVentCoolingCapacity);
+                    console.log(this.getI18N("Simulation.VentCooling", this.totalVentCooling / (reactorTicks - 20), totalVentCoolingCapacity));
                 }
             }
         }

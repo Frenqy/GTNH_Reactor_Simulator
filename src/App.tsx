@@ -17,6 +17,7 @@ function initLang() {
 
 function App() {
     const [reactor, setReactor] = useState(() => new Reactor());
+    const [simulateReactor, setSimulateReactor] = useState<Reactor | null>(null);
     const [selectedItem, setSelectedItem] = useState<ReactorItem | null>(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [version, setVersion] = useState<{ mcVersion: string; gtVersion: string }>({ mcVersion: "1.7.10", gtVersion: "-" });
@@ -53,13 +54,19 @@ function App() {
                                 onReactorChange={setReactor}
                                 selectedItem={selectedItem}
                                 setSelectedRowAndCol={setSelectedRowAndCol}
+                                simulateReactor={simulateReactor}
                             />
                         </div>
                         <div className="ReactorCode">
                             <ReactorCode reactor={reactor} onReactorChange={setReactor} />
                         </div>
                         <div className="ReactorStats">
-                            <ReactorStats reactor={reactor} onReactorChange={setReactor} selectedRowAndCol={selectedRowAndCol} />
+                            <ReactorStats
+                                reactor={reactor}
+                                onReactorChange={setReactor}
+                                selectedRowAndCol={selectedRowAndCol}
+                                simulateReactor={simulateReactor}
+                            />
                         </div>
                     </div>
                     <div className="ReactorSide">
@@ -70,6 +77,7 @@ function App() {
                             setReactor={setReactor}
                             version={version}
                             setVersion={setVersion}
+                            setSimulateReactor={setSimulateReactor}
                         />
                     </div>
                 </div>

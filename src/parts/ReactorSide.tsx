@@ -2,6 +2,7 @@ import { Button, Checkbox, ConfigProvider, Flex, InputNumber, Radio, Select } fr
 import { cloneDeep } from "lodash";
 import { useEffect, useRef, useState, type MouseEvent, type ReactElement } from "react";
 import GridButton from "../components/GridButton";
+import { AutomationSimulator } from "../components/Utils/AutomationSimulator";
 import { showInsetEffect } from "../components/Utils/Defines";
 import { ItemLoader } from "../components/Utils/ItemLoader";
 import { LanguageLoader } from "../components/Utils/LanguageLoader";
@@ -16,8 +17,9 @@ type input = {
     setReactor: React.Dispatch<React.SetStateAction<Reactor>>;
     version: { mcVersion: string; gtVersion: string };
     setVersion: React.Dispatch<React.SetStateAction<{ mcVersion: string; gtVersion: string }>>;
+    setSimulateReactor: React.Dispatch<React.SetStateAction<Reactor | null>>;
 };
-function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, version, setVersion }: input) {
+function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, version, setVersion, setSimulateReactor }: input) {
     const selfRef = useRef<HTMLDivElement>(null);
     const [initHeatValue, setInitHeatValue] = useState(0);
     const [replacementThresholdValue, setReplacementThresholdValue] = useState(9000);
@@ -38,7 +40,7 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, versi
         { value: 2, label: `${LanguageLoader.getI18N("Config.FluidReactor")}` },
     ];
 
-    function getI18N(key: string, ...args: string[]) {
+    function getI18N(key: string, ...args: (string | number)[]) {
         return LanguageLoader.getI18N(key, ...args);
     }
 
@@ -103,6 +105,14 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, versi
             }
             return newVersion;
         });
+    }
+
+    async function startSimulate() {
+        const simReactor = cloneDeep(reactor);
+        setSimulateReactor(() => {
+            return simReactor;
+        });
+        await new AutomationSimulator(simReactor).simulate();
     }
 
     useEffect(() => {
@@ -224,7 +234,7 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, versi
                         <Button variant="solid" color="primary" onClick={() => handleReactorUpdate("clearReactor", null)}>
                             {getI18N("UI.ClearGridButton")}
                         </Button>
-                        <Button variant="solid" color="danger">
+                        <Button variant="solid" color="danger" onClick={startSimulate}>
                             {getI18N("UI.SimulateButton")}
                         </Button>
                         <Button variant="solid" color="default">
