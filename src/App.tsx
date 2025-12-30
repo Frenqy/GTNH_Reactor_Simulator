@@ -12,15 +12,24 @@ import ReactorSide from "./parts/ReactorSide";
 import ReactorStats from "./parts/ReactorStats";
 
 function initLang() {
-    GlobalData.language = navigator.language.includes("zh") ? lang.zh : lang.en;
+    GlobalData.language = localStorage.getItem("lang") === "zh_cn" || navigator.language.includes("zh") ? lang.zh : lang.en;
+    localStorage.setItem("lang", GlobalData.language.toString());
+}
+
+function changeLang() {
+    GlobalData.language = GlobalData.language === lang.zh ? lang.en : lang.zh;
+    localStorage.setItem("lang", GlobalData.language.toString());
 }
 
 function App() {
-    const [reactor, setReactor] = useState(() => new Reactor());
+    const [reactor, setReactor] = useState<Reactor>(new Reactor());
     const [simulateReactor, setSimulateReactor] = useState<Reactor | null>(null);
     const [selectedItem, setSelectedItem] = useState<ReactorItem | null>(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [version, setVersion] = useState<{ mcVersion: string; gtVersion: string }>({ mcVersion: "1.7.10", gtVersion: "-" });
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const [version, setVersion] = useState<{ mcVersion: string; gtVersion: string }>({
+        mcVersion: localStorage.getItem("mcVersion") || "1.7.10",
+        gtVersion: localStorage.getItem("gtVersion") || "-",
+    });
     const [selectedRowAndCol, setSelectedRowAndCol] = useState<{ row: number; col: number }>({ row: 0, col: 0 });
 
     useEffect(() => {
@@ -38,6 +47,7 @@ function App() {
         loadData();
 
         initLang();
+        // changeLang();
     }, [version]);
 
     if (!isLoaded) {

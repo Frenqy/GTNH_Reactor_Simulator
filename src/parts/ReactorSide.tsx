@@ -96,11 +96,13 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, versi
         setVersion((prev) => {
             const newVersion = cloneDeep(prev);
             if (which === "mcVersion") {
+                localStorage.setItem("mcVersion", e);
                 newVersion.mcVersion = e;
                 if (e !== "1.7.10") {
                     newVersion.gtVersion = "-";
                 }
             } else if (which === "gtVersion") {
+                localStorage.setItem("gtVersion", e);
                 newVersion.gtVersion = e;
             }
             return newVersion;
