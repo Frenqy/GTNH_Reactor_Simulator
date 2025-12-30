@@ -7,10 +7,17 @@ import { LanguageLoader } from "../components/Utils/LanguageLoader";
 import { Reactor } from "../components/Utils/Reactor";
 import "./ReactorStats.css";
 
-type input = { reactor: Reactor; onReactorChange: React.Dispatch<React.SetStateAction<Reactor>> };
+type input = {
+    reactor: Reactor;
+    onReactorChange: React.Dispatch<React.SetStateAction<Reactor>>;
+    selectedRowAndCol: { row: number; col: number };
+};
 
-function ReactorStats({ reactor, onReactorChange }: input) {
-    function handleReactorUpdate(id: string, data: string | string[] | number | null) {
+function ReactorStats({ reactor, onReactorChange, selectedRowAndCol }: input) {
+    const selectedGridStack = reactor.getComponentAt(selectedRowAndCol.row, selectedRowAndCol.col);
+    console.log(selectedGridStack);
+
+    function handleReactorUpdate(id: string, data: string | (string | number)[] | number | null) {
         onReactorChange((prev: Reactor) => {
             const newReactor = cloneDeep(prev);
             switch (id) {
@@ -32,6 +39,14 @@ function ReactorStats({ reactor, onReactorChange }: input) {
                 }
                 case "ResetPulseConfig": {
                     newReactor.resetPulseConfig();
+                    break;
+                }
+                case "updateComponentAutomationThreshold": {
+                    newReactor.getComponentAt(selectedRowAndCol.row, selectedRowAndCol.col)!.setAutomationThreshold(Number(data));
+                    break;
+                }
+                case "updateComponentReactorPause": {
+                    newReactor.getComponentAt(selectedRowAndCol.row, selectedRowAndCol.col)!.setReactorPause(Number(data));
                     break;
                 }
             }
@@ -164,8 +179,56 @@ function ReactorStats({ reactor, onReactorChange }: input) {
     return (
         <>
             <Flex align="center" justify="space-between" style={{ width: "100%", height: "100%" }}>
-                <Col span={12} style={{ height: "100%" }} className="reactor-stats-tabs"></Col>
-                <Col span={12} style={{ height: "100%" }} className="reactor-stats-tabs">
+                <Col span={12} style={{ height: "100%" }} className="reactor-stats-tabs" id="leftStats">
+                    <Flex vertical style={{ height: "100%", width: "100%" }}>
+                        <Flex style={{ fontWeight: "bold" }}>{getI18N("UI.ComponentTab")}</Flex>
+                        <Flex flex={1} style={{ backgroundColor: "#cdcdcd", padding: "max(1%, 10px)" }} vertical>
+                            <Flex>{getI18N("UI.NoSimulationRun")}</Flex>
+                        </Flex>
+                        <Flex style={{ fontWeight: "bold" }}>{getI18N("UI.ComponentAutomationTab")}</Flex>
+                        <Flex flex={2} style={{ backgroundColor: "#cdcdcd", padding: "max(1%, 10px)" }} vertical gap="small">
+                            {selectedGridStack === null ? (
+                                <Flex>{getI18N("UI.NoComponentRowCol", selectedRowAndCol.row.toString(), selectedRowAndCol.col.toString())}</Flex>
+                            ) : (
+                                <Flex>
+                                    {getI18N(
+                                        "UI.ChosenComponentRowCol",
+                                        getI18N(selectedGridStack.name),
+                                        selectedRowAndCol.row.toString(),
+                                        selectedRowAndCol.col.toString()
+                                    )}
+                                </Flex>
+                            )}
+                            <Flex gap="small">
+                                {getI18N("Config.ReplacementThreshold")}
+                                <InputNumber
+                                    value={selectedGridStack ? selectedGridStack.automationThreshold : 9000}
+                                    onChange={(v) => handleReactorUpdate("updateComponentAutomationThreshold", v)}
+                                    min={0}
+                                    max={Reactor.MAX_COMPONENT_HEAT}
+                                    size="small"
+                                    step={1}
+                                    style={{ maxWidth: "45%" }}
+                                />
+                            </Flex>
+                            <Flex>{getI18N("Config.ReplacementThresholdHelp")}</Flex>
+                            <Flex gap="small">
+                                {getI18N("Config.ReactorPause")}
+                                <InputNumber
+                                    value={selectedGridStack ? selectedGridStack.reactorPause : 9000}
+                                    onChange={(v) => handleReactorUpdate("updateComponentReactorPause", v)}
+                                    min={0}
+                                    max={10_000}
+                                    size="small"
+                                    step={1}
+                                    style={{ maxWidth: "45%" }}
+                                />
+                            </Flex>
+                            <Flex>{getI18N("Config.ReactorPauseHelp")}</Flex>
+                        </Flex>
+                    </Flex>
+                </Col>
+                <Col span={12} style={{ height: "100%" }} className="reactor-stats-tabs" id="rightStats">
                     <Tabs
                         defaultActiveKey="0"
                         type="card"

@@ -38,6 +38,8 @@ for line in wait_process.split("new ")[1:]:
     line = line.replace("\"", "")[line.find("(") + 1:][:-2].split(",")
     line[2] = line[2].replace("getI18n(", "").replace(")", "")
     line[3] = line[3].replace("TextureFactory.getImage(", "").replace(")", "")
+    if ".png" in line[3] and ".png" in line[4]:
+        line.remove(line[4])
     items_data.append({"type": type, "data": line})
 all_data["items"] = items_data
 

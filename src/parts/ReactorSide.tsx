@@ -143,7 +143,7 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, versi
                         size: buttonSize,
                         reactorItem: item,
                         onClick: (event: MouseEvent<HTMLDivElement>) => handleButtonClick(event, item),
-                        tooltips: `${getI18N("ComponentName." + item.name.split(".")[1])}\n${getI18N("ComponentData." + item.name.split(".")[1])}`,
+                        tooltips: `${getI18N(item.name)}\n${getI18N("ComponentData." + item.name.split(".")[1])}`,
                         enable: isEnable,
                     })
                 );
@@ -170,9 +170,7 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, versi
                     )}
                 </Flex>
                 <Flex style={{ height: "50%", marginLeft: "1%" }} align="center">
-                    {selectedItem
-                        ? getI18N("UI.ComponentPlacingSpecific", getI18N("ComponentName." + selectedItem.name.split(".")[1]))
-                        : getI18N("UI.ComponentPlacingDefault")}
+                    {selectedItem ? getI18N("UI.ComponentPlacingSpecific", getI18N(selectedItem.name)) : getI18N("UI.ComponentPlacingDefault")}
                 </Flex>
                 <Flex style={{ height: "50%" }} align="center" justify="center">
                     <Flex className="paramGroup">

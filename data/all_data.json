@@ -280,103 +280,167 @@
     "items": [
         {
             "type": "FuelRod",
-            "data": ["1", "fuelRodUranium", "ComponentName.FuelRodUranium", "reactorUraniumSimple.png", " uranium.png)", "20e3", "1", "null", "100", "2", "1", "false"]
+            "data": ["1", "fuelRodUranium", "ComponentName.FuelRodUranium", "reactorUraniumSimple.png", "20e3", "1", "null", "100", "2", "1", "false"]
         },
         {
             "type": "FuelRod",
-            "data": ["2", "dualFuelRodUranium", "ComponentName.DualFuelRodUranium", "reactorUraniumDual.png", " dual_uranium.png)", "20e3", "1", "null", "200", "4", "2", "false"]
+            "data": [
+                "2",
+                "dualFuelRodUranium",
+                "ComponentName.DualFuelRodUranium",
+                "reactorUraniumDual.png",
+                "20e3",
+                "1",
+                "null",
+                "200",
+                "4",
+                "2",
+                "false"
+            ]
         },
         {
             "type": "FuelRod",
-            "data": ["3", "quadFuelRodUranium", "ComponentName.QuadFuelRodUranium", "reactorUraniumQuad.png", " quad_uranium.png)", "20e3", "1", "null", "400", "8", "4", "false"]
+            "data": [
+                "3",
+                "quadFuelRodUranium",
+                "ComponentName.QuadFuelRodUranium",
+                "reactorUraniumQuad.png",
+                "20e3",
+                "1",
+                "null",
+                "400",
+                "8",
+                "4",
+                "false"
+            ]
         },
         {
             "type": "FuelRod",
-            "data": ["4", "fuelRodMox", "ComponentName.FuelRodMox", "reactorMOXSimple.png", " mox.png)", "10e3", "1", "null", "100", "2", "1", "true"]
+            "data": ["4", "fuelRodMox", "ComponentName.FuelRodMox", "reactorMOXSimple.png", "10e3", "1", "null", "100", "2", "1", "true"]
         },
         {
             "type": "FuelRod",
-            "data": ["5", "dualFuelRodMox", "ComponentName.DualFuelRodMox", "reactorMOXDual.png", " dual_mox.png)", "10e3", "1", "null", "200", "4", "2", "true"]
+            "data": ["5", "dualFuelRodMox", "ComponentName.DualFuelRodMox", "reactorMOXDual.png", "10e3", "1", "null", "200", "4", "2", "true"]
         },
         {
             "type": "FuelRod",
-            "data": ["6", "quadFuelRodMox", "ComponentName.QuadFuelRodMox", "reactorMOXQuad.png", " quad_mox.png)", "10e3", "1", "null", "400", "8", "4", "true"]
+            "data": ["6", "quadFuelRodMox", "ComponentName.QuadFuelRodMox", "reactorMOXQuad.png", "10e3", "1", "null", "400", "8", "4", "true"]
         },
         {
             "type": "Reflector",
-            "data": ["7", "neutronReflector", "ComponentName.NeutronReflector", "reactorReflector.png", " neutron_reflector.png)", "30e3", "1", "null"]
+            "data": ["7", "neutronReflector", "ComponentName.NeutronReflector", "reactorReflector.png", "30e3", "1", "null"]
         },
         {
             "type": "Reflector",
-            "data": ["8", "thickNeutronReflector", "ComponentName.ThickNeutronReflector", "reactorReflectorThick.png", " thick_neutron_reflector.png)", "120e3", "1", "null"]
+            "data": ["8", "thickNeutronReflector", "ComponentName.ThickNeutronReflector", "reactorReflectorThick.png", "120e3", "1", "null"]
         },
         {
             "type": "Vent",
-            "data": ["9", "heatVent", "ComponentName.HeatVent", "reactorVent.png", " heat_vent.png)", "1", "1000", "null", "6", "0", "0"]
+            "data": ["9", "heatVent", "ComponentName.HeatVent", "reactorVent.png", "1", "1000", "null", "6", "0", "0"]
         },
         {
             "type": "Vent",
-            "data": ["10", "advancedHeatVent", "ComponentName.AdvancedHeatVent", "reactorVentDiamond.png", " advanced_heat_vent.png)", "1", "1000", "null", "12", "0", "0"]
+            "data": ["10", "advancedHeatVent", "ComponentName.AdvancedHeatVent", "reactorVentDiamond.png", "1", "1000", "null", "12", "0", "0"]
         },
         {
             "type": "Vent",
-            "data": ["11", "reactorHeatVent", "ComponentName.ReactorHeatVent", "reactorVentCore.png", " reactor_heat_vent.png)", "1", "1000", "null", "5", "5", "0"]
+            "data": ["11", "reactorHeatVent", "ComponentName.ReactorHeatVent", "reactorVentCore.png", "1", "1000", "null", "5", "5", "0"]
         },
         {
             "type": "Vent",
-            "data": ["12", "componentHeatVent", "ComponentName.ComponentHeatVent", "reactorVentSpread.png", " component_heat_vent.png)", "1", "1", "null", "0", "0", "4"]
+            "data": ["12", "componentHeatVent", "ComponentName.ComponentHeatVent", "reactorVentSpread.png", "1", "1", "null", "0", "0", "4"]
         },
         {
             "type": "Vent",
-            "data": ["13", "overclockedHeatVent", "ComponentName.OverclockedHeatVent", "reactorVentGold.png", " overclocked_heat_vent.png)", "1", "1000", "null", "20", "36", "0"]
+            "data": ["13", "overclockedHeatVent", "ComponentName.OverclockedHeatVent", "reactorVentGold.png", "1", "1000", "null", "20", "36", "0"]
         },
         {
             "type": "CoolantCell",
-            "data": ["14", "coolantCell10k", "ComponentName.CoolantCell10k", "reactorCoolantSimple.png", " heat_storage.png)", "1", "10e3", "null"]
+            "data": ["14", "coolantCell10k", "ComponentName.CoolantCell10k", "reactorCoolantSimple.png", "1", "10e3", "null"]
         },
         {
             "type": "CoolantCell",
-            "data": ["15", "coolantCell30k", "ComponentName.CoolantCell30k", "reactorCoolantTriple.png", " tri_heat_storage.png)", "1", "30e3", "null"]
+            "data": ["15", "coolantCell30k", "ComponentName.CoolantCell30k", "reactorCoolantTriple.png", "1", "30e3", "null"]
         },
         {
             "type": "CoolantCell",
-            "data": ["16", "coolantCell60k", "ComponentName.CoolantCell60k", "reactorCoolantSix.png", " hex_heat_storage.png)", "1", "60e3", "null"]
+            "data": ["16", "coolantCell60k", "ComponentName.CoolantCell60k", "reactorCoolantSix.png", "1", "60e3", "null"]
         },
         {
             "type": "Exchanger",
-            "data": ["17", "heatExchanger", "ComponentName.HeatExchanger", "reactorHeatSwitch.png", " heat_exchanger.png)", "1", "2500", "null", "12", "4"]
+            "data": ["17", "heatExchanger", "ComponentName.HeatExchanger", "reactorHeatSwitch.png", "1", "2500", "null", "12", "4"]
         },
         {
             "type": "Exchanger",
-            "data": ["18", "advancedHeatExchanger", "ComponentName.AdvancedHeatExchanger", "reactorHeatSwitchDiamond.png", " advanced_heat_exchanger.png)", "1", "10e3", "null", "24", "8"]
+            "data": [
+                "18",
+                "advancedHeatExchanger",
+                "ComponentName.AdvancedHeatExchanger",
+                "reactorHeatSwitchDiamond.png",
+                "1",
+                "10e3",
+                "null",
+                "24",
+                "8"
+            ]
         },
         {
             "type": "Exchanger",
-            "data": ["19", "coreHeatExchanger", "ComponentName.ReactorHeatExchanger", "reactorHeatSwitchCore.png", " reactor_heat_exchanger.png)", "1", "5000", "null", "0", "72"]
+            "data": ["19", "coreHeatExchanger", "ComponentName.ReactorHeatExchanger", "reactorHeatSwitchCore.png", "1", "5000", "null", "0", "72"]
         },
         {
             "type": "Exchanger",
-            "data": ["20", "componentHeatExchanger", "ComponentName.ComponentHeatExchanger", "reactorHeatSwitchSpread.png", " component_heat_exchanger.png)", "1", "5000", "null", "36", "0"]
+            "data": [
+                "20",
+                "componentHeatExchanger",
+                "ComponentName.ComponentHeatExchanger",
+                "reactorHeatSwitchSpread.png",
+                "1",
+                "5000",
+                "null",
+                "36",
+                "0"
+            ]
         },
         {
             "type": "Plating",
-            "data": ["21", "reactorPlating", "ComponentName.ReactorPlating", "reactorPlating.png", " plating.png)", "1", "1", "null", "1000", "0.9025"]
+            "data": ["21", "reactorPlating", "ComponentName.ReactorPlating", "reactorPlating.png", "1", "1", "null", "1000", "0.9025"]
         },
         {
             "type": "Plating",
-            "data": ["22", "heatCapacityReactorPlating", "ComponentName.HeatCapacityReactorPlating", "reactorPlatingHeat.png", " heat_plating.png)", "1", "1", "null", "1700", "0.9801"]
+            "data": [
+                "22",
+                "heatCapacityReactorPlating",
+                "ComponentName.HeatCapacityReactorPlating",
+                "reactorPlatingHeat.png",
+                "1",
+                "1",
+                "null",
+                "1700",
+                "0.9801"
+            ]
         },
         {
             "type": "Plating",
-            "data": ["23", "containmentReactorPlating", "ComponentName.ContainmentReactorPlating", "reactorPlatingExplosive.png", " containment_plating.png)", "1", "1", "null", "500", "0.81"]
+            "data": [
+                "23",
+                "containmentReactorPlating",
+                "ComponentName.ContainmentReactorPlating",
+                "reactorPlatingExplosive.png",
+                "1",
+                "1",
+                "null",
+                "500",
+                "0.81"
+            ]
         },
         {
             "type": "Condensator",
-            "data": ["24", "rshCondensator", "ComponentName.RshCondensator", "reactorCondensator.png", " rsh_condensator.png)", "1", "20e3", "null"]
+            "data": ["24", "rshCondensator", "ComponentName.RshCondensator", "reactorCondensator.png", "1", "20e3", "null"]
         },
         {
             "type": "Condensator",
-            "data": ["25", "lzhCondensator", "ComponentName.LzhCondensator", "reactorCondensatorLap.png", " lzh_condensator.png)", "1", "100e3", "null"]
+            "data": ["25", "lzhCondensator", "ComponentName.LzhCondensator", "reactorCondensatorLap.png", "1", "100e3", "null"]
         },
         {
             "type": "FuelRod",
@@ -384,11 +448,35 @@
         },
         {
             "type": "FuelRod",
-            "data": ["27", "dualFuelRodThorium", "ComponentName.DualFuelRodThorium", "gt.Double_Thoriumcell.png", "50e3", "1", "GT5.08", "40", "1", "2", "false"]
+            "data": [
+                "27",
+                "dualFuelRodThorium",
+                "ComponentName.DualFuelRodThorium",
+                "gt.Double_Thoriumcell.png",
+                "50e3",
+                "1",
+                "GT5.08",
+                "40",
+                "1",
+                "2",
+                "false"
+            ]
         },
         {
             "type": "FuelRod",
-            "data": ["28", "quadFuelRodThorium", "ComponentName.QuadFuelRodThorium", "gt.Quad_Thoriumcell.png", "50e3", "1", "GT5.08", "80", "2", "4", "false"]
+            "data": [
+                "28",
+                "quadFuelRodThorium",
+                "ComponentName.QuadFuelRodThorium",
+                "gt.Quad_Thoriumcell.png",
+                "50e3",
+                "1",
+                "GT5.08",
+                "80",
+                "2",
+                "4",
+                "false"
+            ]
         },
         {
             "type": "CoolantCell",
@@ -416,7 +504,7 @@
         },
         {
             "type": "Reflector",
-            "data": ["35", "iridiumNeutronReflector", "ComponentName.IridiumNeutronReflector", "gt.neutronreflector.png", " neutron_reflector.png)", "1", "1", "null"]
+            "data": ["35", "iridiumNeutronReflector", "ComponentName.IridiumNeutronReflector", "gt.neutronreflector.png", "1", "1", "null"]
         },
         {
             "type": "FuelRod",
@@ -424,11 +512,35 @@
         },
         {
             "type": "FuelRod",
-            "data": ["37", "dualFuelRodNaquadah", "ComponentName.DualFuelRodNaquadah", "gt.Double_Naquadahcell.png", "100e3", "1", "GT5.09", "200", "4", "2", "true"]
+            "data": [
+                "37",
+                "dualFuelRodNaquadah",
+                "ComponentName.DualFuelRodNaquadah",
+                "gt.Double_Naquadahcell.png",
+                "100e3",
+                "1",
+                "GT5.09",
+                "200",
+                "4",
+                "2",
+                "true"
+            ]
         },
         {
             "type": "FuelRod",
-            "data": ["38", "quadFuelRodNaquadah", "ComponentName.QuadFuelRodNaquadah", "gt.Quad_Naquadahcell.png", "100e3", "1", "GT5.09", "400", "8", "4", "true"]
+            "data": [
+                "38",
+                "quadFuelRodNaquadah",
+                "ComponentName.QuadFuelRodNaquadah",
+                "gt.Quad_Naquadahcell.png",
+                "100e3",
+                "1",
+                "GT5.09",
+                "400",
+                "8",
+                "4",
+                "true"
+            ]
         },
         {
             "type": "FuelRod",
@@ -436,11 +548,35 @@
         },
         {
             "type": "FuelRod",
-            "data": ["40", "dualFuelRodCoaxium", "ComponentName.DualFuelRodCoaxium", "coaxium_rod_dual.png", "20e3", "1", "Coaxium", "200", "0", "2", "false"]
+            "data": [
+                "40",
+                "dualFuelRodCoaxium",
+                "ComponentName.DualFuelRodCoaxium",
+                "coaxium_rod_dual.png",
+                "20e3",
+                "1",
+                "Coaxium",
+                "200",
+                "0",
+                "2",
+                "false"
+            ]
         },
         {
             "type": "FuelRod",
-            "data": ["41", "quadFuelRodCoaxium", "ComponentName.QuadFuelRodCoaxium", "coaxium_rod_quad.png", "20e3", "1", "Coaxium", "400", "0", "4", "false"]
+            "data": [
+                "41",
+                "quadFuelRodCoaxium",
+                "ComponentName.QuadFuelRodCoaxium",
+                "coaxium_rod_quad.png",
+                "20e3",
+                "1",
+                "Coaxium",
+                "400",
+                "0",
+                "4",
+                "false"
+            ]
         },
         {
             "type": "FuelRod",
@@ -448,23 +584,83 @@
         },
         {
             "type": "FuelRod",
-            "data": ["43", "dualFuelRodCesium", "ComponentName.DualFuelRodCesium", "coaxium_rod_dual.png", "10861", "1", "Coaxium", "400", "6", "2", "false"]
+            "data": [
+                "43",
+                "dualFuelRodCesium",
+                "ComponentName.DualFuelRodCesium",
+                "coaxium_rod_dual.png",
+                "10861",
+                "1",
+                "Coaxium",
+                "400",
+                "6",
+                "2",
+                "false"
+            ]
         },
         {
             "type": "FuelRod",
-            "data": ["44", "quadFuelRodCesium", "ComponentName.QuadFuelRodCesium", "coaxium_rod_quad.png", "10861", "1", "Coaxium", "800", "24", "4", "false"]
+            "data": [
+                "44",
+                "quadFuelRodCesium",
+                "ComponentName.QuadFuelRodCesium",
+                "coaxium_rod_quad.png",
+                "10861",
+                "1",
+                "Coaxium",
+                "800",
+                "24",
+                "4",
+                "false"
+            ]
         },
         {
             "type": "FuelRod",
-            "data": ["45", "fuelRodNaquadahGTNH", "ComponentName.FuelRodNaquadahGTNH", "gt.Naquadahcell.png", "100e3", "1", "GTNH", "100", "2", "1", "false"]
+            "data": [
+                "45",
+                "fuelRodNaquadahGTNH",
+                "ComponentName.FuelRodNaquadahGTNH",
+                "gt.Naquadahcell.png",
+                "100e3",
+                "1",
+                "GTNH",
+                "100",
+                "2",
+                "1",
+                "false"
+            ]
         },
         {
             "type": "FuelRod",
-            "data": ["46", "dualFuelRodNaquadahGTNH", "ComponentName.DualFuelRodNaquadahGTNH", "gt.Double_Naquadahcell.png", "100e3", "1", "GTNH", "200", "4", "2", "false"]
+            "data": [
+                "46",
+                "dualFuelRodNaquadahGTNH",
+                "ComponentName.DualFuelRodNaquadahGTNH",
+                "gt.Double_Naquadahcell.png",
+                "100e3",
+                "1",
+                "GTNH",
+                "200",
+                "4",
+                "2",
+                "false"
+            ]
         },
         {
             "type": "FuelRod",
-            "data": ["47", "quadFuelRodNaquadahGTNH", "ComponentName.QuadFuelRodNaquadahGTNH", "gt.Quad_Naquadahcell.png", "100e3", "1", "GTNH", "400", "8", "4", "false"]
+            "data": [
+                "47",
+                "quadFuelRodNaquadahGTNH",
+                "ComponentName.QuadFuelRodNaquadahGTNH",
+                "gt.Quad_Naquadahcell.png",
+                "100e3",
+                "1",
+                "GTNH",
+                "400",
+                "8",
+                "4",
+                "false"
+            ]
         },
         {
             "type": "FuelRod",
@@ -472,11 +668,35 @@
         },
         {
             "type": "FuelRod",
-            "data": ["49", "dualFuelRodNaquadria", "ComponentName.DualFuelRodNaquadria", "gt.Double_MNqCell.png", "100e3", "1", "GTNH", "200", "4", "2", "true"]
+            "data": [
+                "49",
+                "dualFuelRodNaquadria",
+                "ComponentName.DualFuelRodNaquadria",
+                "gt.Double_MNqCell.png",
+                "100e3",
+                "1",
+                "GTNH",
+                "200",
+                "4",
+                "2",
+                "true"
+            ]
         },
         {
             "type": "FuelRod",
-            "data": ["50", "quadFuelRodNaquadria", "ComponentName.QuadFuelRodNaquadria", "gt.Quad_MNqCell.png", "100e3", "1", "GTNH", "400", "8", "4", "true"]
+            "data": [
+                "50",
+                "quadFuelRodNaquadria",
+                "ComponentName.QuadFuelRodNaquadria",
+                "gt.Quad_MNqCell.png",
+                "100e3",
+                "1",
+                "GTNH",
+                "400",
+                "8",
+                "4",
+                "true"
+            ]
         },
         {
             "type": "FuelRod",
@@ -484,15 +704,51 @@
         },
         {
             "type": "FuelRod",
-            "data": ["52", "dualFuelRodTiberium", "ComponentName.DualFuelRodTiberium", "gt.Double_Tiberiumcell.png", "50e3", "1", "GTNH", "200", "2", "2", "false"]
+            "data": [
+                "52",
+                "dualFuelRodTiberium",
+                "ComponentName.DualFuelRodTiberium",
+                "gt.Double_Tiberiumcell.png",
+                "50e3",
+                "1",
+                "GTNH",
+                "200",
+                "2",
+                "2",
+                "false"
+            ]
         },
         {
             "type": "FuelRod",
-            "data": ["53", "quadFuelRodTiberium", "ComponentName.QuadFuelRodTiberium", "gt.Quad_Tiberiumcell.png", "50e3", "1", "GTNH", "400", "4", "4", "false"]
+            "data": [
+                "53",
+                "quadFuelRodTiberium",
+                "ComponentName.QuadFuelRodTiberium",
+                "gt.Quad_Tiberiumcell.png",
+                "50e3",
+                "1",
+                "GTNH",
+                "400",
+                "4",
+                "4",
+                "false"
+            ]
         },
         {
             "type": "FuelRod",
-            "data": ["54", "fuelRodTheCore", "ComponentName.FuelRodTheCore", "gt.Core_Reactor_Cell.png", "100e3", "1", "GTNH", "12800", "64", "32", "false"]
+            "data": [
+                "54",
+                "fuelRodTheCore",
+                "ComponentName.FuelRodTheCore",
+                "gt.Core_Reactor_Cell.png",
+                "100e3",
+                "1",
+                "GTNH",
+                "12800",
+                "64",
+                "32",
+                "false"
+            ]
         },
         {
             "type": "CoolantCell",
@@ -512,55 +768,219 @@
         },
         {
             "type": "CoolantCell",
-            "data": ["59", "coolantCellNeutronium1G", "ComponentName.CoolantCell1GNeutronium", "gt.1g_Neutronium_Coolantcell.png", "1", "1e9", "GT5.09"]
+            "data": [
+                "59",
+                "coolantCellNeutronium1G",
+                "ComponentName.CoolantCell1GNeutronium",
+                "gt.1g_Neutronium_Coolantcell.png",
+                "1",
+                "1e9",
+                "GT5.09"
+            ]
         },
         {
             "type": "GGFuelRod",
-            "data": ["60", "fuelRodCompressedUranium", "ComponentName.FuelRodCompressedUranium", "gg.CompressedUranium.png", "70000", "1", "GTNH", "400", "2", "1", "false", "0"]
+            "data": [
+                "60",
+                "fuelRodCompressedUranium",
+                "ComponentName.FuelRodCompressedUranium",
+                "gg.CompressedUranium.png",
+                "70000",
+                "1",
+                "GTNH",
+                "400",
+                "2",
+                "1",
+                "false",
+                "0"
+            ]
         },
         {
             "type": "GGFuelRod",
-            "data": ["61", "dualFuelRodCompressedUranium", "ComponentName.DualFuelRodCompressedUranium", "gg.Double_CompressedUranium.png", "70000", "1", "GTNH", "800", "4", "2", "false", "0"]
+            "data": [
+                "61",
+                "dualFuelRodCompressedUranium",
+                "ComponentName.DualFuelRodCompressedUranium",
+                "gg.Double_CompressedUranium.png",
+                "70000",
+                "1",
+                "GTNH",
+                "800",
+                "4",
+                "2",
+                "false",
+                "0"
+            ]
         },
         {
             "type": "GGFuelRod",
-            "data": ["62", "quadFuelRodCompressedUranium", "ComponentName.QuadFuelRodCompressedUranium", "gg.Quad_CompressedUranium.png", "70000", "1", "GTNH", "1600", "8", "4", "false", "0"]
+            "data": [
+                "62",
+                "quadFuelRodCompressedUranium",
+                "ComponentName.QuadFuelRodCompressedUranium",
+                "gg.Quad_CompressedUranium.png",
+                "70000",
+                "1",
+                "GTNH",
+                "1600",
+                "8",
+                "4",
+                "false",
+                "0"
+            ]
         },
         {
             "type": "GGFuelRod",
-            "data": ["63", "fuelRodCompressedPlutonium", "ComponentName.FuelRodCompressedPlutonium", "gg.CompressedPlutonium.png", "30000", "1", "GTNH", "200", "2", "1", "false", "6"]
+            "data": [
+                "63",
+                "fuelRodCompressedPlutonium",
+                "ComponentName.FuelRodCompressedPlutonium",
+                "gg.CompressedPlutonium.png",
+                "30000",
+                "1",
+                "GTNH",
+                "200",
+                "2",
+                "1",
+                "false",
+                "6"
+            ]
         },
         {
             "type": "GGFuelRod",
-            "data": ["64", "dualFuelRodCompressedPlutonium", "ComponentName.DualFuelRodCompressedPlutonium", "gg.Double_CompressedPlutonium.png", "30000", "1", "GTNH", "400", "4", "2", "false", "6"]
+            "data": [
+                "64",
+                "dualFuelRodCompressedPlutonium",
+                "ComponentName.DualFuelRodCompressedPlutonium",
+                "gg.Double_CompressedPlutonium.png",
+                "30000",
+                "1",
+                "GTNH",
+                "400",
+                "4",
+                "2",
+                "false",
+                "6"
+            ]
         },
         {
             "type": "GGFuelRod",
-            "data": ["65", "quadFuelRodCompressedPlutonium", "ComponentName.QuadFuelRodCompressedPlutonium", "gg.Quad_CompressedPlutonium.png", "30000", "1", "GTNH", "800", "8", "4", "false", "6"]
+            "data": [
+                "65",
+                "quadFuelRodCompressedPlutonium",
+                "ComponentName.QuadFuelRodCompressedPlutonium",
+                "gg.Quad_CompressedPlutonium.png",
+                "30000",
+                "1",
+                "GTNH",
+                "800",
+                "8",
+                "4",
+                "false",
+                "6"
+            ]
         },
         {
             "type": "GGFuelRod",
-            "data": ["66", "fuelRodLiquidUranium", "ComponentName.FuelRodLiquidUranium", "gg.LiquidUranium.png", "6000", "1", "GTNH", "4800", "16", "1", "false", "0"]
+            "data": [
+                "66",
+                "fuelRodLiquidUranium",
+                "ComponentName.FuelRodLiquidUranium",
+                "gg.LiquidUranium.png",
+                "6000",
+                "1",
+                "GTNH",
+                "4800",
+                "16",
+                "1",
+                "false",
+                "0"
+            ]
         },
         {
             "type": "GGFuelRod",
-            "data": ["67", "dualFuelRodLiquidUranium", "ComponentName.DualFuelRodLiquidUranium", "gg.Double_LiquidUranium.png", "6000", "1", "GTNH", "9600", "32", "2", "false", "0"]
+            "data": [
+                "67",
+                "dualFuelRodLiquidUranium",
+                "ComponentName.DualFuelRodLiquidUranium",
+                "gg.Double_LiquidUranium.png",
+                "6000",
+                "1",
+                "GTNH",
+                "9600",
+                "32",
+                "2",
+                "false",
+                "0"
+            ]
         },
         {
             "type": "GGFuelRod",
-            "data": ["68", "quadFuelRodLiquidUranium", "ComponentName.QuadFuelRodLiquidUranium", "gg.Quad_LiquidUranium.png", "6000", "1", "GTNH", "19200", "64", "4", "false", "0"]
+            "data": [
+                "68",
+                "quadFuelRodLiquidUranium",
+                "ComponentName.QuadFuelRodLiquidUranium",
+                "gg.Quad_LiquidUranium.png",
+                "6000",
+                "1",
+                "GTNH",
+                "19200",
+                "64",
+                "4",
+                "false",
+                "0"
+            ]
         },
         {
             "type": "GGFuelRod",
-            "data": ["69", "fuelRodLiquidPlutonium", "ComponentName.FuelRodLiquidPlutonium", "gg.LiquidPlutonium.png", "10000", "1", "GTNH", "6400", "16", "1", "false", "2"]
+            "data": [
+                "69",
+                "fuelRodLiquidPlutonium",
+                "ComponentName.FuelRodLiquidPlutonium",
+                "gg.LiquidPlutonium.png",
+                "10000",
+                "1",
+                "GTNH",
+                "6400",
+                "16",
+                "1",
+                "false",
+                "2"
+            ]
         },
         {
             "type": "GGFuelRod",
-            "data": ["70", "dualFuelRodLiquidPlutonium", "ComponentName.DualFuelRodLiquidPlutonium", "gg.Double_LiquidPlutonium.png", "10000", "1", "GTNH", "12800", "32", "2", "false", "2"]
+            "data": [
+                "70",
+                "dualFuelRodLiquidPlutonium",
+                "ComponentName.DualFuelRodLiquidPlutonium",
+                "gg.Double_LiquidPlutonium.png",
+                "10000",
+                "1",
+                "GTNH",
+                "12800",
+                "32",
+                "2",
+                "false",
+                "2"
+            ]
         },
         {
             "type": "GGFuelRod",
-            "data": ["71", "quadFuelRodLiquidPlutonium", "ComponentName.QuadFuelRodLiquidPlutonium", "gg.Quad_LiquidPlutonium.png", "10000", "1", "GTNH", "25600", "64", "4", "false", "2"]
+            "data": [
+                "71",
+                "quadFuelRodLiquidPlutonium",
+                "ComponentName.QuadFuelRodLiquidPlutonium",
+                "gg.Quad_LiquidPlutonium.png",
+                "10000",
+                "1",
+                "GTNH",
+                "25600",
+                "64",
+                "4",
+                "false",
+                "2"
+            ]
         },
         {
             "type": "BreederCell",

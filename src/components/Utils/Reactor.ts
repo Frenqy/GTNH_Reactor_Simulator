@@ -108,7 +108,7 @@ export class Reactor {
         for (let col = 0; col < this.grid[0].length; col++) {
             for (let row = 0; row < this.grid.length; row++) {
                 if ((item = this.getComponentAt(row, col)) !== null) {
-                    result.add([LanguageLoader.getI18N("ComponentName." + item.name.split(".")[1])]);
+                    result.add([LanguageLoader.getI18N(item.name)]);
                 }
             }
         }

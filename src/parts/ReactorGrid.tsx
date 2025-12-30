@@ -6,9 +6,14 @@ import type { Reactor } from "../components/Utils/Reactor";
 import type { ReactorItem } from "../components/Utils/ReactorItem";
 import "./ReactorGrid.css";
 
-type input = { reactor: Reactor; onReactorChange: React.Dispatch<React.SetStateAction<Reactor>>; selectedItem: ReactorItem | null };
+type input = {
+    reactor: Reactor;
+    onReactorChange: React.Dispatch<React.SetStateAction<Reactor>>;
+    selectedItem: ReactorItem | null;
+    setSelectedRowAndCol: React.Dispatch<React.SetStateAction<{ row: number; col: number }>>;
+};
 
-function ReactorGrid({ reactor, onReactorChange, selectedItem }: input) {
+function ReactorGrid({ reactor, onReactorChange, selectedItem, setSelectedRowAndCol }: input) {
     const selfRef = useRef<HTMLDivElement>(null);
     const [parentSize, setParentSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
 
@@ -42,7 +47,7 @@ function ReactorGrid({ reactor, onReactorChange, selectedItem }: input) {
                     thisCol: col,
                     reactorItem: item,
                     onClick: (event: MouseEvent<HTMLDivElement>) => handleButtonClick(event, row, col),
-                    tooltips: item ? LanguageLoader.getI18N("ComponentName." + item.name.split(".")[1]) : "",
+                    tooltips: item ? LanguageLoader.getI18N(item.name) : "",
                 })
             );
         }
@@ -64,6 +69,9 @@ function ReactorGrid({ reactor, onReactorChange, selectedItem }: input) {
             }
             return newReactor;
         });
+        if (event.button === 0) {
+            setSelectedRowAndCol({ row: row, col: column });
+        }
     }
 
     return (

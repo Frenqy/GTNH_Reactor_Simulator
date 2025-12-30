@@ -20,6 +20,7 @@ function App() {
     const [selectedItem, setSelectedItem] = useState<ReactorItem | null>(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [version, setVersion] = useState<{ mcVersion: string; gtVersion: string }>({ mcVersion: "1.7.10", gtVersion: "-" });
+    const [selectedRowAndCol, setSelectedRowAndCol] = useState<{ row: number; col: number }>({ row: 0, col: 0 });
 
     useEffect(() => {
         const loadData = async () => {
@@ -47,13 +48,18 @@ function App() {
                 <div className="MainBody">
                     <div className="ReactorGridCodeStats">
                         <div className="ReactorGrid">
-                            <ReactorGrid reactor={reactor} onReactorChange={setReactor} selectedItem={selectedItem} />
+                            <ReactorGrid
+                                reactor={reactor}
+                                onReactorChange={setReactor}
+                                selectedItem={selectedItem}
+                                setSelectedRowAndCol={setSelectedRowAndCol}
+                            />
                         </div>
                         <div className="ReactorCode">
                             <ReactorCode reactor={reactor} onReactorChange={setReactor} />
                         </div>
                         <div className="ReactorStats">
-                            <ReactorStats reactor={reactor} onReactorChange={setReactor} />
+                            <ReactorStats reactor={reactor} onReactorChange={setReactor} selectedRowAndCol={selectedRowAndCol} />
                         </div>
                     </div>
                     <div className="ReactorSide">
