@@ -1,8 +1,8 @@
 import { lang, type LangsJson } from "./Defines";
-import { GlobalData } from "./GlobalData";
 
 export class LanguageLoader {
     static LangsData: LangsJson;
+    static language: lang;
     private static regex = /%((\.(?<num>\d)*|,*)+f|(\.(?<num>\d)*|,*)d|s)/g;
 
     private static replacePairs = [
@@ -12,8 +12,9 @@ export class LanguageLoader {
         ["&amp;", "&"],
     ];
 
-    static initLanguageLoader(d: LangsJson) {
+    static initLanguageLoader(d: LangsJson, l: lang) {
         this.LangsData = d;
+        this.language = l;
     }
 
     static format(baseString: string, ...args: (string | number)[]) {
@@ -44,7 +45,9 @@ export class LanguageLoader {
     }
 
     static getI18N(key: string, ...args: (string | number)[]): string {
-        let temp: unknown = this.LangsData[GlobalData.language == lang.zh ? lang.zh : lang.en];
+        let temp: unknown = this.LangsData[this.language === lang.zh ? lang.zh : lang.en];
+        console.log(temp);
+
         for (const k of key.split(".")) {
             if (typeof temp === "object" && temp !== null) {
                 temp = (temp as Record<string, unknown>)[this.capitalizeWithReplace(k)];

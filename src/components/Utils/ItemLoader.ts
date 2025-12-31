@@ -181,9 +181,6 @@ export class ItemLoader {
             this.ITEM_LIST_MAP[key] = new Array<ReactorItem>();
         }
         this.ITEM_MAP = new Map<string, ReactorItem>();
-
-        console.log(data);
-
         data.forEach((item: ItemData) => {
             const name = LanguageLoader.getI18N(item.data[2]);
             item.data[3] = ImageLoader.getImage(item.data[3]);

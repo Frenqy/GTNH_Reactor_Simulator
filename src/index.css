@@ -57,3 +57,15 @@ div.ReactorStats {
     align-items: center;
     align-content: center;
 }
+
+#changeLang {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: max(1vh, 40px);
+    height: max(1vh, 40px);
+    fill: none;
+    stroke-width: 1.5;
+    stroke: currentColor;
+    cursor: pointer;
+}

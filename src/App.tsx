@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { lang, type AllData, type LangsJson } from "./components/Utils/Defines";
-import { GlobalData } from "./components/Utils/GlobalData";
 import { ImageLoader } from "./components/Utils/ImageLoader";
 import { ItemLoader } from "./components/Utils/ItemLoader";
 import { LanguageLoader } from "./components/Utils/LanguageLoader";
@@ -10,16 +9,6 @@ import ReactorCode from "./parts/ReactorCode";
 import ReactorGrid from "./parts/ReactorGrid";
 import ReactorSide from "./parts/ReactorSide";
 import ReactorStats from "./parts/ReactorStats";
-
-function initLang() {
-    GlobalData.language = localStorage.getItem("lang") === "zh_cn" || navigator.language.includes("zh") ? lang.zh : lang.en;
-    localStorage.setItem("lang", GlobalData.language.toString());
-}
-
-function changeLang() {
-    GlobalData.language = GlobalData.language === lang.zh ? lang.en : lang.zh;
-    localStorage.setItem("lang", GlobalData.language.toString());
-}
 
 function App() {
     const [reactor, setReactor] = useState<Reactor>(new Reactor());
@@ -32,11 +21,20 @@ function App() {
     });
     const [selectedRowAndCol, setSelectedRowAndCol] = useState<{ row: number; col: number }>({ row: 0, col: 0 });
 
+    const languageState =
+        localStorage.getItem("lang") === "zh_cn" || (localStorage.getItem("lang") == null && navigator.language.includes("zh")) ? lang.zh : lang.en;
+
+    const toggleLanguage = () => {
+        const next = languageState === lang.zh ? lang.en : lang.zh;
+        localStorage.setItem("lang", next.toString());
+        location.reload();
+    };
+
     useEffect(() => {
         const loadData = async () => {
             const langsRes = await fetch("/data/langs.json");
             const langsData: LangsJson = await langsRes.json();
-            LanguageLoader.initLanguageLoader(langsData);
+            LanguageLoader.initLanguageLoader(langsData, languageState);
 
             const allRes = await fetch("/data/all_data.json");
             const allData: AllData = await allRes.json();
@@ -45,13 +43,9 @@ function App() {
             setIsLoaded(true);
         };
         loadData();
-
-        initLang();
-        // changeLang();
-    }, []);
+    }, [languageState]);
 
     if (!isLoaded) {
-        // 数据没加载完时只显示 loading
         return <div>加载中...</div>;
     } else {
         return (
@@ -66,6 +60,20 @@ function App() {
                                 setSelectedRowAndCol={setSelectedRowAndCol}
                                 simulateReactor={simulateReactor}
                             />
+                            <svg
+                                id="changeLang"
+                                data-slot="icon"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden={true}
+                                onClick={toggleLanguage}
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802"
+                                ></path>
+                            </svg>
                         </div>
                         <div className="ReactorCode">
                             <ReactorCode reactor={reactor} onReactorChange={setReactor} />
