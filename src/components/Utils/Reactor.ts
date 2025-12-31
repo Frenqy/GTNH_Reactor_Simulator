@@ -128,7 +128,9 @@ export class Reactor {
     }
 
     getCode() {
-        return "erp=" + this.buildCodeString();
+        const tempCode = "erp=" + this.buildCodeString();
+        localStorage.setItem("reactorCode", tempCode);
+        return tempCode;
     }
 
     readCodeString(code: string) {
