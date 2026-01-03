@@ -129,7 +129,6 @@ export class Reactor {
 
     getCode() {
         const tempCode = "erp=" + this.buildCodeString();
-        localStorage.setItem("reactorCode", tempCode);
         return tempCode;
     }
 
@@ -221,15 +220,15 @@ export class Reactor {
                 if (component != null) {
                     const id = component.id;
                     if (
-                        component.initialHeat > 0 ||
-                        component.automationThreshold != ComponentFactory.getDefaultComponent(id)?.automationThreshold ||
-                        component.reactorPause != ComponentFactory.getDefaultComponent(id)?.reactorPause
+                        component.getInitialHeat() > 0 ||
+                        component.getAutomationThreshold() != ComponentFactory.getDefaultComponent(id)?.getAutomationThreshold() ||
+                        component.getReactorPause() != ComponentFactory.getDefaultComponent(id)?.getReactorPause()
                     ) {
                         if (this.automated) {
-                            storage.store(component.reactorPause, 10e3);
-                            storage.store(component.automationThreshold, 1e9);
+                            storage.store(component.getReactorPause(), 10e3);
+                            storage.store(component.getAutomationThreshold(), 1e9);
                         }
-                        storage.store(component.initialHeat, 1e9);
+                        storage.store(component.getInitialHeat(), 1e9);
                         storage.store(1, 1);
                     } else {
                         storage.store(0, 1);

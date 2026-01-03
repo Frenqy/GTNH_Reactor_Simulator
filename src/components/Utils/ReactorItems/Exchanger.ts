@@ -41,12 +41,16 @@ export class Exchanger extends ReactorItem {
     transfer() {
         const heatableNeighbors: ReactorItem[] = [];
         if (this.row != null && this.col != null && this.parentReactor != null) {
-            for (const r of [this.row - 1, this.row + 1]) {
-                for (const c of [this.col - 1, this.col + 1]) {
-                    const component = this.parentReactor.getComponentAt(r, c);
-                    if (component != null && component.isHeatAcceptor()) {
-                        heatableNeighbors.push(component);
-                    }
+            for (const temp of [
+                [this.row, this.col - 1],
+                [this.row, this.col + 1],
+                [this.row - 1, this.col],
+                [this.row + 1, this.col],
+            ]) {
+                const [r, c] = temp;
+                const component = this.parentReactor.getComponentAt(r, c);
+                if (component != null && component.isHeatAcceptor()) {
+                    heatableNeighbors.push(component);
                 }
             }
         }
@@ -57,7 +61,7 @@ export class Exchanger extends ReactorItem {
                 const mymed = (this.currentHeat * 100.0) / this.maxHeat;
                 const heatablemed = (heatableNeighbor.currentHeat * 100.0) / heatableNeighbor.maxHeat;
 
-                let add = Math.round((heatableNeighbor.maxHeat / 100.0) * (heatablemed + mymed / 2.0));
+                let add = Math.trunc((heatableNeighbor.maxHeat / 100.0) * (heatablemed + mymed / 2.0));
                 if (add > this.switchSide) {
                     add = this.switchSide;
                 }

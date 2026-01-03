@@ -28,7 +28,7 @@ function GridButton({ size, thisRow, thisCol, reactorItem = null, onClick, enabl
     let color: string = "#C0C0C0";
 
     if (simulateItem) {
-        if (simulateItem.currentHeat > 0) {
+        if (simulateItem.getCurrentHeat() > 0) {
             color = "#FFA500";
         } else if (simulateItem.isBroken()) {
             color = "#FF0000";

@@ -63,6 +63,81 @@ export class ReactorItem {
     getCopy() {
         return new ReactorItem(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod);
     }
+    getMaxDamage() {
+        return this.maxDamage;
+    }
+
+    getMaxHeat() {
+        return this.maxHeat;
+    }
+
+    getAutomationThreshold() {
+        return this.automationThreshold;
+    }
+
+    getInitialHeat() {
+        return this.initialHeat;
+    }
+
+    getCurrentHeat() {
+        return this.currentHeat;
+    }
+
+    getReactorPause() {
+        return this.reactorPause;
+    }
+
+    getCurrentDamage() {
+        return this.currentDamage;
+    }
+
+    getMaxReachedHeat() {
+        return this.maxReachedHeat;
+    }
+
+    getMinEUGenerated() {
+        return this.minEUGenerated;
+    }
+
+    getMaxEUGenerated() {
+        return this.maxEUGenerated;
+    }
+
+    getMinHeatGenerated() {
+        return this.minHeatGenerated;
+    }
+
+    getMaxHeatGenerated() {
+        return this.maxHeatGenerated;
+    }
+
+    getBestCondensatorCooling() {
+        return this.bestCondensatorCooling;
+    }
+
+    getBestCellCooling() {
+        return this.bestCellCooling;
+    }
+
+    getBestVentCooling() {
+        return this.bestVentCooling;
+    }
+
+    getCurrentHullHeating() {
+        return this.currentHullHeating;
+    }
+
+    getCurrentComponentHeating() {
+        return this.currentComponentHeating;
+    }
+
+    getCurrentHullCooling() {
+        return this.currentHullCooling;
+    }
+
+    getCurrentVentCooling() {
+        return this.currentVentCooling;
+    }
 
     setInitialHeat(value: number) {
         if (this.isHeatAcceptor() && value >= 0 && value < this.maxHeat) {

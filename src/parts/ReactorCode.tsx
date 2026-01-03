@@ -1,5 +1,4 @@
 import { Button, Col, ConfigProvider, Flex, Input } from "antd";
-import { useEffect } from "react";
 import { showInsetEffect } from "../components/Utils/Defines";
 import { LanguageLoader } from "../components/Utils/LanguageLoader";
 import { Reactor } from "../components/Utils/Reactor";
@@ -23,17 +22,6 @@ function ReactorCode({ reactor, onReactorChange }: input) {
             });
         });
     }
-
-    useEffect(() => {
-        const savedCode = localStorage.getItem("reactorCode");
-        if (savedCode) {
-            onReactorChange(() => {
-                const newReactor = new Reactor();
-                newReactor.readCodeString(savedCode);
-                return newReactor;
-            });
-        }
-    }, [onReactorChange]);
 
     return (
         <>

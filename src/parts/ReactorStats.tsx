@@ -1,7 +1,7 @@
 import type { TabsProps } from "antd";
 import { Button, Col, ConfigProvider, Flex, InputNumber, Space, Tabs } from "antd";
 import { cloneDeep } from "lodash";
-import type { ReactElement } from "react";
+import { useEffect, useRef, type ReactElement } from "react";
 import { showInsetEffect } from "../components/Utils/Defines";
 import { LanguageLoader } from "../components/Utils/LanguageLoader";
 import { Reactor } from "../components/Utils/Reactor";
@@ -12,20 +12,25 @@ type input = {
     onReactorChange: React.Dispatch<React.SetStateAction<Reactor>>;
     selectedRowAndCol: { row: number; col: number };
     simulateReactor: Reactor | null;
+    outputLines: string[];
 };
 
-function ReactorStats({ reactor, onReactorChange, selectedRowAndCol, simulateReactor }: input) {
+function ReactorStats({ reactor, onReactorChange, selectedRowAndCol, simulateReactor, outputLines }: input) {
     const selectedRow = selectedRowAndCol.row;
     const selectedCol = selectedRowAndCol.col;
     const selectedGridStack = reactor.getComponentAt(selectedRow, selectedCol);
     const items: TabsProps["items"] = [];
     const tableItem: ReactElement[] = [];
     let componentArea: string;
+    const outputRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        outputRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [outputLines]);
 
     if (simulateReactor) {
         const component = simulateReactor.getComponentAt(selectedRow, selectedCol);
         if (component) {
-            componentArea = getI18N("UI.ComponentInfoLastSimRowCol", component.toString(), selectedRow, selectedCol);
+            componentArea = getI18N("UI.ComponentInfoLastSimRowCol", component.toString(), selectedRow, selectedCol, component.info);
         } else {
             componentArea = getI18N("UI.NoComponentLastSimRowCol", selectedRow, selectedCol);
         }
@@ -74,8 +79,11 @@ function ReactorStats({ reactor, onReactorChange, selectedRowAndCol, simulateRea
         label: getI18N("UI.SimulationTab"),
         key: (items.length + 1).toString(),
         children: (
-            <Flex className="children-full-height">
-                <div>{getI18N("UI.SimulationTab")}</div>
+            <Flex className="children-full-height" style={{ overflowY: "auto" }} vertical>
+                {outputLines.map((line, idx) => (
+                    <div key={idx}>{line}</div>
+                ))}
+                <div ref={outputRef} />
             </Flex>
         ),
     });
@@ -188,7 +196,7 @@ function ReactorStats({ reactor, onReactorChange, selectedRowAndCol, simulateRea
 
     const replacementThresholdInput = (
         <InputNumber
-            value={selectedGridStack ? selectedGridStack.automationThreshold : 9000}
+            value={selectedGridStack ? selectedGridStack.getAutomationThreshold() : 9000}
             onChange={(v) => handleReactorUpdate("updateComponentAutomationThreshold", v)}
             min={0}
             max={Reactor.MAX_COMPONENT_HEAT}
@@ -200,7 +208,7 @@ function ReactorStats({ reactor, onReactorChange, selectedRowAndCol, simulateRea
 
     const reactorPauseInput = (
         <InputNumber
-            value={selectedGridStack ? selectedGridStack.reactorPause : 9000}
+            value={selectedGridStack ? selectedGridStack.getReactorPause() : 9000}
             onChange={(v) => handleReactorUpdate("updateComponentReactorPause", v)}
             min={0}
             max={10_000}
@@ -221,7 +229,7 @@ function ReactorStats({ reactor, onReactorChange, selectedRowAndCol, simulateRea
                     <Flex vertical style={{ height: "100%", width: "100%" }}>
                         <Flex style={{ fontWeight: "bold" }}>{getI18N("UI.ComponentTab")}</Flex>
                         <Flex flex={1} style={{ backgroundColor: "#cdcdcd", padding: "max(1%, 10px)" }} vertical>
-                            <Flex>{componentArea}</Flex>
+                            <Flex style={{ whiteSpace: "pre-line" }}>{componentArea}</Flex>
                         </Flex>
                         <Flex style={{ fontWeight: "bold" }}>{getI18N("UI.ComponentAutomationTab")}</Flex>
                         <Flex flex={2} style={{ backgroundColor: "#cdcdcd", padding: "max(1%, 10px)" }} vertical gap="small">
@@ -249,7 +257,7 @@ function ReactorStats({ reactor, onReactorChange, selectedRowAndCol, simulateRea
                         type="card"
                         items={items}
                         tabBarStyle={{ margin: "0", height: "max(5%, 20px)" }}
-                        style={{ maxHeight: "100%" }}
+                        style={{ height: "100%" }}
                     />
                 </Col>
             </Flex>

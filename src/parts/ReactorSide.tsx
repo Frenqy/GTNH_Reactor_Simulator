@@ -18,8 +18,9 @@ type input = {
     version: { mcVersion: string; gtVersion: string };
     setVersion: React.Dispatch<React.SetStateAction<{ mcVersion: string; gtVersion: string }>>;
     setSimulateReactor: React.Dispatch<React.SetStateAction<Reactor | null>>;
+    setOutputLines: React.Dispatch<React.SetStateAction<string[]>>;
 };
-function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, version, setVersion, setSimulateReactor }: input) {
+function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, version, setVersion, setSimulateReactor, setOutputLines }: input) {
     const selfRef = useRef<HTMLDivElement>(null);
     const [initHeatValue, setInitHeatValue] = useState(0);
     const [replacementThresholdValue, setReplacementThresholdValue] = useState(9000);
@@ -48,9 +49,9 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, versi
         setSelectedItem(() => {
             if (item) {
                 const tempItem = item.getCopy();
-                setInitHeatValue(tempItem.initialHeat);
-                setReplacementThresholdValue(tempItem.automationThreshold);
-                setReactorPauseValue(tempItem.reactorPause);
+                setInitHeatValue(tempItem.getInitialHeat());
+                setReplacementThresholdValue(tempItem.getAutomationThreshold());
+                setReactorPauseValue(tempItem.getReactorPause());
                 return tempItem;
             } else {
                 return null;
@@ -114,7 +115,7 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, versi
         setSimulateReactor(() => {
             return simReactor;
         });
-        await new AutomationSimulator(simReactor).simulate();
+        await new AutomationSimulator(simReactor, setOutputLines).simulate();
     }
 
     useEffect(() => {

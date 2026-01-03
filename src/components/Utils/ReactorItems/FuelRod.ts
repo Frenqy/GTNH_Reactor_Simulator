@@ -60,12 +60,16 @@ export class FuelRod extends ReactorItem {
     countNeutronNeighbors() {
         let neutronNeighbors = 0;
         if (this.row != null && this.col != null && this.parentReactor != null) {
-            for (const r of [this.row - 1, this.row + 1]) {
-                for (const c of [this.col - 1, this.col + 1]) {
-                    const component = this.parentReactor!.getComponentAt(r, c);
-                    if (component != null && component.isNeutronReflector()) {
-                        neutronNeighbors++;
-                    }
+            for (const temp of [
+                [this.row + 1, this.col],
+                [this.row - 1, this.col],
+                [this.row, this.col - 1],
+                [this.row, this.col + 1],
+            ]) {
+                const [r, c] = temp;
+                const component = this.parentReactor!.getComponentAt(r, c);
+                if (component != null && component.isNeutronReflector()) {
+                    neutronNeighbors++;
                 }
             }
         }
@@ -75,19 +79,40 @@ export class FuelRod extends ReactorItem {
     getHeatableNeighbors() {
         const heatableNeighbors: ReactorItem[] = [] as ReactorItem[];
         if (this.row != null && this.col != null && this.parentReactor != null) {
-            for (const r of [this.row - 1, this.row + 1]) {
-                for (const c of [this.col - 1, this.col + 1]) {
-                    const component = this.parentReactor.getComponentAt(r, c);
-                    if (component != null && component.isHeatAcceptor()) {
-                        heatableNeighbors.push(component);
-                    }
+            for (const temp of [
+                [this.row + 1, this.col],
+                [this.row - 1, this.col],
+                [this.row, this.col - 1],
+                [this.row, this.col + 1],
+            ]) {
+                const [r, c] = temp;
+                const component = this.parentReactor.getComponentAt(r, c);
+                if (component != null && component.isHeatAcceptor()) {
+                    heatableNeighbors.push(component);
                 }
             }
         }
         return heatableNeighbors;
     }
 
-    getGTHeatableNeighbors = this.getHeatableNeighbors;
+    getGTHeatableNeighbors() {
+        const heatableNeighbors: ReactorItem[] = [] as ReactorItem[];
+        if (this.row != null && this.col != null && this.parentReactor != null) {
+            for (const temp of [
+                [this.row, this.col - 1],
+                [this.row, this.col + 1],
+                [this.row + 1, this.col],
+                [this.row - 1, this.col],
+            ]) {
+                const [r, c] = temp;
+                const component = this.parentReactor.getComponentAt(r, c);
+                if (component != null && component.isHeatAcceptor()) {
+                    heatableNeighbors.push(component);
+                }
+            }
+        }
+        return heatableNeighbors;
+    }
 
     handleHeat(heat: number) {
         const heatableNeighbors = this.getHeatableNeighbors();
@@ -111,18 +136,18 @@ export class FuelRod extends ReactorItem {
             this.currentHullHeating = heat;
         } else {
             this.currentComponentHeating = heat;
-            let everCycleHeat = heat / this.getRodCount();
+            let everCycleHeat = heat / this.rodCount;
             for (let i = 0; i < heatableNeighbors.length; i++) {
                 const toNeighborHeat = everCycleHeat / (heatableNeighbors.length - i);
                 everCycleHeat -= toNeighborHeat;
-                heatableNeighbors[i].adjustCurrentHeat(this.getRodCount() * toNeighborHeat);
+                heatableNeighbors[i].adjustCurrentHeat(this.rodCount * toNeighborHeat);
             }
         }
     }
 
     generateHeat() {
-        const pulses = this.countNeutronNeighbors() + 1 + this.getRodCount() / 2;
-        let heat = Math.round(this.heatMult * pulses * (pulses + 1));
+        const pulses = this.countNeutronNeighbors() + 1 + this.rodCount / 2;
+        let heat = Math.trunc(this.heatMult * pulses * (pulses + 1));
         if (
             this.parentReactor != null &&
             this.moxStyle &&
@@ -143,7 +168,7 @@ export class FuelRod extends ReactorItem {
     }
 
     generateEnergy() {
-        const pulses = this.countNeutronNeighbors() + 1 + this.getRodCount() / 2;
+        const pulses = this.countNeutronNeighbors() + 1 + this.rodCount / 2;
         let energy = this.energyMult * pulses;
         if ((FuelRod.GT509behavior || "GT5.09" === this.sourceMod) && this.parentReactor != null) {
             energy *= 2; // EUx2 if from GT5.09 or in GT5.09 mode

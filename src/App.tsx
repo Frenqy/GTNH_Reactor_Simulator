@@ -5,6 +5,8 @@ import { ItemLoader } from "./components/Utils/ItemLoader";
 import { LanguageLoader } from "./components/Utils/LanguageLoader";
 import { Reactor } from "./components/Utils/Reactor";
 import type { ReactorItem } from "./components/Utils/ReactorItem";
+import { FuelRod } from "./components/Utils/ReactorItems/FuelRod";
+import { Reflector } from "./components/Utils/ReactorItems/Reflector";
 import ReactorCode from "./parts/ReactorCode";
 import ReactorGrid from "./parts/ReactorGrid";
 import ReactorSide from "./parts/ReactorSide";
@@ -20,6 +22,7 @@ function App() {
         gtVersion: localStorage.getItem("gtVersion") || "-",
     });
     const [selectedRowAndCol, setSelectedRowAndCol] = useState<{ row: number; col: number }>({ row: 0, col: 0 });
+    const [outputLines, setOutputLines] = useState<string[]>([]);
 
     const languageState =
         localStorage.getItem("lang") === "zh_cn" || (localStorage.getItem("lang") == null && navigator.language.includes("zh")) ? lang.zh : lang.en;
@@ -43,7 +46,11 @@ function App() {
             setIsLoaded(true);
         };
         loadData();
-    }, [languageState]);
+
+        Reflector.setMcVersion(version.mcVersion);
+        FuelRod.setGT509Behavior(version.gtVersion === "5.09");
+        FuelRod.setGTNHBehavior(version.gtVersion === "GTNH");
+    }, [languageState, version]);
 
     if (!isLoaded) {
         return <div>加载中...</div>;
@@ -84,6 +91,7 @@ function App() {
                                 onReactorChange={setReactor}
                                 selectedRowAndCol={selectedRowAndCol}
                                 simulateReactor={simulateReactor}
+                                outputLines={outputLines}
                             />
                         </div>
                     </div>
@@ -96,6 +104,7 @@ function App() {
                             version={version}
                             setVersion={setVersion}
                             setSimulateReactor={setSimulateReactor}
+                            setOutputLines={setOutputLines}
                         />
                     </div>
                 </div>

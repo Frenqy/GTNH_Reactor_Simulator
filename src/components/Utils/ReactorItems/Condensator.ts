@@ -37,8 +37,4 @@ export class Condensator extends ReactorItem {
     injectCoolant() {
         this.currentHeat = 0;
     }
-
-    isCoolable(): boolean {
-        return this.maxHeat > 1 && !(this instanceof Condensator);
-    }
 }

@@ -49,6 +49,7 @@ div.ReactorCode {
 div.ReactorStats {
     flex: 30 1 0%;
     background: #a0a0a0;
+    height: 0;
 }
 
 .center {

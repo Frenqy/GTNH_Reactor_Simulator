@@ -46,7 +46,6 @@ export class LanguageLoader {
 
     static getI18N(key: string, ...args: (string | number)[]): string {
         let temp: unknown = this.LangsData[this.language === lang.zh ? lang.zh : lang.en];
-        console.log(temp);
 
         for (const k of key.split(".")) {
             if (typeof temp === "object" && temp !== null) {

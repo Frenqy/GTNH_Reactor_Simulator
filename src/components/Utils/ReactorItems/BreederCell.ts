@@ -38,14 +38,16 @@ export class BreederCell extends ReactorItem {
     generateHeat(): number {
         const targetDamage = 1 + (this.parentReactor!.currentHeat / this.mHeatBonusStep) * this.mHeatBonusMultiplier;
         if (this.row != null && this.col != null && this.parentReactor != null) {
-            for (const r of [this.row - 1, this.row + 1]) {
-                for (const c of [this.col - 1, this.col + 1]) {
-                    const component = this.parentReactor.getComponentAt(r, c);
-                    if (component != null && component instanceof FuelRod) {
-                        for (let i = 0; i < (component as FuelRod).getRodCount(); i++) {
-                            this.applyDamage(targetDamage);
-                        }
-                    }
+            for (const temp of [
+                [this.row, this.col - 1],
+                [this.row, this.col + 1],
+                [this.row - 1, this.col],
+                [this.row + 1, this.col],
+            ]) {
+                const [r, c] = temp;
+                const component = this.parentReactor.getComponentAt(r, c);
+                if (component != null && component instanceof FuelRod) {
+                    this.applyDamage(targetDamage * component.getRodCount());
                 }
             }
         }
