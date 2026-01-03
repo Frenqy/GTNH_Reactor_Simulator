@@ -226,11 +226,11 @@ export class ReactorItem {
     adjustCurrentHeat(heat: number) {
         if (this.isHeatAcceptor()) {
             let result = 0.0;
-            let tempHeat = this.currentHeat;
+            let tempHeat = this.getCurrentHeat();
             tempHeat += heat;
-            if (tempHeat > this.maxHeat) {
-                result = this.maxHeat - tempHeat + 1;
-                tempHeat = this.maxHeat;
+            if (tempHeat > this.getMaxHeat()) {
+                result = this.getMaxHeat() - tempHeat + 1;
+                tempHeat = this.getMaxHeat();
             } else if (tempHeat < 0.0) {
                 result = tempHeat;
                 tempHeat = 0.0;
@@ -256,7 +256,7 @@ export class ReactorItem {
     }
 
     isBroken() {
-        return this.currentHeat >= this.maxHeat || this.currentDamage >= this.maxDamage;
+        return this.currentHeat >= this.getMaxHeat() || this.currentDamage >= this.getMaxDamage();
     }
 
     getRodCount() {

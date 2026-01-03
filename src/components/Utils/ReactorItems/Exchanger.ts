@@ -58,10 +58,10 @@ export class Exchanger extends ReactorItem {
         let myHeat = 0;
         if (this.switchSide > 0) {
             for (const heatableNeighbor of heatableNeighbors) {
-                const mymed = (this.currentHeat * 100.0) / this.maxHeat;
-                const heatablemed = (heatableNeighbor.currentHeat * 100.0) / heatableNeighbor.maxHeat;
+                const mymed = (this.getCurrentHeat() * 100.0) / this.getMaxHeat();
+                const heatablemed = (heatableNeighbor.getCurrentHeat() * 100.0) / heatableNeighbor.getMaxHeat();
 
-                let add = Math.trunc((heatableNeighbor.maxHeat / 100.0) * (heatablemed + mymed / 2.0));
+                let add = Math.trunc((heatableNeighbor.getMaxHeat() / 100.0) * (heatablemed + mymed / 2.0));
                 if (add > this.switchSide) {
                     add = this.switchSide;
                 }
@@ -79,7 +79,7 @@ export class Exchanger extends ReactorItem {
                 }
                 if (Math.round(heatablemed * 10.0) / 10.0 > Math.round(mymed * 10.0) / 10.0) {
                     add -= 2 * add;
-                } else if (Math.round(heatablemed * 10.0) / 10.0 == Math.round(mymed * 10.0) / 10.0) {
+                } else if (Math.round(heatablemed * 10.0) / 10.0 === Math.round(mymed * 10.0) / 10.0) {
                     add = 0;
                 }
                 myHeat -= add;
@@ -87,7 +87,7 @@ export class Exchanger extends ReactorItem {
             }
         }
         if (this.switchReactor > 0 && this.parentReactor != null) {
-            const mymed = (this.currentHeat * 100.0) / this.maxHeat;
+            const mymed = (this.getCurrentHeat() * 100.0) / this.getMaxHeat();
             const Reactormed = (this.parentReactor.getCurrentHeat() * 100.0) / this.parentReactor.getMaxHeat();
 
             let add = Math.round((this.parentReactor.getMaxHeat() / 100.0) * (Reactormed + mymed / 2.0));

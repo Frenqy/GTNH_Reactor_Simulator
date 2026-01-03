@@ -23,7 +23,7 @@ export class Condensator extends ReactorItem {
         }
         this.currentCondensatorCooling += heat;
         this.bestCondensatorCooling = Math.max(this.currentCondensatorCooling, this.bestCondensatorCooling);
-        const acceptedHeat = Math.min(heat, this.maxHeat - heat);
+        const acceptedHeat = Math.min(heat, this.getMaxHeat() - heat);
         const result = heat - acceptedHeat;
         this.currentHeat += acceptedHeat;
         this.maxReachedHeat = Math.max(this.maxReachedHeat, this.currentHeat);
@@ -31,7 +31,7 @@ export class Condensator extends ReactorItem {
     }
 
     needsCoolantInjected() {
-        return this.currentHeat > 0.85 * this.maxHeat;
+        return this.currentHeat > 0.85 * this.getMaxHeat();
     }
 
     injectCoolant() {

@@ -6,6 +6,7 @@ import { LanguageLoader } from "./components/Utils/LanguageLoader";
 import { Reactor } from "./components/Utils/Reactor";
 import type { ReactorItem } from "./components/Utils/ReactorItem";
 import { FuelRod } from "./components/Utils/ReactorItems/FuelRod";
+import { GGFuelRod } from "./components/Utils/ReactorItems/GGFuelRod";
 import { Reflector } from "./components/Utils/ReactorItems/Reflector";
 import ReactorCode from "./parts/ReactorCode";
 import ReactorGrid from "./parts/ReactorGrid";
@@ -45,11 +46,36 @@ function App() {
             ItemLoader.initItems(allData.items);
             setIsLoaded(true);
         };
-        loadData();
 
+        switch (version.gtVersion) {
+            case "5.08": {
+                FuelRod.setGT509Behavior(false);
+                FuelRod.setGTNHBehavior(false);
+                GGFuelRod.setGTNHBehavior(false);
+                break;
+            }
+            case "5.09": {
+                FuelRod.setGT509Behavior(true);
+                FuelRod.setGTNHBehavior(false);
+                GGFuelRod.setGTNHBehavior(false);
+                break;
+            }
+            case "GTNH": {
+                FuelRod.setGT509Behavior(false);
+                FuelRod.setGTNHBehavior(true);
+                GGFuelRod.setGTNHBehavior(true);
+                break;
+            }
+            default: {
+                FuelRod.setGT509Behavior(false);
+                FuelRod.setGTNHBehavior(false);
+                GGFuelRod.setGTNHBehavior(false);
+                break;
+            }
+        }
         Reflector.setMcVersion(version.mcVersion);
-        FuelRod.setGT509Behavior(version.gtVersion === "5.09");
-        FuelRod.setGTNHBehavior(version.gtVersion === "GTNH");
+
+        loadData();
     }, [languageState, version]);
 
     if (!isLoaded) {

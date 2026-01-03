@@ -68,7 +68,7 @@ export class AutomationSimulator {
 
     constructor(reactor: Reactor, setSimulateOutput: React.Dispatch<React.SetStateAction<string[]>>) {
         this.reactor = reactor;
-        this.initialHeat = Math.round(reactor.getCurrentHeat());
+        this.initialHeat = Math.trunc(reactor.getCurrentHeat());
         this.onPulseDuration = reactor.getOnPulse();
         this.offPulseDuration = reactor.getOffPulse();
         this.clockPeriod = this.onPulseDuration + this.offPulseDuration;
@@ -535,7 +535,7 @@ export class AutomationSimulator {
                             component.getCurrentHeat() >= component.getAutomationThreshold()
                         ) {
                             component.clearCurrentHeat();
-                            this.replacedItems.add([component.name]);
+                            this.replacedItems.add([this.getI18N(component.baseName)]);
                             component.info += this.getI18N("ComponentInfo.ReplacedTime", reactorTicks);
                             if (component.getReactorPause() > 0) {
                                 this.active = false;
@@ -549,7 +549,7 @@ export class AutomationSimulator {
                             component.getCurrentHeat() <= component.getAutomationThreshold()
                         ) {
                             component.clearCurrentHeat();
-                            this.replacedItems.add([component.name]);
+                            this.replacedItems.add([this.getI18N(component.baseName)]);
                             component.info += this.getI18N("ComponentInfo.ReplacedTime", reactorTicks);
                             if (component.getReactorPause() > 0) {
                                 this.active = false;
@@ -564,7 +564,7 @@ export class AutomationSimulator {
                         (component.getMaxDamage() > 1 && component.getCurrentDamage() >= component.getAutomationThreshold())
                     ) {
                         component.clearDamage();
-                        this.replacedItems.add([component.name]);
+                        this.replacedItems.add([this.getI18N(component.baseName)]);
                         component.info += this.getI18N("ComponentInfo.ReplacedTime", reactorTicks);
                         if (component.getReactorPause() > 0) {
                             this.active = false;
