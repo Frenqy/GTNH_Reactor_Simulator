@@ -3,7 +3,7 @@ import { lang, type LangsJson } from "./Defines";
 export class LanguageLoader {
     static LangsData: LangsJson;
     static language: lang;
-    private static regex = /%((\.(?<num>\d)*|,*)+f|(\.(?<num>\d)*|,*)d|s)/g;
+    private static regex = /%((?:\.(?<num>\d+)|,*)+[fd]|s)/g;
 
     private static replacePairs = [
         ["%%", ""],
