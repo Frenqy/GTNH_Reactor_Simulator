@@ -14,7 +14,11 @@ export class CoolantCell extends ReactorItem {
     }
 
     getCopy() {
-        return new CoolantCell(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod);
+        const copyItem = new CoolantCell(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod);
+        copyItem.setInitialHeat(this.initialHeat);
+        copyItem.setAutomationThreshold(this.automationThreshold);
+        copyItem.setReactorPause(this.reactorPause);
+        return copyItem;
     }
 
     adjustCurrentHeat(heat: number) {

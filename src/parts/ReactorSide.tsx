@@ -22,9 +22,6 @@ type input = {
 };
 function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, version, setVersion, setSimulateReactor, setOutputLines }: input) {
     const selfRef = useRef<HTMLDivElement>(null);
-    const [initHeatValue, setInitHeatValue] = useState(0);
-    const [replacementThresholdValue, setReplacementThresholdValue] = useState(9000);
-    const [reactorPauseValue, setReactorPauseValue] = useState(0);
     const [divSize, setDivSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
 
     const styleForEachLine: React.CSSProperties = { width: "90%", height: "100%" };
@@ -49,13 +46,29 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, versi
         setSelectedItem(() => {
             if (item) {
                 const tempItem = item.getCopy();
-                setInitHeatValue(tempItem.getInitialHeat());
-                setReplacementThresholdValue(tempItem.getAutomationThreshold());
-                setReactorPauseValue(tempItem.getReactorPause());
                 return tempItem;
             } else {
                 return null;
             }
+        });
+    }
+
+    function updateSelectedItemSetting(which: string, value: number) {
+        setSelectedItem((prev) => {
+            if (prev == null) return null;
+            const newItem = prev.getCopy();
+            switch (which) {
+                case "initialHeat":
+                    newItem.setInitialHeat(value);
+                    break;
+                case "automationThreshold":
+                    newItem.setAutomationThreshold(value);
+                    break;
+                case "reactorPause":
+                    newItem.setReactorPause(value);
+                    break;
+            }
+            return newItem;
         });
     }
 
@@ -189,8 +202,8 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, versi
                     <Flex className="paramGroup">
                         {getI18N("Config.InitialComponentHeat")}
                         <InputNumber
-                            value={initHeatValue}
-                            onChange={(v) => setInitHeatValue(Number(v))}
+                            value={selectedItem ? selectedItem.getInitialHeat() : 0}
+                            onChange={(v) => updateSelectedItemSetting("initialHeat", Number(v))}
                             min={0}
                             max={Reactor.MAX_COMPONENT_HEAT}
                             size="small"
@@ -201,8 +214,8 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, versi
                     <Flex className="paramGroup">
                         {getI18N("Config.PlacingReplacementThreshold")}
                         <InputNumber
-                            value={replacementThresholdValue}
-                            onChange={(v) => setReplacementThresholdValue(Number(v))}
+                            value={selectedItem ? selectedItem.getAutomationThreshold() : 9000}
+                            onChange={(v) => updateSelectedItemSetting("automationThreshold", Number(v))}
                             min={0}
                             max={Reactor.MAX_COMPONENT_HEAT}
                             size="small"
@@ -213,8 +226,8 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, versi
                     <Flex className="paramGroup">
                         {getI18N("Config.PlacingReactorPause")}
                         <InputNumber
-                            value={reactorPauseValue}
-                            onChange={(v) => setReactorPauseValue(Number(v))}
+                            value={selectedItem ? selectedItem.getReactorPause() : 0}
+                            onChange={(v) => updateSelectedItemSetting("reactorPause", Number(v))}
                             min={0}
                             max={10_000}
                             size="small"
@@ -237,7 +250,7 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, versi
                         <Button variant="solid" color="primary" onClick={() => handleReactorUpdate("clearReactor", null)}>
                             {getI18N("UI.ClearGridButton")}
                         </Button>
-                        <Button variant="solid" color="danger" onClick={startSimulate}>
+                        <Button variant="solid" color="danger" onClick={async () => await startSimulate()}>
                             {getI18N("UI.SimulateButton")}
                         </Button>
                         <Button variant="solid" color="default">

@@ -21,7 +21,7 @@ export class Exchanger extends ReactorItem {
     }
 
     getCopy() {
-        return new Exchanger(
+        const copyItem = new Exchanger(
             this.id,
             this.baseName,
             this.name,
@@ -32,6 +32,10 @@ export class Exchanger extends ReactorItem {
             this.switchSide,
             this.switchReactor
         );
+        copyItem.setInitialHeat(this.initialHeat);
+        copyItem.setAutomationThreshold(this.automationThreshold);
+        copyItem.setReactorPause(this.reactorPause);
+        return copyItem;
     }
 
     getHullCoolingCapacity() {

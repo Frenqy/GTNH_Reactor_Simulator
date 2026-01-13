@@ -61,7 +61,11 @@ export class ReactorItem {
     }
 
     getCopy() {
-        return new ReactorItem(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod);
+        const copyItem = new ReactorItem(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod);
+        copyItem.setInitialHeat(this.initialHeat);
+        copyItem.setAutomationThreshold(this.automationThreshold);
+        copyItem.setReactorPause(this.reactorPause);
+        return copyItem;
     }
     getMaxDamage() {
         return this.maxDamage;

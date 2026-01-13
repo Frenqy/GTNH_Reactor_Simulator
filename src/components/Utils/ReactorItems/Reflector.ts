@@ -16,7 +16,11 @@ export class Reflector extends ReactorItem {
     }
 
     getCopy(): Reflector {
-        return new Reflector(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod);
+        const copyItem = new Reflector(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod);
+        copyItem.setInitialHeat(this.initialHeat);
+        copyItem.setAutomationThreshold(this.automationThreshold);
+        copyItem.setReactorPause(this.reactorPause);
+        return copyItem;
     }
 
     isNeutronReflector() {

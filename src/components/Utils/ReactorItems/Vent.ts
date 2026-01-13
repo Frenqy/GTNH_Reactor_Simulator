@@ -24,7 +24,7 @@ export class Vent extends ReactorItem {
     }
 
     getCopy(): Vent {
-        return new Vent(
+        const copyItem = new Vent(
             this.id,
             this.baseName,
             this.name,
@@ -36,6 +36,10 @@ export class Vent extends ReactorItem {
             this.hullDraw,
             this.sideVent
         );
+        copyItem.setInitialHeat(this.initialHeat);
+        copyItem.setAutomationThreshold(this.automationThreshold);
+        copyItem.setReactorPause(this.reactorPause);
+        return copyItem;
     }
 
     dissipate() {

@@ -31,7 +31,7 @@ export class GGFuelRod extends FuelRod {
     }
 
     getCopy(): FuelRod {
-        return new GGFuelRod(
+        const copyItem = new GGFuelRod(
             this.id,
             this.baseName,
             this.name,
@@ -45,6 +45,10 @@ export class GGFuelRod extends FuelRod {
             this.moxStyle,
             this.heatBonus
         );
+        copyItem.setInitialHeat(this.initialHeat);
+        copyItem.setAutomationThreshold(this.automationThreshold);
+        copyItem.setReactorPause(this.reactorPause);
+        return copyItem;
     }
 
     countNeutronNeighbors = super.countNeutronNeighbors;

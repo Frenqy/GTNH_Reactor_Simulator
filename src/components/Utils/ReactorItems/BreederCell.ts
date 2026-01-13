@@ -22,7 +22,7 @@ export class BreederCell extends ReactorItem {
     }
 
     getCopy(): ReactorItem {
-        return new BreederCell(
+        const copyItem = new BreederCell(
             this.id,
             this.baseName,
             this.name,
@@ -33,6 +33,10 @@ export class BreederCell extends ReactorItem {
             this.mHeatBonusStep,
             this.mHeatBonusMultiplier
         );
+        copyItem.setInitialHeat(this.initialHeat);
+        copyItem.setAutomationThreshold(this.automationThreshold);
+        copyItem.setReactorPause(this.reactorPause);
+        return copyItem;
     }
 
     generateHeat(): number {

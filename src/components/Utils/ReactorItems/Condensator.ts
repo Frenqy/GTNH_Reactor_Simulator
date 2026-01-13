@@ -14,7 +14,11 @@ export class Condensator extends ReactorItem {
     }
 
     getCopy(): Condensator {
-        return new Condensator(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod);
+        const copyItem = new Condensator(this.id, this.baseName, this.name, this.image, this.maxDamage, this.maxHeat, this.sourceMod);
+        copyItem.setInitialHeat(this.initialHeat);
+        copyItem.setAutomationThreshold(this.automationThreshold);
+        copyItem.setReactorPause(this.reactorPause);
+        return copyItem;
     }
 
     adjustCurrentHeat(heat: number) {

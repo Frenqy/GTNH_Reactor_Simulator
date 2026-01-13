@@ -38,7 +38,7 @@ export class FuelRod extends ReactorItem {
     }
 
     getCopy(): FuelRod {
-        return new FuelRod(
+        const copyItem = new FuelRod(
             this.id,
             this.baseName,
             this.name,
@@ -51,6 +51,10 @@ export class FuelRod extends ReactorItem {
             this.rodCount,
             this.moxStyle
         );
+        copyItem.setInitialHeat(this.initialHeat);
+        copyItem.setAutomationThreshold(this.automationThreshold);
+        copyItem.setReactorPause(this.reactorPause);
+        return copyItem;
     }
 
     isNeutronReflector() {

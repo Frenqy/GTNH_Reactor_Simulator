@@ -21,7 +21,7 @@ export class Plating extends ReactorItem {
     }
 
     getCopy(): Plating {
-        return new Plating(
+        const copyItem = new Plating(
             this.id,
             this.baseName,
             this.name,
@@ -32,6 +32,10 @@ export class Plating extends ReactorItem {
             this.heatAdjustment,
             this.explosionPowerMultiplier
         );
+        copyItem.setInitialHeat(this.initialHeat);
+        copyItem.setAutomationThreshold(this.automationThreshold);
+        copyItem.setReactorPause(this.reactorPause);
+        return copyItem;
     }
 
     addToReactor(parent: Reactor, row: number, col: number) {
