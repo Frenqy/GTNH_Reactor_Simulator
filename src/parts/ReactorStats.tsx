@@ -228,11 +228,11 @@ function ReactorStats({ reactor, onReactorChange, selectedRowAndCol, simulateRea
                 <Col span={12} style={{ height: "100%" }} className="reactor-stats-tabs" id="leftStats">
                     <Flex vertical style={{ height: "100%", width: "100%" }}>
                         <Flex style={{ fontWeight: "bold" }}>{getI18N("UI.ComponentTab")}</Flex>
-                        <Flex flex={1} style={{ backgroundColor: "#cdcdcd", padding: "max(1%, 10px)" }} vertical>
+                        <Flex flex={1} style={{ backgroundColor: "#cdcdcd", padding: "max(1%, 10px)", overflowY: "scroll" }} vertical>
                             <Flex style={{ whiteSpace: "pre-line" }}>{componentArea}</Flex>
                         </Flex>
                         <Flex style={{ fontWeight: "bold" }}>{getI18N("UI.ComponentAutomationTab")}</Flex>
-                        <Flex flex={2} style={{ backgroundColor: "#cdcdcd", padding: "max(1%, 10px)" }} vertical gap="small">
+                        <Flex flex={2} style={{ backgroundColor: "#cdcdcd", padding: "max(1%, 10px)", overflowY: "scroll" }} vertical gap="small">
                             {selectedGridStack === null ? (
                                 <Flex>{getI18N("UI.NoComponentRowCol", selectedRow, selectedCol)}</Flex>
                             ) : (

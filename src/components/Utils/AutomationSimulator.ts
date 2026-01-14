@@ -87,7 +87,7 @@ export class AutomationSimulator {
         this.outputArea((lines) => [...lines, ...line]);
     }
 
-    async simulate() {
+    simulate() {
         const reactor = this.reactor;
         let reactorTicks = 0;
         let cooldownTicks = 0;
@@ -125,6 +125,8 @@ export class AutomationSimulator {
             this.componentsIntact = true;
             this.anyRodsDepleted = false;
             do {
+                console.log("ticks", reactorTicks);
+
                 reactorTicks++;
                 this.reactor.clearEUOutput();
                 this.reactor.clearVentedHeat();

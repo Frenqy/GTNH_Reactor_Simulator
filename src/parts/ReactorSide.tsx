@@ -128,7 +128,7 @@ function ReactorSide({ setSelectedItem, selectedItem, reactor, setReactor, versi
         setSimulateReactor(() => {
             return simReactor;
         });
-        await new AutomationSimulator(simReactor, setOutputLines).simulate();
+        new AutomationSimulator(simReactor, setOutputLines).simulate();
     }
 
     useEffect(() => {
