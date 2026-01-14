@@ -54,12 +54,16 @@ export class Vent extends ReactorItem {
         if (this.sideVent > 0 && this.parentReactor != null) {
             const coolableNeighbors: ReactorItem[] = [];
             if (this.row != null && this.col != null) {
-                for (const r of [this.row - 1, this.row + 1]) {
-                    for (const c of [this.col - 1, this.col + 1]) {
-                        const component = this.parentReactor.getComponentAt(r, c);
-                        if (component != null) {
-                            coolableNeighbors.push(component);
-                        }
+                for (const temp of [
+                    [this.row - 1, this.col],
+                    [this.row, this.col + 1],
+                    [this.row + 1, this.col],
+                    [this.row, this.col - 1],
+                ]) {
+                    const [r, c] = temp;
+                    const component = this.parentReactor.getComponentAt(r, c);
+                    if (component != null && component.isCoolable()) {
+                        coolableNeighbors.push(component);
                     }
                 }
             }
@@ -77,12 +81,16 @@ export class Vent extends ReactorItem {
     getVentCoolingCapacity() {
         let result = this.selfVent;
         if (this.selfVent > 0 && this.parentReactor != null && this.row != null && this.col != null) {
-            for (const r of [this.row - 1, this.row + 1]) {
-                for (const c of [this.col - 1, this.col + 1]) {
-                    const component = this.parentReactor.getComponentAt(r, c);
-                    if (component != null && component.isCoolable()) {
-                        result += this.sideVent;
-                    }
+            for (const temp of [
+                [this.row - 1, this.col],
+                [this.row, this.col + 1],
+                [this.row + 1, this.col],
+                [this.row, this.col - 1],
+            ]) {
+                const [r, c] = temp;
+                const component = this.parentReactor.getComponentAt(r, c);
+                if (component != null && component.isCoolable()) {
+                    result += this.sideVent;
                 }
             }
         }
