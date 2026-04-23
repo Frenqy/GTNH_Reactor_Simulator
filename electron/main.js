@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function createWindow() {
-    const window = new BrowserWindow({
+    const mainWindow = new BrowserWindow({
         width: 1400,
         height: 900,
         autoHideMenuBar: true,
@@ -16,7 +16,7 @@ function createWindow() {
         }
     });
 
-    window.loadFile(path.join(__dirname, "../dist/index.html"));
+    mainWindow.loadFile(path.join(__dirname, "../dist/index.html"));
 }
 
 app.whenReady().then(() => {
